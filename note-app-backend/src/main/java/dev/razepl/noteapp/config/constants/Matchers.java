@@ -1,7 +1,7 @@
 package dev.razepl.noteapp.config.constants;
 
 public final class Matchers {
-    public static final String AUTH_MAPPING = "/auth/";
+    public static final String AUTH_MAPPING = "/api/auth/";
 
     public static final String LOGOUT_URL = "/api/auth/logout";
 
