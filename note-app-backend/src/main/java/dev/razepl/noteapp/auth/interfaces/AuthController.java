@@ -13,7 +13,7 @@ public interface AuthController {
 
     AuthResponse loginUser(LoginRequest loginRequest);
 
-    AuthResponse refreshUserToken(HttpServletRequest request, HttpServletResponse response);
+    AuthResponse refreshUserToken(String refreshToken);
 
     TokenResponse authenticateUser(TokenRequest request);
 }

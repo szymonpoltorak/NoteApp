@@ -13,7 +13,7 @@ public interface AuthService {
 
     AuthResponse login(LoginRequest loginRequest);
 
-    AuthResponse refreshToken(HttpServletRequest request, HttpServletResponse response);
+    AuthResponse refreshToken(String refreshToken);
 
     TokenResponse validateUsersTokens(TokenRequest request);
 

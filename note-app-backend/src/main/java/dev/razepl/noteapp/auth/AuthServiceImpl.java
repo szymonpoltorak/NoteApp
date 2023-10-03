@@ -81,9 +81,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public final AuthResponse refreshToken(HttpServletRequest request, HttpServletResponse response) {
-        String refreshToken = jwtService.getJwtRefreshToken(request);
-
+    public final AuthResponse refreshToken(String refreshToken) {
         log.info("Refresh token : {}", refreshToken);
 
         User user = validateRefreshTokenData(refreshToken);
