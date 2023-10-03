@@ -1,0 +1,29 @@
+version: "3.1"
+
+services:
+    postgres:
+        env_file:
+            - .env
+        container_name: postgres
+        image: postgres:alpine
+        environment:
+            - POSTGRES_USER=${_POSTGRES_USER}
+            - POSTGRES_PASSWORD=${_POSTGRES_PASSWORD}
+            - POSTGRES_DB=${_POSTGRES_DB}
+        ports:
+            - "81:5432"
+
+    note-app-backend:
+        env_file:
+            - .env
+        container_name: note-app-backend
+        image: note-app-backend
+        depends_on:
+            - postgres
+        environment:
+            - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/noteapp
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - "80:8080"

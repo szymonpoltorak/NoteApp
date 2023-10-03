@@ -4,8 +4,9 @@ server:
 spring:
     datasource:
         url: ${SPRING_DATASOURCE_URL}
-        username: postgres
-        password: none
+        username: ${_POSTGRES_USER}
+        password: ${_POSTGRES_PASSWORD}
+
     jpa:
         hibernate:
             ddl-auto: create-drop
