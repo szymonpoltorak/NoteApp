@@ -1,6 +1,5 @@
 package dev.razepl.noteapp.entities.token;
 
-import dev.razepl.noteapp.entities.token.interfaces.Token;
 import dev.razepl.noteapp.entities.user.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,7 +26,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "Tokens")
-public class JwtToken implements Token {
+public class JwtToken {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long tokenId;

@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByEmail(String email);
+    Optional<User> findByUsername(String username);
 
     Optional<User> findByName(String name);
 
@@ -25,5 +25,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
             """)
     Page<User> findAllByPattern(String pattern, Pageable pageable, User user);
 
-    void deleteByEmail(String email);
+    void deleteByUsername(String username);
 }

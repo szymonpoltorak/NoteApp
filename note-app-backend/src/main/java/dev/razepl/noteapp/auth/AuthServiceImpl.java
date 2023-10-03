@@ -48,7 +48,7 @@ public class AuthServiceImpl implements AuthService {
         @Valid User user = User
                 .builder()
                 .name(registerRequest.name())
-                .email(registerRequest.email())
+                .username(registerRequest.email())
                 .dateOfBirth(registerRequest.dateOfBirth())
                 .surname(registerRequest.surname())
                 .password(passwordEncoder.encode(password))
@@ -70,7 +70,7 @@ public class AuthServiceImpl implements AuthService {
                 username, loginRequest.password())
         );
 
-        User user = userRepository.findByEmail(username).orElseThrow(
+        User user = userRepository.findByUsername(username).orElseThrow(
                 () -> new UsernameNotFoundException("Such user does not exist!")
         );
         log.info("Building token response for user : {}", user);
@@ -118,7 +118,7 @@ public class AuthServiceImpl implements AuthService {
 
             throw new PasswordValidationException(PASSWORD_PATTERN_MESSAGE);
         }
-        Optional<User> existingUser = userRepository.findByEmail(registerRequest.email());
+        Optional<User> existingUser = userRepository.findByUsername(registerRequest.email());
 
         if (existingUser.isPresent()) {
             log.error("User already exists! Found user: {}", existingUser.get());
@@ -139,7 +139,7 @@ public class AuthServiceImpl implements AuthService {
         }
         log.info("User of username : {}", username);
 
-        User user = userRepository.findByEmail(username).orElseThrow(
+        User user = userRepository.findByUsername(username).orElseThrow(
                 () -> new UsernameNotFoundException("Such user does not exist!")
         );
 

@@ -33,7 +33,7 @@ public class AppConfigurationImpl implements AppConfiguration {
     @Bean
     @Override
     public UserDetailsService userDetailsService() {
-        return username -> userRepository.findByEmail(username)
+        return username -> userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found!"));
     }
 

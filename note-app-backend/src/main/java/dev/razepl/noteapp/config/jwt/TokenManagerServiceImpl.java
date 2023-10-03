@@ -27,7 +27,7 @@ public class TokenManagerServiceImpl implements TokenManagerService {
 
     @Override
     public final void saveUsersToken(String jwtToken, String username) {
-        User user = userRepository.findByEmail(username)
+        User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("User not found!"));
 
         saveUsersToken(jwtToken, user);
@@ -68,7 +68,7 @@ public class TokenManagerServiceImpl implements TokenManagerService {
 
     @Override
     public final void revokeUserTokens(String username) {
-        User user = userRepository.findByEmail(username)
+        User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("User not found!"));
 
         revokeUserTokens(user);

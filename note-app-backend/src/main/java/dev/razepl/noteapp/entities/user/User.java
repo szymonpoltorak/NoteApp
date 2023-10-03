@@ -50,12 +50,7 @@ import static dev.razepl.noteapp.entities.user.constants.UserValidationMessages.
 import static dev.razepl.noteapp.entities.user.constants.UserValidationMessages.SURNAME_PATTERN_MESSAGE;
 import static dev.razepl.noteapp.entities.user.constants.UserValidationMessages.SURNAME_SIZE_MESSAGE;
 
-/**
- * This class represents a user in the system.
- * It implements the ServiceUser interface which specifies the behavior of a user in a service.
- * It also implements the UserDetails interface which provides core user information.
- * The class has several annotations that specify its behavior and constraints.
- */
+
 @Slf4j
 @Data
 @NoArgsConstructor
@@ -83,20 +78,10 @@ public class User implements ServiceUser {
     @NotNull(message = EMAIL_NULL_MESSAGE)
     @Column(unique = true)
     @Email(message = EMAIL_MESSAGE)
-    private String email;
+    private String username;
 
     @NotNull(message = PASSWORD_NULL_MESSAGE)
     private String password;
-
-    private String location;
-
-    private String job;
-
-    private String github;
-
-    private String twitter;
-
-    private String linkedin;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -120,8 +105,8 @@ public class User implements ServiceUser {
     }
 
     @Override
-    public final String getUsername() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
     @Override
