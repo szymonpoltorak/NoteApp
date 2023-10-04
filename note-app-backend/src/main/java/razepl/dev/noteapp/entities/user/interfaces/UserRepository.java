@@ -13,17 +13,6 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByUsername(String username);
 
-    Optional<User> findByName(String name);
-
     @Query("select u from User as u inner join JwtToken as t on u.userId = t.user.userId where t.token = :authToken")
     Optional<User> findUserByToken(String authToken);
-
-    @Query("""
-            select u
-            from User as u
-            where concat(u.name, ' ', u.surname) like :pattern% and u != :user
-            """)
-    Page<User> findAllByPattern(String pattern, Pageable pageable, User user);
-
-    void deleteByUsername(String username);
 }

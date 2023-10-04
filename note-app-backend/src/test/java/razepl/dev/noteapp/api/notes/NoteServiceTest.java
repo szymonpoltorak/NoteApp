@@ -1,16 +1,13 @@
 package razepl.dev.noteapp.api.notes;
 
-import razepl.dev.noteapp.api.notes.data.NoteRequest;
-import razepl.dev.noteapp.api.notes.data.NoteResponse;
-import razepl.dev.noteapp.api.notes.interfaces.NoteMapper;
-import razepl.dev.noteapp.entities.note.Note;
-import razepl.dev.noteapp.entities.note.NoteLang;
-import razepl.dev.noteapp.entities.note.interfaces.NoteRepository;
-import razepl.dev.noteapp.entities.user.User;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
+import razepl.dev.noteapp.api.notes.data.NoteResponse;
+import razepl.dev.noteapp.api.notes.interfaces.NoteMapper;
+import razepl.dev.noteapp.entities.note.Note;
+import razepl.dev.noteapp.entities.note.interfaces.NoteRepository;
 import razepl.dev.noteapp.utils.NoteTestData;
 import razepl.dev.noteapp.utils.TestDataBuilder;
 

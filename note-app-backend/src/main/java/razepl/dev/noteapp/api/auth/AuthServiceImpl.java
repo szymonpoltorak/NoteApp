@@ -38,12 +38,12 @@ public class AuthServiceImpl implements AuthService {
     private final UserMapper userMapper;
 
     @Override
-    public final AuthResponse register(RegisterRequest registerRequest) {
+    public final AuthResponse register(@Valid RegisterRequest registerRequest) {
         log.info("Registering user with data: \n{}", registerRequest);
 
         String password = validateUserRegisterData(registerRequest);
 
-        User user = userMapper.toUser(registerRequest, password);
+        User user = userMapper.toUser(registerRequest, passwordEncoder.encode(password));
 
         createUserWithEncodedPassword(user);
 
@@ -103,8 +103,6 @@ public class AuthServiceImpl implements AuthService {
     }
 
     private void createUserWithEncodedPassword(@Valid User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-
         userRepository.save(user);
     }
 

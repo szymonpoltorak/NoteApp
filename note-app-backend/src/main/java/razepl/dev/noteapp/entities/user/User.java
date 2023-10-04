@@ -82,7 +82,6 @@ public class User implements ServiceUser {
     private String username;
 
     @NotNull(message = PASSWORD_NULL_MESSAGE)
-    @Password
     private String password;
 
     @Id

@@ -1,5 +1,6 @@
 package razepl.dev.noteapp.entities.user;
 
+import lombok.extern.slf4j.Slf4j;
 import razepl.dev.noteapp.entities.user.interfaces.Password;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
@@ -7,6 +8,7 @@ import jakarta.validation.ConstraintValidatorContext;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Slf4j
 public class PasswordValidator implements ConstraintValidator<Password, String> {
     private static final Pattern PASSWORD_PATTERN = Pattern
             .compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[:\\?\\.@!#:\\-_=+ ])[a-zA-Z0-9:\\?\\.@!#:\\-_=+ ]{8,20}$");
