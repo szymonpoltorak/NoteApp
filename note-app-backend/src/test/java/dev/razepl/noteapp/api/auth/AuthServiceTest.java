@@ -4,31 +4,24 @@ import dev.razepl.noteapp.api.auth.data.AuthResponse;
 import dev.razepl.noteapp.api.auth.data.LoginRequest;
 import dev.razepl.noteapp.api.auth.data.RegisterRequest;
 import dev.razepl.noteapp.api.auth.data.TokenRequest;
-import dev.razepl.noteapp.api.auth.interfaces.AuthService;
 import dev.razepl.noteapp.config.jwt.interfaces.JwtService;
 import dev.razepl.noteapp.config.jwt.interfaces.TokenManagerService;
 import dev.razepl.noteapp.entities.user.User;
 import dev.razepl.noteapp.entities.user.interfaces.UserRepository;
 import dev.razepl.noteapp.exceptions.auth.InvalidTokenException;
 import dev.razepl.noteapp.exceptions.auth.PasswordValidationException;
-import dev.razepl.noteapp.exceptions.auth.TokenDoesNotExistException;
 import dev.razepl.noteapp.exceptions.auth.TokensUserNotFoundException;
 import dev.razepl.noteapp.exceptions.auth.UserAlreadyExistsException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -39,7 +32,6 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyBoolean;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -108,25 +100,6 @@ class AuthServiceTest {
         assertNotNull(authResponse);
         verify(userRepository).save(any(User.class));
         verify(tokenManager).buildTokensIntoResponse(any(User.class), eq(false));
-    }
-
-    @Test
-    final void test_register_should_throw_exception_if_password_is_invalid() {
-        // given
-        RegisterRequest registerRequest = RegisterRequest.builder()
-                .name("John")
-                .surname("Doe")
-                .username("john.doe@example.com")
-                .dateOfBirth(LocalDate.of(1990, 1, 1))
-                .password("nope")
-                .build();
-
-        // when
-
-        // then
-        assertThrows(PasswordValidationException.class, () -> authService.register(registerRequest));
-        verify(userRepository, never()).save(any(User.class));
-        verify(tokenManager, never()).buildTokensIntoResponse(any(User.class), anyBoolean());
     }
 
     @Test
@@ -251,16 +224,5 @@ class AuthServiceTest {
 
         // then
         Assertions.assertThrows(TokensUserNotFoundException.class, () -> authService.validateUsersTokens(request));
-    }
-
-    @Test
-    final void test_register_wrong_password() {
-        // given
-        RegisterRequest request = new RegisterRequest("name", "surname", "username", "password", LocalDate.now());
-
-        // when
-
-        // then
-        Assertions.assertThrows(PasswordValidationException.class, () -> authService.register(request));
     }
 }

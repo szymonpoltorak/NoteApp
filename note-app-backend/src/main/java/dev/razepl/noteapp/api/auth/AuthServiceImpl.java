@@ -11,7 +11,6 @@ import dev.razepl.noteapp.config.jwt.interfaces.TokenManagerService;
 import dev.razepl.noteapp.entities.user.User;
 import dev.razepl.noteapp.entities.user.interfaces.UserRepository;
 import dev.razepl.noteapp.exceptions.auth.InvalidTokenException;
-import dev.razepl.noteapp.exceptions.auth.PasswordValidationException;
 import dev.razepl.noteapp.exceptions.auth.TokenDoesNotExistException;
 import dev.razepl.noteapp.exceptions.auth.TokensUserNotFoundException;
 import dev.razepl.noteapp.exceptions.auth.UserAlreadyExistsException;
@@ -25,9 +24,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
-import static dev.razepl.noteapp.entities.user.constants.UserValidation.PASSWORD_PATTERN;
-import static dev.razepl.noteapp.entities.user.constants.UserValidationMessages.PASSWORD_PATTERN_MESSAGE;
 
 @Slf4j
 @Service
@@ -45,15 +41,15 @@ public class AuthServiceImpl implements AuthService {
 
         String password = validateUserRegisterData(registerRequest);
 
-        @Valid User user = User
+        User user = User
                 .builder()
                 .name(registerRequest.name())
                 .username(registerRequest.username())
                 .dateOfBirth(registerRequest.dateOfBirth())
                 .surname(registerRequest.surname())
-                .password(passwordEncoder.encode(password))
+                .password(password)
                 .build();
-        userRepository.save(user);
+        createUserWithEncodedPassword(user);
 
         log.info("Building token response for user : {}", user);
 
@@ -110,14 +106,15 @@ public class AuthServiceImpl implements AuthService {
                 .build();
     }
 
+    private void createUserWithEncodedPassword(@Valid User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        userRepository.save(user);
+    }
+
     private String validateUserRegisterData(RegisterRequest registerRequest) {
         String password = registerRequest.password();
 
-        if (!PASSWORD_PATTERN.matcher(password).matches()) {
-            log.error("Password was not valid! Password: {}", password);
-
-            throw new PasswordValidationException(PASSWORD_PATTERN_MESSAGE);
-        }
         Optional<User> existingUser = userRepository.findByUsername(registerRequest.username());
 
         if (existingUser.isPresent()) {

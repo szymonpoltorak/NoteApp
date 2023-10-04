@@ -1,6 +1,7 @@
 package dev.razepl.noteapp.api.auth;
 
 import dev.razepl.noteapp.api.auth.constants.AuthMessages;
+import dev.razepl.noteapp.api.auth.data.ConstraintExceptionResponse;
 import dev.razepl.noteapp.api.auth.data.ExceptionResponse;
 import dev.razepl.noteapp.api.auth.data.TokenResponse;
 import dev.razepl.noteapp.api.auth.interfaces.AuthExceptionHandler;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -26,16 +28,17 @@ import java.util.stream.Collectors;
 public class AuthExceptionHandlerImpl implements AuthExceptionHandler {
     @Override
     @ExceptionHandler(ConstraintViolationException.class)
-    public final ResponseEntity<ExceptionResponse> handleConstraintValidationExceptions(ConstraintViolationException exception) {
+    public final ResponseEntity<ConstraintExceptionResponse> handleConstraintValidationExceptions
+            (ConstraintViolationException exception) {
         String className = exception.getClass().getSimpleName();
-        String errorMessage = exception.getConstraintViolations()
+        List<String> errorResponse = exception.getConstraintViolations()
                 .stream()
                 .map(error -> String.format(AuthMessages.ERROR_FORMAT, error.getPropertyPath(), error.getMessage()))
-                .collect(Collectors.joining(AuthMessages.ERROR_DELIMITER));
+                .toList();
 
-        log.error("Exception class name : {}\nError message : {}", className, errorMessage);
+        log.error("Exception class name : {}\nError message : {}", className, errorResponse);
 
-        return new ResponseEntity<>(buildResponse(errorMessage, className), HttpStatus.UNPROCESSABLE_ENTITY);
+        return new ResponseEntity<>(buildConstraintResponse(errorResponse, className), HttpStatus.BAD_REQUEST);
     }
 
     @Override
@@ -50,13 +53,7 @@ public class AuthExceptionHandlerImpl implements AuthExceptionHandler {
 
         log.error("Exception class name : {}\nError message : {}", className, errorMessage);
 
-        return new ResponseEntity<>(buildResponse(errorMessage, className), HttpStatus.UNPROCESSABLE_ENTITY);
-    }
-
-    @Override
-    @ExceptionHandler(PasswordValidationException.class)
-    public final ResponseEntity<ExceptionResponse> handlePasswordValidationException(ValidationException exception) {
-        return buildResponseEntity(exception, HttpStatus.UNPROCESSABLE_ENTITY);
+        return new ResponseEntity<>(buildResponse(errorMessage, className), HttpStatus.BAD_REQUEST);
     }
 
     @Override
@@ -95,6 +92,14 @@ public class AuthExceptionHandlerImpl implements AuthExceptionHandler {
         log.error("Exception class name : {}\nError message : {}", className, errorMessage);
 
         return new ResponseEntity<>(buildResponse(errorMessage, className), status);
+    }
+
+    private ConstraintExceptionResponse buildConstraintResponse(List<String> errorResponse, String className) {
+        return ConstraintExceptionResponse
+                .builder()
+                .errorResponse(errorResponse)
+                .exceptionClassName(className)
+                .build();
     }
 
     private ExceptionResponse buildResponse(String errorMessage, String exceptionClassName) {

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import dev.razepl.noteapp.entities.user.interfaces.Password;
 import dev.razepl.noteapp.entities.user.interfaces.ServiceUser;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -81,6 +82,7 @@ public class User implements ServiceUser {
     private String username;
 
     @NotNull(message = PASSWORD_NULL_MESSAGE)
+    @Password
     private String password;
 
     @Id
