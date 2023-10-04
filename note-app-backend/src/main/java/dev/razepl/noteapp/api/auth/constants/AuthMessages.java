@@ -1,4 +1,4 @@
-package dev.razepl.noteapp.auth.constants;
+package dev.razepl.noteapp.api.auth.constants;
 
 public final class AuthMessages {
     public static final String ADDED_INFO = "Added user to userRepository.";

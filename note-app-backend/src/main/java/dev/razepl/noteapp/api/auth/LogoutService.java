@@ -1,4 +1,4 @@
-package dev.razepl.noteapp.auth;
+package dev.razepl.noteapp.api.auth;
 
 import dev.razepl.noteapp.entities.token.JwtToken;
 import dev.razepl.noteapp.entities.token.interfaces.TokenRepository;
@@ -36,11 +36,10 @@ public class LogoutService implements LogoutHandler {
             return;
         }
         String jwt = authHeader.substring(TOKEN_START_INDEX);
-        
+
         JwtToken token = tokenRepository.findByToken(jwt).orElseThrow(
                 () -> new TokenDoesNotExistException("Jwt in header: {}\nToken is null")
         );
-
         log.info("Jwt in header : {}\nToken is not null", jwt);
 
         token.setExpired(true);

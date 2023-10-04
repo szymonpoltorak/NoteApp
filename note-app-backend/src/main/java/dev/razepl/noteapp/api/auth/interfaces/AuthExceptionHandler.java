@@ -1,7 +1,7 @@
-package dev.razepl.noteapp.auth.interfaces;
+package dev.razepl.noteapp.api.auth.interfaces;
 
-import dev.razepl.noteapp.auth.data.ExceptionResponse;
-import dev.razepl.noteapp.auth.data.TokenResponse;
+import dev.razepl.noteapp.api.auth.data.ExceptionResponse;
+import dev.razepl.noteapp.api.auth.data.TokenResponse;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.ValidationException;
 import org.springframework.http.ResponseEntity;

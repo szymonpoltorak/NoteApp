@@ -1,8 +1,9 @@
-package dev.razepl.noteapp.auth;
+package dev.razepl.noteapp.api.auth;
 
-import dev.razepl.noteapp.auth.data.ExceptionResponse;
-import dev.razepl.noteapp.auth.data.TokenResponse;
-import dev.razepl.noteapp.auth.interfaces.AuthExceptionHandler;
+import dev.razepl.noteapp.api.auth.constants.AuthMessages;
+import dev.razepl.noteapp.api.auth.data.ExceptionResponse;
+import dev.razepl.noteapp.api.auth.data.TokenResponse;
+import dev.razepl.noteapp.api.auth.interfaces.AuthExceptionHandler;
 import dev.razepl.noteapp.exceptions.auth.InvalidTokenException;
 import dev.razepl.noteapp.exceptions.auth.PasswordValidationException;
 import dev.razepl.noteapp.exceptions.auth.TokenDoesNotExistException;
@@ -20,9 +21,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.stream.Collectors;
 
-import static dev.razepl.noteapp.auth.constants.AuthMessages.ERROR_DELIMITER;
-import static dev.razepl.noteapp.auth.constants.AuthMessages.ERROR_FORMAT;
-
 @Slf4j
 @ControllerAdvice
 public class AuthExceptionHandlerImpl implements AuthExceptionHandler {
@@ -32,8 +30,8 @@ public class AuthExceptionHandlerImpl implements AuthExceptionHandler {
         String className = exception.getClass().getSimpleName();
         String errorMessage = exception.getConstraintViolations()
                 .stream()
-                .map(error -> String.format(ERROR_FORMAT, error.getPropertyPath(), error.getMessage()))
-                .collect(Collectors.joining(ERROR_DELIMITER));
+                .map(error -> String.format(AuthMessages.ERROR_FORMAT, error.getPropertyPath(), error.getMessage()))
+                .collect(Collectors.joining(AuthMessages.ERROR_DELIMITER));
 
         log.error("Exception class name : {}\nError message : {}", className, errorMessage);
 
@@ -47,8 +45,8 @@ public class AuthExceptionHandlerImpl implements AuthExceptionHandler {
         String errorMessage = exception.getBindingResult()
                 .getFieldErrors()
                 .stream()
-                .map(error -> String.format(ERROR_FORMAT, error.getField(), error.getDefaultMessage()))
-                .collect(Collectors.joining(ERROR_DELIMITER));
+                .map(error -> String.format(AuthMessages.ERROR_FORMAT, error.getField(), error.getDefaultMessage()))
+                .collect(Collectors.joining(AuthMessages.ERROR_DELIMITER));
 
         log.error("Exception class name : {}\nError message : {}", className, errorMessage);
 

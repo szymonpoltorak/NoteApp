@@ -1,4 +1,4 @@
-package dev.razepl.noteapp.auth.data;
+package dev.razepl.noteapp.api.auth.data;
 
 import lombok.Builder;
 

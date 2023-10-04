@@ -72,6 +72,6 @@ public class AppConfigurationImpl implements AppConfiguration {
     @Bean
     @Override
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
-            return configuration.getAuthenticationManager();
+        return configuration.getAuthenticationManager();
     }
 }

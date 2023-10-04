@@ -1,7 +1,7 @@
 package dev.razepl.noteapp.config.jwt.interfaces;
 
 
-import dev.razepl.noteapp.auth.data.AuthResponse;
+import dev.razepl.noteapp.api.auth.data.AuthResponse;
 import dev.razepl.noteapp.entities.user.User;
 
 public interface TokenManagerService {

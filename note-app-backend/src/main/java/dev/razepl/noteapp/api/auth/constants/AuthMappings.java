@@ -1,4 +1,4 @@
-package dev.razepl.noteapp.auth.constants;
+package dev.razepl.noteapp.api.auth.constants;
 
 public final class AuthMappings {
     public static final String REGISTER_MAPPING = "/register";

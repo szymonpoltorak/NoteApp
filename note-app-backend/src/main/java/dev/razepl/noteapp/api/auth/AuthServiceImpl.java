@@ -1,11 +1,11 @@
-package dev.razepl.noteapp.auth;
+package dev.razepl.noteapp.api.auth;
 
-import dev.razepl.noteapp.auth.data.AuthResponse;
-import dev.razepl.noteapp.auth.data.LoginRequest;
-import dev.razepl.noteapp.auth.data.RegisterRequest;
-import dev.razepl.noteapp.auth.data.TokenRequest;
-import dev.razepl.noteapp.auth.data.TokenResponse;
-import dev.razepl.noteapp.auth.interfaces.AuthService;
+import dev.razepl.noteapp.api.auth.data.AuthResponse;
+import dev.razepl.noteapp.api.auth.data.LoginRequest;
+import dev.razepl.noteapp.api.auth.data.RegisterRequest;
+import dev.razepl.noteapp.api.auth.data.TokenRequest;
+import dev.razepl.noteapp.api.auth.data.TokenResponse;
+import dev.razepl.noteapp.api.auth.interfaces.AuthService;
 import dev.razepl.noteapp.config.jwt.interfaces.JwtService;
 import dev.razepl.noteapp.config.jwt.interfaces.TokenManagerService;
 import dev.razepl.noteapp.entities.user.User;
@@ -48,7 +48,7 @@ public class AuthServiceImpl implements AuthService {
         @Valid User user = User
                 .builder()
                 .name(registerRequest.name())
-                .username(registerRequest.email())
+                .username(registerRequest.username())
                 .dateOfBirth(registerRequest.dateOfBirth())
                 .surname(registerRequest.surname())
                 .password(passwordEncoder.encode(password))
@@ -118,7 +118,7 @@ public class AuthServiceImpl implements AuthService {
 
             throw new PasswordValidationException(PASSWORD_PATTERN_MESSAGE);
         }
-        Optional<User> existingUser = userRepository.findByUsername(registerRequest.email());
+        Optional<User> existingUser = userRepository.findByUsername(registerRequest.username());
 
         if (existingUser.isPresent()) {
             log.error("User already exists! Found user: {}", existingUser.get());

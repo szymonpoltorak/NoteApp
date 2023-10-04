@@ -2,7 +2,7 @@ package dev.razepl.noteapp.entities.user.constants;
 
 /**
  * A utility class that contains constants for user validation messages.
- * The class defines the error messages for name, surname, date of birth, email and password fields.
+ * The class defines the error messages for name, surname, date of birth, username and password fields.
  * The class has a private constructor to prevent instantiation.
  */
 public final class UserValidationMessages {
@@ -32,9 +32,9 @@ public final class UserValidationMessages {
     public static final String DATE_NULL_MESSAGE = "Date of birth is mandatory";
 
     /**
-     * The error message for email validation.
+     * The error message for username validation.
      */
-    public static final String EMAIL_MESSAGE = "Email must be a valid email address";
+    public static final String EMAIL_MESSAGE = "Email must be a valid username address";
 
     /**
      * The error message for password pattern validation.
@@ -48,7 +48,7 @@ public final class UserValidationMessages {
     public static final String NAME_NULL_MESSAGE = "Name is mandatory";
 
     /**
-     * The error message for email not null validation.
+     * The error message for username not null validation.
      */
     public static final String EMAIL_NULL_MESSAGE = "Email is mandatory";
 

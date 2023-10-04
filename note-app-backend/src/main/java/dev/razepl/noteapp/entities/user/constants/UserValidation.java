@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 
 /**
  * A utility class that provides constants and methods for validating user input.
- * The class defines patterns and length limits for email, name and password fields.
+ * The class defines patterns and length limits for username, name and password fields.
  * The class has a private constructor to prevent instantiation.
  */
 public final class UserValidation {
