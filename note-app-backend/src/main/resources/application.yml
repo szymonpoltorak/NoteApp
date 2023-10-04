@@ -4,8 +4,9 @@ server:
 spring:
     datasource:
         url: ${SPRING_DATASOURCE_URL}
-        username: postgres
-        password: none
+        username: ${_POSTGRES_USER}
+        password: ${_POSTGRES_PASSWORD}
+
     jpa:
         hibernate:
             ddl-auto: create-drop
@@ -14,3 +15,9 @@ spring:
             hibernate:
                 dialect: org.hibernate.dialect.PostgreSQLDialect
                 format_sql: true
+
+security:
+    jwt:
+        expiration-time: 86400000
+        refresh-time: 604800000
+        encoding-key: 25442A472D4B6150645367566B597033733676397924423F4528482B4D625165
