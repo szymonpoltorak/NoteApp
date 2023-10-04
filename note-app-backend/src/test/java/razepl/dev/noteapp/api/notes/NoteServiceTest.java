@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
+import razepl.dev.noteapp.utils.NoteTestData;
+import razepl.dev.noteapp.utils.TestDataBuilder;
 
 import java.time.LocalDate;
 
@@ -29,51 +31,24 @@ class NoteServiceTest {
     @Mock
     private NoteMapper noteMapper;
 
+    private NoteTestData testData = TestDataBuilder.buildNoteTestData();
+
     @Test
     final void test_createNewNote_shouldCreateNote() {
         // given
-        String content = "content";
-        String title = "title";
-        long noteId = 1L;
-
-        Note newNote = Note
-                .builder()
-                .content(content)
-                .title(title)
-                .noteId(noteId)
-                .noteLang(NoteLang.TEXT)
-                .build();
-        User noteAuthor = User
-                .builder()
-                .username("author@gmail.com")
-                .build();
-        NoteRequest noteRequest = NoteRequest
-                .builder()
-                .noteLang(NoteLang.TEXT)
-                .content(content)
-                .title(title)
-                .build();
-        NoteResponse expected = NoteResponse
-                .builder()
-                .content(content)
-                .title(title)
-                .noteLang(NoteLang.TEXT)
-                .noteId(noteId)
-                .build();
-
-        when(noteMapper.toNote(noteRequest, LocalDate.now(), noteAuthor))
-                .thenReturn(newNote);
+        when(noteMapper.toNote(testData.noteRequest(), LocalDate.now(), testData.noteAuthor()))
+                .thenReturn(testData.newNote());
 
         when(noteRepository.save(any(Note.class)))
-                .thenReturn(newNote);
+                .thenReturn(testData.newNote());
 
-        when(noteMapper.toNoteResponse(newNote))
-                .thenReturn(expected);
+        when(noteMapper.toNoteResponse(testData.newNote()))
+                .thenReturn(testData.noteResponse());
 
         // when
-        NoteResponse actual = noteService.createNewNote(noteRequest, noteAuthor);
+        NoteResponse actual = noteService.createNewNote(testData.noteRequest(), testData.noteAuthor());
 
         // then
-        assertEquals(expected, actual, "The created not differs from the note returned by service");
+        assertEquals(testData.noteResponse(), actual, "The created not differs from the note returned by service");
     }
 }

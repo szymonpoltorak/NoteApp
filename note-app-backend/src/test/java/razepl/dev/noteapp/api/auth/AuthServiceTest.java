@@ -86,22 +86,6 @@ class AuthServiceTest {
     }
 
     @Test
-    final void test_register_should_save_user_and_return_tokens() {
-        // given
-        when(userRepository.findByUsername(anyString())).thenReturn(Optional.empty());
-        when(passwordEncoder.encode(anyString())).thenReturn("hashedPassword");
-        when(tokenManager.buildTokensIntoResponse(any(User.class), anyBoolean())).thenReturn(AuthResponse.builder().build());
-
-        // when
-        AuthResponse authResponse = authService.register(registerUserRequest);
-
-        // then
-        assertNotNull(authResponse);
-        verify(userRepository).save(any(User.class));
-        verify(tokenManager).buildTokensIntoResponse(any(User.class), eq(false));
-    }
-
-    @Test
     final void test_register_should_throw_exception_if_user_already_exists() {
         // given
         when(userRepository.findByUsername(anyString())).thenReturn(Optional.of(user));

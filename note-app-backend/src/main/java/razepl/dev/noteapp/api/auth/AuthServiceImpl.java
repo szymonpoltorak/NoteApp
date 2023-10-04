@@ -9,6 +9,7 @@ import razepl.dev.noteapp.api.auth.interfaces.AuthService;
 import razepl.dev.noteapp.config.jwt.interfaces.JwtService;
 import razepl.dev.noteapp.config.jwt.interfaces.TokenManagerService;
 import razepl.dev.noteapp.entities.user.User;
+import razepl.dev.noteapp.entities.user.interfaces.UserMapper;
 import razepl.dev.noteapp.entities.user.interfaces.UserRepository;
 import razepl.dev.noteapp.exceptions.auth.InvalidTokenException;
 import razepl.dev.noteapp.exceptions.auth.TokenDoesNotExistException;
@@ -34,6 +35,7 @@ public class AuthServiceImpl implements AuthService {
     private final AuthenticationManager authenticationManager;
     private final TokenManagerService tokenManager;
     private final JwtService jwtService;
+    private final UserMapper userMapper;
 
     @Override
     public final AuthResponse register(RegisterRequest registerRequest) {
@@ -41,14 +43,8 @@ public class AuthServiceImpl implements AuthService {
 
         String password = validateUserRegisterData(registerRequest);
 
-        User user = User
-                .builder()
-                .name(registerRequest.name())
-                .username(registerRequest.username())
-                .dateOfBirth(registerRequest.dateOfBirth())
-                .surname(registerRequest.surname())
-                .password(password)
-                .build();
+        User user = userMapper.toUser(registerRequest, password);
+
         createUserWithEncodedPassword(user);
 
         log.info("Building token response for user : {}", user);
