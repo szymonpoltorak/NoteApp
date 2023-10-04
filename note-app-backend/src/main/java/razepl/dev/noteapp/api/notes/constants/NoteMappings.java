@@ -5,6 +5,8 @@ public final class NoteMappings {
 
     public static final String CREATE_NOTE_MAPPING = "createNote";
 
+    public static final String GET_NOTES_MAPPING = "getNotes";
+
     private NoteMappings() {
     }
 }
