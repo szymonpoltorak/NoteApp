@@ -2,6 +2,7 @@ package dev.razepl.noteapp.api.notes;
 
 import dev.razepl.noteapp.api.notes.data.NoteRequest;
 import dev.razepl.noteapp.api.notes.data.NoteResponse;
+import dev.razepl.noteapp.api.notes.interfaces.NoteMapper;
 import dev.razepl.noteapp.entities.note.Note;
 import dev.razepl.noteapp.entities.note.NoteLang;
 import dev.razepl.noteapp.entities.note.interfaces.NoteRepository;
@@ -22,6 +23,9 @@ class NoteServiceTest {
 
     @Mock
     private NoteRepository noteRepository;
+
+    @Mock
+    private NoteMapper noteMapper;
 
     @Test
     final void test_createNewNote_shouldCreateNote() {
@@ -57,6 +61,9 @@ class NoteServiceTest {
 
         when(noteRepository.save(any(Note.class)))
                 .thenReturn(newNote);
+
+        when(noteMapper.toNoteResponse(newNote))
+                .thenReturn(expected);
 
         // when
         NoteResponse actual = noteService.createNewNote(noteRequest, noteAuthor);

@@ -2,6 +2,7 @@ package dev.razepl.noteapp.api.notes;
 
 import dev.razepl.noteapp.api.notes.data.NoteRequest;
 import dev.razepl.noteapp.api.notes.data.NoteResponse;
+import dev.razepl.noteapp.api.notes.interfaces.NoteMapper;
 import dev.razepl.noteapp.api.notes.interfaces.NoteService;
 import dev.razepl.noteapp.entities.note.Note;
 import dev.razepl.noteapp.entities.note.interfaces.NoteRepository;
@@ -17,6 +18,7 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 public class NoteServiceImpl implements NoteService {
     private final NoteRepository noteRepository;
+    private final NoteMapper noteMapper;
 
     @Override
     public final NoteResponse createNewNote(NoteRequest noteRequest, User noteAuthor) {
@@ -30,12 +32,6 @@ public class NoteServiceImpl implements NoteService {
                 .build();
         Note repoNote = noteRepository.save(newNote);
 
-        return NoteResponse
-                .builder()
-                .noteId(repoNote.getNoteId())
-                .content(repoNote.getContent())
-                .title(repoNote.getTitle())
-                .noteLang(repoNote.getNoteLang())
-                .build();
+        return noteMapper.toNoteResponse(repoNote);
     }
 }
