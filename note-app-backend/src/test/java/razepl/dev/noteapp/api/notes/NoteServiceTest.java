@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,9 +16,11 @@ import razepl.dev.noteapp.utils.TestDataBuilder;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static razepl.dev.noteapp.api.notes.constants.Constants.PAGE_SIZE;
 
@@ -52,7 +53,7 @@ class NoteServiceTest {
         NoteResponse actual = noteService.createNewNote(testData.noteRequest(), testData.noteAuthor());
 
         // then
-        assertEquals(testData.noteResponse(), actual, "The created not differs from the note returned by service");
+        assertEquals(testData.noteResponse(), actual, "The created note differs from the note returned by service");
     }
 
     @Test
@@ -72,5 +73,48 @@ class NoteServiceTest {
 
         // then
         assertEquals(expected, actual, "List of notes for the user differed from the expected");
+    }
+
+    @Test
+    final void test_deleteNote_shouldDeleteNote() {
+        // given
+        Note note = testData.newNote();
+
+        when(noteRepository.findById(note.getNoteId()))
+                .thenReturn(Optional.of(note));
+        when(noteMapper.toNoteResponse(note))
+                .thenReturn(testData.noteResponse());
+
+        // when
+        NoteResponse actual = noteService.deleteNote(note.getNoteId());
+
+        // then
+        assertEquals(testData.noteResponse(), actual, "The deleted note differs from expected");
+        verify(noteRepository).delete(note);
+    }
+
+    @Test
+    final void test_updateNote_shouldUpdateNote() {
+        // given
+        Note note = testData.newNote();
+        NoteResponse expected = NoteResponse
+                .builder()
+                .noteId(note.getNoteId())
+                .noteLang(note.getNoteLang())
+                .content("New note content")
+                .title("New note title")
+                .build();
+
+        when(noteRepository.findById(note.getNoteId()))
+                .thenReturn(Optional.of(note));
+        when(noteMapper.toNoteResponse(note))
+                .thenReturn(expected);
+
+        // when
+        NoteResponse actual = noteService.updateNote(testData.noteResponse());
+
+        // then
+        assertEquals(expected, actual, "The updatedNote differs from the expected");
+        verify(noteRepository).save(any(Note.class));
     }
 }

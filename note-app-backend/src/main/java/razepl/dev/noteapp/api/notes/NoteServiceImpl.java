@@ -13,6 +13,7 @@ import razepl.dev.noteapp.entities.user.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import razepl.dev.noteapp.exceptions.notes.NoteDoesNotExistException;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -50,5 +51,35 @@ public class NoteServiceImpl implements NoteService {
                 .stream()
                 .map(noteMapper::toNoteResponse)
                 .toList();
+    }
+
+    @Override
+    public final NoteResponse deleteNote(long noteId) {
+        Note noteToDelete = noteRepository.findById(noteId)
+                .orElseThrow(() -> new NoteDoesNotExistException(
+                        String.format("Note of id '%s' does not exist!", noteId))
+                );
+        log.info("Deleting note : {}", noteToDelete);
+
+        noteRepository.delete(noteToDelete);
+
+        return noteMapper.toNoteResponse(noteToDelete);
+    }
+
+    @Override
+    public final NoteResponse updateNote(NoteResponse updateData) {
+        log.info("Updating with data : {}", updateData);
+
+        Note noteToUpdate = noteRepository.findById(updateData.noteId())
+                .orElseThrow(() -> new NoteDoesNotExistException(
+                        String.format("Note of id '%s' does not exist!", updateData.noteId()))
+                );
+        log.info("Note to be updated : {}", noteToUpdate);
+
+        noteToUpdate.update(updateData);
+
+        noteRepository.save(noteToUpdate);
+
+        return noteMapper.toNoteResponse(noteToUpdate);
     }
 }

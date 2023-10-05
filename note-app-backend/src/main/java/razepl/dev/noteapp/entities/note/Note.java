@@ -1,5 +1,7 @@
 package razepl.dev.noteapp.entities.note;
 
+import razepl.dev.noteapp.api.notes.data.NoteResponse;
+import razepl.dev.noteapp.entities.note.interfaces.Updateable;
 import razepl.dev.noteapp.entities.user.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -23,7 +25,7 @@ import java.time.LocalDate;
 @Table(name = "Notes")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Note {
+public class Note implements Updateable<NoteResponse> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long noteId;
@@ -40,4 +42,11 @@ public class Note {
 
     @Enumerated(EnumType.STRING)
     private NoteLang noteLang;
+
+    @Override
+    public final void update(NoteResponse updateData) {
+        this.content = updateData.content();
+        this.title = updateData.title();
+        this.noteLang = updateData.noteLang();
+    }
 }

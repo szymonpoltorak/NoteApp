@@ -10,4 +10,8 @@ public interface NoteController {
     NoteResponse createNewNote(NoteRequest noteRequest, User noteAuthor);
 
     List<NoteResponse> getNotesFromPage(int pageNumber, User notesAuthor);
+
+    NoteResponse deleteNote(long noteId);
+
+    NoteResponse updateNote(NoteResponse updateData);
 }
