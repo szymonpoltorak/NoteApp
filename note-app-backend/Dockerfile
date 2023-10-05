@@ -1,4 +1,4 @@
-FROM maven:3.9.0-eclipse-temurin-17-alpine
+FROM gradle:8.2-jdk17-alpine
 
 WORKDIR /home/note-app
 
@@ -8,4 +8,4 @@ COPY src/ src/
 
 EXPOSE 8080
 
-ENTRYPOINT ["mvn", "clean", "spring-boot:run"]
+ENTRYPOINT ["gradle", "bootRun"]
