@@ -14,7 +14,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import razepl.dev.noteapp.api.notes.data.NoteResponse;
-import razepl.dev.noteapp.entities.note.interfaces.Updateable;
+import razepl.dev.noteapp.entities.note.interfaces.Updatable;
 import razepl.dev.noteapp.entities.user.User;
 
 import java.time.LocalDate;
@@ -25,7 +25,7 @@ import java.time.LocalDate;
 @Table(name = "Notes")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Note implements Updateable<NoteResponse> {
+public class Note implements Updatable<NoteResponse> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long noteId;

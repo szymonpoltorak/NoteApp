@@ -1,5 +1,6 @@
 package razepl.dev.noteapp.entities.note.interfaces;
 
-public interface Updateable<T> {
+@FunctionalInterface
+public interface Updatable<T> {
     void update(T updateData);
 }

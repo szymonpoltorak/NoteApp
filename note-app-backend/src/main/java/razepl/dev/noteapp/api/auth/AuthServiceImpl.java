@@ -30,6 +30,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
+    private static final String USER_NOT_EXIST_MESSAGE = "Such user does not exist!";
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
@@ -63,7 +64,7 @@ public class AuthServiceImpl implements AuthService {
         );
 
         User user = userRepository.findByUsername(username).orElseThrow(
-                () -> new UsernameNotFoundException("Such user does not exist!")
+                () -> new UsernameNotFoundException(USER_NOT_EXIST_MESSAGE)
         );
         log.info("Building token response for user : {}", user);
 
@@ -123,15 +124,17 @@ public class AuthServiceImpl implements AuthService {
         if (refreshToken == null) {
             throw new TokenDoesNotExistException("Token does not exist!");
         }
-        String username = jwtService.getUsernameFromToken(refreshToken);
+        Optional<String> usernameOptional = jwtService.getUsernameFromToken(refreshToken);
 
-        if (username == null) {
-            throw new UsernameNotFoundException("Such user does not exist!");
+        if (usernameOptional.isEmpty()) {
+            throw new UsernameNotFoundException(USER_NOT_EXIST_MESSAGE);
         }
+        String username = usernameOptional.get();
+
         log.info("User of username : {}", username);
 
         User user = userRepository.findByUsername(username).orElseThrow(
-                () -> new UsernameNotFoundException("Such user does not exist!")
+                () -> new UsernameNotFoundException(USER_NOT_EXIST_MESSAGE)
         );
 
         if (!jwtService.isTokenValid(refreshToken, user)) {

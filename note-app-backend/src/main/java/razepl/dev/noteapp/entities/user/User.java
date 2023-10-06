@@ -59,6 +59,9 @@ import static razepl.dev.noteapp.entities.user.constants.UserValidationMessages.
 @Entity
 @Table(name = USERS_TABLE_NAME)
 public class User implements ServiceUser {
+    @Serial
+    private static final long serialVersionUID = 884980275324187578L;
+    
     @NotNull(message = DATE_NULL_MESSAGE)
     @DateTimeFormat(pattern = DATE_PATTERN)
     @JsonSerialize(using = LocalDateSerializer.class)
@@ -130,12 +133,12 @@ public class User implements ServiceUser {
     }
 
     @Serial
-    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream in) throws ClassNotFoundException, NotSerializableException {
         throw new NotSerializableException(USER_PACKAGE);
     }
 
     @Serial
-    private void writeObject(ObjectOutputStream out) throws IOException {
+    private void writeObject(ObjectOutputStream out) throws NotSerializableException {
         throw new NotSerializableException(USER_PACKAGE);
     }
 }

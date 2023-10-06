@@ -18,6 +18,7 @@ import java.security.Key;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 
 @Service
@@ -32,8 +33,8 @@ public class JwtServiceImpl implements JwtService {
     private long refreshTime;
 
     @Override
-    public final String getUsernameFromToken(String jwtToken) {
-        return getClaimFromToken(jwtToken, Claims::getSubject);
+    public final Optional<String> getUsernameFromToken(String jwtToken) {
+        return Optional.ofNullable(getClaimFromToken(jwtToken, Claims::getSubject));
     }
 
     @Override
@@ -60,29 +61,29 @@ public class JwtServiceImpl implements JwtService {
 
     @Override
     public final boolean isTokenValid(String jwtToken, UserDetails userDetails) {
-        String username = getUsernameFromToken(jwtToken);
+        Optional<String> username = getUsernameFromToken(jwtToken);
 
-        return username.equals(userDetails.getUsername()) && !isTokenExpired(jwtToken);
+        return username.filter(s -> s.equals(userDetails.getUsername()) && !isTokenExpired(jwtToken)).isPresent();
     }
 
     @Override
-    public final String getJwtToken(HttpServletRequest request) {
+    public final Optional<String> getJwtToken(HttpServletRequest request) {
         String authHeader = request.getHeader(Headers.AUTH_HEADER);
 
         if (request.getServletPath().contains(Matchers.AUTH_MAPPING) || authHeader == null || !authHeader.startsWith(Headers.TOKEN_HEADER)) {
-            return null;
+            return Optional.empty();
         }
-        return authHeader.substring(Headers.TOKEN_START_INDEX);
+        return Optional.of(authHeader.substring(Headers.TOKEN_START_INDEX));
     }
 
     @Override
-    public final String getJwtRefreshToken(HttpServletRequest request) {
+    public final Optional<String> getJwtRefreshToken(HttpServletRequest request) {
         String authHeader = request.getHeader(Headers.AUTH_HEADER);
 
         if (authHeader == null || !authHeader.startsWith(Headers.TOKEN_HEADER)) {
-            return null;
+            return Optional.empty();
         }
-        return authHeader.substring(Headers.TOKEN_START_INDEX);
+        return Optional.of(authHeader.substring(Headers.TOKEN_START_INDEX));
     }
 
     private Claims getAllClaims(String token) {

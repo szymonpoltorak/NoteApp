@@ -130,7 +130,7 @@ class AuthServiceTest {
         String refreshToken = "refreshToken";
         String authToken = "authToken";
 
-        when(jwtService.getUsernameFromToken(refreshToken)).thenReturn("john.doe@example.com");
+        when(jwtService.getUsernameFromToken(refreshToken)).thenReturn(Optional.of("john.doe@example.com"));
 
         when(userRepository.findByUsername(anyString())).thenReturn(Optional.of(user));
         when(jwtService.isTokenValid(refreshToken, user)).thenReturn(true);
@@ -166,7 +166,7 @@ class AuthServiceTest {
         // given
         String refreshToken = "refreshToken";
 
-        when(jwtService.getUsernameFromToken(refreshToken)).thenReturn("john.doe@example.com");
+        when(jwtService.getUsernameFromToken(refreshToken)).thenReturn(Optional.of("john.doe@example.com"));
         when(userRepository.findByUsername(anyString())).thenReturn(Optional.empty());
 
         // when
@@ -183,7 +183,7 @@ class AuthServiceTest {
         // given
         String refreshToken = "refreshToken";
 
-        when(jwtService.getUsernameFromToken(refreshToken)).thenReturn("john.doe@example.com");
+        when(jwtService.getUsernameFromToken(refreshToken)).thenReturn(Optional.of("john.doe@example.com"));
         when(userRepository.findByUsername(anyString())).thenReturn(Optional.of(user));
         when(jwtService.isTokenValid(refreshToken, user)).thenReturn(false);
 
