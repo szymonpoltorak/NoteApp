@@ -1,5 +1,13 @@
 package razepl.dev.noteapp.api.auth;
 
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import razepl.dev.noteapp.api.auth.data.AuthResponse;
 import razepl.dev.noteapp.api.auth.data.LoginRequest;
 import razepl.dev.noteapp.api.auth.data.RegisterRequest;
@@ -15,14 +23,6 @@ import razepl.dev.noteapp.exceptions.auth.InvalidTokenException;
 import razepl.dev.noteapp.exceptions.auth.TokenDoesNotExistException;
 import razepl.dev.noteapp.exceptions.auth.TokensUserNotFoundException;
 import razepl.dev.noteapp.exceptions.auth.UserAlreadyExistsException;
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 

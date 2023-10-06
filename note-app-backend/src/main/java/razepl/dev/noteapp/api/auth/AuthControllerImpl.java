@@ -1,13 +1,5 @@
 package razepl.dev.noteapp.api.auth;
 
-import razepl.dev.noteapp.api.auth.constants.AuthMappings;
-import razepl.dev.noteapp.api.auth.data.AuthResponse;
-import razepl.dev.noteapp.api.auth.data.LoginRequest;
-import razepl.dev.noteapp.api.auth.data.RegisterRequest;
-import razepl.dev.noteapp.api.auth.data.TokenRequest;
-import razepl.dev.noteapp.api.auth.data.TokenResponse;
-import razepl.dev.noteapp.api.auth.interfaces.AuthController;
-import razepl.dev.noteapp.api.auth.interfaces.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import razepl.dev.noteapp.api.auth.constants.AuthMappings;
+import razepl.dev.noteapp.api.auth.data.AuthResponse;
+import razepl.dev.noteapp.api.auth.data.LoginRequest;
+import razepl.dev.noteapp.api.auth.data.RegisterRequest;
+import razepl.dev.noteapp.api.auth.data.TokenRequest;
+import razepl.dev.noteapp.api.auth.data.TokenResponse;
+import razepl.dev.noteapp.api.auth.interfaces.AuthController;
+import razepl.dev.noteapp.api.auth.interfaces.AuthService;
 
 import static razepl.dev.noteapp.config.constants.Matchers.AUTH_MAPPING;
 

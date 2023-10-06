@@ -1,7 +1,5 @@
 package razepl.dev.noteapp.config;
 
-import razepl.dev.noteapp.config.interfaces.AppConfiguration;
-import razepl.dev.noteapp.entities.user.interfaces.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +14,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import razepl.dev.noteapp.config.interfaces.AppConfiguration;
+import razepl.dev.noteapp.entities.user.interfaces.UserRepository;
 
 import java.util.List;
 

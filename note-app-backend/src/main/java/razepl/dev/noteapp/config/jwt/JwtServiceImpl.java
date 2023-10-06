@@ -1,9 +1,5 @@
 package razepl.dev.noteapp.config.jwt;
 
-import razepl.dev.noteapp.config.constants.Headers;
-import razepl.dev.noteapp.config.constants.Matchers;
-import razepl.dev.noteapp.config.constants.Properties;
-import razepl.dev.noteapp.config.jwt.interfaces.JwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -13,6 +9,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import razepl.dev.noteapp.config.constants.Headers;
+import razepl.dev.noteapp.config.constants.Matchers;
+import razepl.dev.noteapp.config.constants.Properties;
+import razepl.dev.noteapp.config.jwt.interfaces.JwtService;
 
 import java.security.Key;
 import java.util.Collections;

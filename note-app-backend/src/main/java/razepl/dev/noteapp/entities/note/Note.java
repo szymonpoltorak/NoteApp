@@ -1,8 +1,5 @@
 package razepl.dev.noteapp.entities.note;
 
-import razepl.dev.noteapp.api.notes.data.NoteResponse;
-import razepl.dev.noteapp.entities.note.interfaces.Updateable;
-import razepl.dev.noteapp.entities.user.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -16,6 +13,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import razepl.dev.noteapp.api.notes.data.NoteResponse;
+import razepl.dev.noteapp.entities.note.interfaces.Updateable;
+import razepl.dev.noteapp.entities.user.User;
 
 import java.time.LocalDate;
 

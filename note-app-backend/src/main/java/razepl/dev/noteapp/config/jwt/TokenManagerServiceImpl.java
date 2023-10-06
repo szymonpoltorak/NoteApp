@@ -1,5 +1,7 @@
 package razepl.dev.noteapp.config.jwt;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import razepl.dev.noteapp.api.auth.data.AuthResponse;
 import razepl.dev.noteapp.config.jwt.interfaces.JwtService;
 import razepl.dev.noteapp.config.jwt.interfaces.TokenManagerService;
@@ -8,8 +10,6 @@ import razepl.dev.noteapp.entities.token.TokenType;
 import razepl.dev.noteapp.entities.token.interfaces.TokenRepository;
 import razepl.dev.noteapp.entities.user.User;
 import razepl.dev.noteapp.entities.user.interfaces.UserRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

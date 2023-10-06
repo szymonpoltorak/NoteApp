@@ -1,5 +1,13 @@
 package razepl.dev.noteapp.api.auth;
 
+import jakarta.validation.ConstraintViolationException;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import razepl.dev.noteapp.api.auth.constants.AuthMessages;
 import razepl.dev.noteapp.api.auth.data.ConstraintExceptionResponse;
 import razepl.dev.noteapp.api.auth.data.ExceptionResponse;
@@ -9,14 +17,6 @@ import razepl.dev.noteapp.exceptions.auth.InvalidTokenException;
 import razepl.dev.noteapp.exceptions.auth.TokenDoesNotExistException;
 import razepl.dev.noteapp.exceptions.auth.TokensUserNotFoundException;
 import razepl.dev.noteapp.exceptions.auth.UserAlreadyExistsException;
-import jakarta.validation.ConstraintViolationException;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.List;
 import java.util.stream.Collectors;

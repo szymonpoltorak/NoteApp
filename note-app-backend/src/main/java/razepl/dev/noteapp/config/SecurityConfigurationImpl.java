@@ -1,7 +1,5 @@
 package razepl.dev.noteapp.config;
 
-import razepl.dev.noteapp.config.interfaces.SecurityConfiguration;
-import razepl.dev.noteapp.config.jwt.interfaces.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
+import razepl.dev.noteapp.config.interfaces.SecurityConfiguration;
+import razepl.dev.noteapp.config.jwt.interfaces.JwtAuthenticationFilter;
 
 import static razepl.dev.noteapp.config.constants.Matchers.LOGOUT_URL;
 import static razepl.dev.noteapp.config.constants.Matchers.WHITE_LIST;

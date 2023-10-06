@@ -1,9 +1,9 @@
 package razepl.dev.noteapp.entities.user;
 
-import lombok.extern.slf4j.Slf4j;
-import razepl.dev.noteapp.entities.user.interfaces.Password;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+import lombok.extern.slf4j.Slf4j;
+import razepl.dev.noteapp.entities.user.interfaces.Password;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

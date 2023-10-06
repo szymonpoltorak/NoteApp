@@ -1,6 +1,5 @@
 package razepl.dev.noteapp.config.jwt;
 
-import razepl.dev.noteapp.entities.user.User;
 import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,6 +8,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UserDetails;
+import razepl.dev.noteapp.entities.user.User;
 
 import java.time.LocalDate;
 

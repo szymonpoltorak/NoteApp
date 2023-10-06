@@ -1,8 +1,5 @@
 package razepl.dev.noteapp.config.jwt;
 
-import razepl.dev.noteapp.config.jwt.interfaces.JwtAuthenticationFilter;
-import razepl.dev.noteapp.config.jwt.interfaces.JwtService;
-import razepl.dev.noteapp.entities.token.interfaces.TokenRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,13 +13,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import razepl.dev.noteapp.config.jwt.interfaces.JwtAuthenticationFilter;
+import razepl.dev.noteapp.config.jwt.interfaces.JwtService;
+import razepl.dev.noteapp.entities.token.interfaces.TokenRepository;
 
 import java.io.IOException;
 
-/**
- * Class made to add Jwt to security filter chain to let Jwt tokens to authenticate user and his requests.
- * This class extends {@link OncePerRequestFilter}.
- */
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilterImpl extends OncePerRequestFilter implements JwtAuthenticationFilter {

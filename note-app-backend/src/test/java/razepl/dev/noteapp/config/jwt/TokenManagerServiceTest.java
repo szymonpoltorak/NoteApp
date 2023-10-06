@@ -1,5 +1,10 @@
 package razepl.dev.noteapp.config.jwt;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
 import razepl.dev.noteapp.api.auth.data.AuthResponse;
 import razepl.dev.noteapp.config.jwt.interfaces.JwtService;
 import razepl.dev.noteapp.config.jwt.interfaces.TokenManagerService;
@@ -7,12 +12,6 @@ import razepl.dev.noteapp.entities.token.JwtToken;
 import razepl.dev.noteapp.entities.token.interfaces.TokenRepository;
 import razepl.dev.noteapp.entities.user.User;
 import razepl.dev.noteapp.entities.user.interfaces.UserRepository;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
-
 
 import java.util.ArrayList;
 import java.util.List;
