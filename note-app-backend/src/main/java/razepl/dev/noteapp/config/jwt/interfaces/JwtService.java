@@ -11,7 +11,7 @@ import java.util.function.Function;
 public interface JwtService {
     Optional<String> getUsernameFromToken(String jwtToken);
 
-    <T> T getClaimFromToken(String jwtToken, Function<Claims, T> claimsHandler);
+    <T> Optional<T> getClaimFromToken(String jwtToken, Function<Claims, T> claimsHandler);
 
     String generateToken(UserDetails userDetails);
 

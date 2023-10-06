@@ -13,6 +13,7 @@ import razepl.dev.noteapp.config.constants.Headers;
 import razepl.dev.noteapp.config.constants.Matchers;
 import razepl.dev.noteapp.config.constants.Properties;
 import razepl.dev.noteapp.config.jwt.interfaces.JwtService;
+import razepl.dev.noteapp.exceptions.auth.TokenDoesNotExistException;
 
 import java.security.Key;
 import java.util.Collections;
@@ -34,14 +35,14 @@ public class JwtServiceImpl implements JwtService {
 
     @Override
     public final Optional<String> getUsernameFromToken(String jwtToken) {
-        return Optional.ofNullable(getClaimFromToken(jwtToken, Claims::getSubject));
+        return getClaimFromToken(jwtToken, Claims::getSubject);
     }
 
     @Override
-    public final <T> T getClaimFromToken(String jwtToken, Function<Claims, T> claimsHandler) {
+    public final <T> Optional<T> getClaimFromToken(String jwtToken, Function<Claims, T> claimsHandler) {
         Claims claims = getAllClaims(jwtToken);
 
-        return claimsHandler.apply(claims);
+        return Optional.ofNullable(claimsHandler.apply(claims));
     }
 
     @Override
@@ -111,7 +112,12 @@ public class JwtServiceImpl implements JwtService {
     }
 
     private Date getExpirationDateFromToken(String token) {
-        return getClaimFromToken(token, Claims::getExpiration);
+        Optional<Date> optionalDate = getClaimFromToken(token, Claims::getExpiration);
+
+        if (optionalDate.isEmpty()) {
+            throw new TokenDoesNotExistException("Token without expiration date does not exists!");
+        }
+        return optionalDate.get();
     }
 
     private Key buildSignInKey() {
