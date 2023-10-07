@@ -1,9 +1,5 @@
 package razepl.dev.noteapp.config.jwt;
 
-import razepl.dev.noteapp.config.constants.Headers;
-import razepl.dev.noteapp.config.constants.Matchers;
-import razepl.dev.noteapp.config.constants.Properties;
-import razepl.dev.noteapp.config.jwt.interfaces.JwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -13,34 +9,40 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import razepl.dev.noteapp.config.constants.Headers;
+import razepl.dev.noteapp.config.constants.Matchers;
+import razepl.dev.noteapp.config.constants.Properties;
+import razepl.dev.noteapp.config.jwt.interfaces.JwtService;
+import razepl.dev.noteapp.exceptions.auth.TokenDoesNotExistException;
 
 import java.security.Key;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 
 @Service
 public class JwtServiceImpl implements JwtService {
-    @Value(Properties.EXPIRATION_PROPERTY)
-    private long expirationTime;
-
     @Value(Properties.ENCODING_KEY_PROPERTY)
     private String encodingKey;
+
+    @Value(Properties.EXPIRATION_PROPERTY)
+    private long expirationTime;
 
     @Value(Properties.REFRESH_PROPERTY)
     private long refreshTime;
 
     @Override
-    public final String getUsernameFromToken(String jwtToken) {
+    public final Optional<String> getUsernameFromToken(String jwtToken) {
         return getClaimFromToken(jwtToken, Claims::getSubject);
     }
 
     @Override
-    public final <T> T getClaimFromToken(String jwtToken, Function<Claims, T> claimsHandler) {
+    public final <T> Optional<T> getClaimFromToken(String jwtToken, Function<Claims, T> claimsHandler) {
         Claims claims = getAllClaims(jwtToken);
 
-        return claimsHandler.apply(claims);
+        return Optional.ofNullable(claimsHandler.apply(claims));
     }
 
     @Override
@@ -60,29 +62,29 @@ public class JwtServiceImpl implements JwtService {
 
     @Override
     public final boolean isTokenValid(String jwtToken, UserDetails userDetails) {
-        String username = getUsernameFromToken(jwtToken);
+        Optional<String> username = getUsernameFromToken(jwtToken);
 
-        return username.equals(userDetails.getUsername()) && !isTokenExpired(jwtToken);
+        return username.filter(s -> s.equals(userDetails.getUsername()) && !isTokenExpired(jwtToken)).isPresent();
     }
 
     @Override
-    public final String getJwtToken(HttpServletRequest request) {
+    public final Optional<String> getJwtToken(HttpServletRequest request) {
         String authHeader = request.getHeader(Headers.AUTH_HEADER);
 
         if (request.getServletPath().contains(Matchers.AUTH_MAPPING) || authHeader == null || !authHeader.startsWith(Headers.TOKEN_HEADER)) {
-            return null;
+            return Optional.empty();
         }
-        return authHeader.substring(Headers.TOKEN_START_INDEX);
+        return Optional.of(authHeader.substring(Headers.TOKEN_START_INDEX));
     }
 
     @Override
-    public final String getJwtRefreshToken(HttpServletRequest request) {
+    public final Optional<String> getJwtRefreshToken(HttpServletRequest request) {
         String authHeader = request.getHeader(Headers.AUTH_HEADER);
 
         if (authHeader == null || !authHeader.startsWith(Headers.TOKEN_HEADER)) {
-            return null;
+            return Optional.empty();
         }
-        return authHeader.substring(Headers.TOKEN_START_INDEX);
+        return Optional.of(authHeader.substring(Headers.TOKEN_START_INDEX));
     }
 
     private Claims getAllClaims(String token) {
@@ -101,7 +103,7 @@ public class JwtServiceImpl implements JwtService {
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(time))
                 .setExpiration(new Date(time + expiration))
-                .signWith(buildSignInKey(), SignatureAlgorithm.HS256)
+                .signWith(buildSignInKey(), SignatureAlgorithm.ES256)
                 .compact();
     }
 
@@ -110,7 +112,12 @@ public class JwtServiceImpl implements JwtService {
     }
 
     private Date getExpirationDateFromToken(String token) {
-        return getClaimFromToken(token, Claims::getExpiration);
+        Optional<Date> optionalDate = getClaimFromToken(token, Claims::getExpiration);
+
+        if (optionalDate.isEmpty()) {
+            throw new TokenDoesNotExistException("Token without expiration date does not exists!");
+        }
+        return optionalDate.get();
     }
 
     private Key buildSignInKey() {

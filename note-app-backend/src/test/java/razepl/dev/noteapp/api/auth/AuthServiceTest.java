@@ -1,5 +1,15 @@
 package razepl.dev.noteapp.api.auth;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import razepl.dev.noteapp.api.auth.data.AuthResponse;
 import razepl.dev.noteapp.api.auth.data.LoginRequest;
 import razepl.dev.noteapp.api.auth.data.RegisterRequest;
@@ -11,16 +21,6 @@ import razepl.dev.noteapp.entities.user.interfaces.UserRepository;
 import razepl.dev.noteapp.exceptions.auth.InvalidTokenException;
 import razepl.dev.noteapp.exceptions.auth.TokensUserNotFoundException;
 import razepl.dev.noteapp.exceptions.auth.UserAlreadyExistsException;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -130,7 +130,7 @@ class AuthServiceTest {
         String refreshToken = "refreshToken";
         String authToken = "authToken";
 
-        when(jwtService.getUsernameFromToken(refreshToken)).thenReturn("john.doe@example.com");
+        when(jwtService.getUsernameFromToken(refreshToken)).thenReturn(Optional.of("john.doe@example.com"));
 
         when(userRepository.findByUsername(anyString())).thenReturn(Optional.of(user));
         when(jwtService.isTokenValid(refreshToken, user)).thenReturn(true);
@@ -166,7 +166,7 @@ class AuthServiceTest {
         // given
         String refreshToken = "refreshToken";
 
-        when(jwtService.getUsernameFromToken(refreshToken)).thenReturn("john.doe@example.com");
+        when(jwtService.getUsernameFromToken(refreshToken)).thenReturn(Optional.of("john.doe@example.com"));
         when(userRepository.findByUsername(anyString())).thenReturn(Optional.empty());
 
         // when
@@ -183,7 +183,7 @@ class AuthServiceTest {
         // given
         String refreshToken = "refreshToken";
 
-        when(jwtService.getUsernameFromToken(refreshToken)).thenReturn("john.doe@example.com");
+        when(jwtService.getUsernameFromToken(refreshToken)).thenReturn(Optional.of("john.doe@example.com"));
         when(userRepository.findByUsername(anyString())).thenReturn(Optional.of(user));
         when(jwtService.isTokenValid(refreshToken, user)).thenReturn(false);
 

@@ -1,8 +1,11 @@
 package razepl.dev.noteapp.api.notes;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 import razepl.dev.noteapp.api.notes.data.NoteRequest;
 import razepl.dev.noteapp.api.notes.data.NoteResponse;
 import razepl.dev.noteapp.api.notes.interfaces.NoteMapper;
@@ -10,13 +13,9 @@ import razepl.dev.noteapp.api.notes.interfaces.NoteService;
 import razepl.dev.noteapp.entities.note.Note;
 import razepl.dev.noteapp.entities.note.interfaces.NoteRepository;
 import razepl.dev.noteapp.entities.user.User;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 import razepl.dev.noteapp.exceptions.notes.NoteDoesNotExistException;
 
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 
 import static razepl.dev.noteapp.api.notes.constants.Constants.PAGE_SIZE;
@@ -25,6 +24,7 @@ import static razepl.dev.noteapp.api.notes.constants.Constants.PAGE_SIZE;
 @Service
 @RequiredArgsConstructor
 public class NoteServiceImpl implements NoteService {
+    private static final String NOTE_ID_ERROR_MESSAGE = "Note of id '%s' does not exist!";
     private final NoteRepository noteRepository;
     private final NoteMapper noteMapper;
 
@@ -57,7 +57,7 @@ public class NoteServiceImpl implements NoteService {
     public final NoteResponse deleteNote(long noteId) {
         Note noteToDelete = noteRepository.findById(noteId)
                 .orElseThrow(() -> new NoteDoesNotExistException(
-                        String.format("Note of id '%s' does not exist!", noteId))
+                        String.format(NOTE_ID_ERROR_MESSAGE, noteId))
                 );
         log.info("Deleting note : {}", noteToDelete);
 
@@ -72,7 +72,7 @@ public class NoteServiceImpl implements NoteService {
 
         Note noteToUpdate = noteRepository.findById(updateData.noteId())
                 .orElseThrow(() -> new NoteDoesNotExistException(
-                        String.format("Note of id '%s' does not exist!", updateData.noteId()))
+                        String.format(NOTE_ID_ERROR_MESSAGE, updateData.noteId()))
                 );
         log.info("Note to be updated : {}", noteToUpdate);
 

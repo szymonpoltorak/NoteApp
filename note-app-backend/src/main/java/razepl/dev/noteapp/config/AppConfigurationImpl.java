@@ -1,7 +1,5 @@
 package razepl.dev.noteapp.config;
 
-import razepl.dev.noteapp.config.interfaces.AppConfiguration;
-import razepl.dev.noteapp.entities.user.interfaces.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +14,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import razepl.dev.noteapp.config.interfaces.AppConfiguration;
+import razepl.dev.noteapp.entities.user.interfaces.UserRepository;
 
+import java.security.SecureRandom;
 import java.util.List;
 
 import static razepl.dev.noteapp.config.constants.CorsConfig.ALLOWED_REQUESTS;
@@ -28,6 +29,7 @@ import static razepl.dev.noteapp.config.constants.Headers.AUTH_HEADER;
 @RequiredArgsConstructor
 @Configuration
 public class AppConfigurationImpl implements AppConfiguration {
+    private static final int BCRYPT_STRENGTH = 10;
     private final UserRepository userRepository;
 
     @Bean
@@ -66,7 +68,7 @@ public class AppConfigurationImpl implements AppConfiguration {
     @Bean
     @Override
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder(BCRYPT_STRENGTH, new SecureRandom(SecureRandom.getSeed(BCRYPT_STRENGTH)));
     }
 
     @Bean

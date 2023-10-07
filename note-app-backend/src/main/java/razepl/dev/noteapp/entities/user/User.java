@@ -19,11 +19,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.minidev.json.annotate.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import razepl.dev.noteapp.entities.user.interfaces.ServiceUser;
 
-import java.io.IOException;
 import java.io.NotSerializableException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -36,6 +36,8 @@ import java.util.Collections;
 import static razepl.dev.noteapp.entities.user.constants.Constants.USERS_TABLE_NAME;
 import static razepl.dev.noteapp.entities.user.constants.Constants.USER_PACKAGE;
 import static razepl.dev.noteapp.entities.user.constants.UserValidation.DATE_PATTERN;
+import static razepl.dev.noteapp.entities.user.constants.UserValidation.EMAIL_MAX_LENGTH;
+import static razepl.dev.noteapp.entities.user.constants.UserValidation.EMAIL_MIN_LENGTH;
 import static razepl.dev.noteapp.entities.user.constants.UserValidation.NAME_MAX_LENGTH;
 import static razepl.dev.noteapp.entities.user.constants.UserValidation.NAME_MIN_LENGTH;
 import static razepl.dev.noteapp.entities.user.constants.UserValidation.NAME_PATTERN;
@@ -59,6 +61,9 @@ import static razepl.dev.noteapp.entities.user.constants.UserValidationMessages.
 @Entity
 @Table(name = USERS_TABLE_NAME)
 public class User implements ServiceUser {
+    @Serial
+    private static final long serialVersionUID = 884980275324187578L;
+    
     @NotNull(message = DATE_NULL_MESSAGE)
     @DateTimeFormat(pattern = DATE_PATTERN)
     @JsonSerialize(using = LocalDateSerializer.class)
@@ -77,9 +82,11 @@ public class User implements ServiceUser {
 
     @NotNull(message = EMAIL_NULL_MESSAGE)
     @Column(unique = true)
+    @Size(min = EMAIL_MIN_LENGTH, max = EMAIL_MAX_LENGTH)
     @Email(message = EMAIL_MESSAGE)
     private String username;
 
+    @JsonIgnore
     @NotNull(message = PASSWORD_NULL_MESSAGE)
     private String password;
 
@@ -130,12 +137,12 @@ public class User implements ServiceUser {
     }
 
     @Serial
-    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream in) throws ClassNotFoundException, NotSerializableException {
         throw new NotSerializableException(USER_PACKAGE);
     }
 
     @Serial
-    private void writeObject(ObjectOutputStream out) throws IOException {
+    private void writeObject(ObjectOutputStream out) throws NotSerializableException {
         throw new NotSerializableException(USER_PACKAGE);
     }
 }

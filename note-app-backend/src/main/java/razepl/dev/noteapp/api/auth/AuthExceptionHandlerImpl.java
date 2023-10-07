@@ -1,5 +1,13 @@
 package razepl.dev.noteapp.api.auth;
 
+import jakarta.validation.ConstraintViolationException;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import razepl.dev.noteapp.api.auth.constants.AuthMessages;
 import razepl.dev.noteapp.api.auth.data.ConstraintExceptionResponse;
 import razepl.dev.noteapp.api.auth.data.ExceptionResponse;
@@ -9,14 +17,6 @@ import razepl.dev.noteapp.exceptions.auth.InvalidTokenException;
 import razepl.dev.noteapp.exceptions.auth.TokenDoesNotExistException;
 import razepl.dev.noteapp.exceptions.auth.TokensUserNotFoundException;
 import razepl.dev.noteapp.exceptions.auth.UserAlreadyExistsException;
-import jakarta.validation.ConstraintViolationException;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +24,8 @@ import java.util.stream.Collectors;
 @Slf4j
 @ControllerAdvice
 public class AuthExceptionHandlerImpl implements AuthExceptionHandler {
+    private static final String MESSAGE_CLASS_ERROR_LOG = "Exception class name : {}\nError message : {}";
+
     @Override
     @ExceptionHandler(ConstraintViolationException.class)
     public final ResponseEntity<ConstraintExceptionResponse> handleConstraintValidationExceptions
@@ -34,7 +36,7 @@ public class AuthExceptionHandlerImpl implements AuthExceptionHandler {
                 .map(error -> String.format(AuthMessages.ERROR_FORMAT, error.getPropertyPath(), error.getMessage()))
                 .toList();
 
-        log.error("Exception class name : {}\nError message : {}", className, errorResponse);
+        log.error(MESSAGE_CLASS_ERROR_LOG, className, errorResponse);
 
         return new ResponseEntity<>(buildConstraintResponse(errorResponse, className), HttpStatus.BAD_REQUEST);
     }
@@ -49,7 +51,7 @@ public class AuthExceptionHandlerImpl implements AuthExceptionHandler {
                 .map(error -> String.format(AuthMessages.ERROR_FORMAT, error.getField(), error.getDefaultMessage()))
                 .collect(Collectors.joining(AuthMessages.ERROR_DELIMITER));
 
-        log.error("Exception class name : {}\nError message : {}", className, errorMessage);
+        log.error(MESSAGE_CLASS_ERROR_LOG, className, errorMessage);
 
         return new ResponseEntity<>(buildResponse(errorMessage, className), HttpStatus.BAD_REQUEST);
     }
@@ -78,7 +80,7 @@ public class AuthExceptionHandlerImpl implements AuthExceptionHandler {
         String className = exception.getClass().getSimpleName();
         TokenResponse response = TokenResponse.builder().isAuthTokenValid(false).build();
 
-        log.error("Exception class name : {}\nError message : {}", className, exception.getMessage());
+        log.error(MESSAGE_CLASS_ERROR_LOG, className, exception.getMessage());
 
         return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
     }
@@ -87,7 +89,7 @@ public class AuthExceptionHandlerImpl implements AuthExceptionHandler {
         String errorMessage = exception.getMessage();
         String className = exception.getClass().getSimpleName();
 
-        log.error("Exception class name : {}\nError message : {}", className, errorMessage);
+        log.error(MESSAGE_CLASS_ERROR_LOG, className, errorMessage);
 
         return new ResponseEntity<>(buildResponse(errorMessage, className), status);
     }

@@ -35,7 +35,7 @@ class NoteServiceTest {
     @Mock
     private NoteMapper noteMapper;
 
-    private NoteTestData testData = TestDataBuilder.buildNoteTestData();
+    private final NoteTestData testData = TestDataBuilder.buildNoteTestData();
 
     @Test
     final void test_createNewNote_shouldCreateNote() {

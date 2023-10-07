@@ -1,5 +1,13 @@
 package razepl.dev.noteapp.api.auth;
 
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import razepl.dev.noteapp.api.auth.data.AuthResponse;
 import razepl.dev.noteapp.api.auth.data.LoginRequest;
 import razepl.dev.noteapp.api.auth.data.RegisterRequest;
@@ -9,20 +17,11 @@ import razepl.dev.noteapp.api.auth.interfaces.AuthService;
 import razepl.dev.noteapp.config.jwt.interfaces.JwtService;
 import razepl.dev.noteapp.config.jwt.interfaces.TokenManagerService;
 import razepl.dev.noteapp.entities.user.User;
-import razepl.dev.noteapp.entities.user.interfaces.UserMapper;
 import razepl.dev.noteapp.entities.user.interfaces.UserRepository;
 import razepl.dev.noteapp.exceptions.auth.InvalidTokenException;
 import razepl.dev.noteapp.exceptions.auth.TokenDoesNotExistException;
 import razepl.dev.noteapp.exceptions.auth.TokensUserNotFoundException;
 import razepl.dev.noteapp.exceptions.auth.UserAlreadyExistsException;
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
@@ -30,12 +29,13 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
+    private static final String USER_NOT_EXIST_MESSAGE = "Such user does not exist!";
+    private static final String BUILDING_TOKEN_RESPONSE_MESSAGE = "Building token response for user : {}";
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final TokenManagerService tokenManager;
     private final JwtService jwtService;
-    private final UserMapper userMapper;
 
     @Override
     public final AuthResponse register(@Valid RegisterRequest registerRequest) {
@@ -43,11 +43,17 @@ public class AuthServiceImpl implements AuthService {
 
         String password = validateUserRegisterData(registerRequest);
 
-        User user = userMapper.toUser(registerRequest, passwordEncoder.encode(password));
-
+        User user = User
+                .builder()
+                .name(registerRequest.name())
+                .username(registerRequest.username())
+                .dateOfBirth(registerRequest.dateOfBirth())
+                .surname(registerRequest.surname())
+                .password(passwordEncoder.encode(password))
+                .build();
         createUserWithEncodedPassword(user);
 
-        log.info("Building token response for user : {}", user);
+        log.info(BUILDING_TOKEN_RESPONSE_MESSAGE, user);
 
         return tokenManager.buildTokensIntoResponse(user, false);
     }
@@ -63,9 +69,9 @@ public class AuthServiceImpl implements AuthService {
         );
 
         User user = userRepository.findByUsername(username).orElseThrow(
-                () -> new UsernameNotFoundException("Such user does not exist!")
+                () -> new UsernameNotFoundException(USER_NOT_EXIST_MESSAGE)
         );
-        log.info("Building token response for user : {}", user);
+        log.info(BUILDING_TOKEN_RESPONSE_MESSAGE, user);
 
         return tokenManager.buildTokensIntoResponse(user, true);
     }
@@ -123,15 +129,17 @@ public class AuthServiceImpl implements AuthService {
         if (refreshToken == null) {
             throw new TokenDoesNotExistException("Token does not exist!");
         }
-        String username = jwtService.getUsernameFromToken(refreshToken);
+        Optional<String> usernameOptional = jwtService.getUsernameFromToken(refreshToken);
 
-        if (username == null) {
-            throw new UsernameNotFoundException("Such user does not exist!");
+        if (usernameOptional.isEmpty()) {
+            throw new UsernameNotFoundException(USER_NOT_EXIST_MESSAGE);
         }
+        String username = usernameOptional.get();
+
         log.info("User of username : {}", username);
 
         User user = userRepository.findByUsername(username).orElseThrow(
-                () -> new UsernameNotFoundException("Such user does not exist!")
+                () -> new UsernameNotFoundException(USER_NOT_EXIST_MESSAGE)
         );
 
         if (!jwtService.isTokenValid(refreshToken, user)) {

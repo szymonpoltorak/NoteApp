@@ -1,7 +1,5 @@
 package razepl.dev.noteapp.api.auth;
 
-import razepl.dev.noteapp.entities.token.JwtToken;
-import razepl.dev.noteapp.entities.token.interfaces.TokenRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.junit.jupiter.api.Test;
@@ -10,6 +8,8 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import razepl.dev.noteapp.entities.token.JwtToken;
+import razepl.dev.noteapp.entities.token.interfaces.TokenRepository;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.any;

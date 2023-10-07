@@ -1,6 +1,5 @@
 package razepl.dev.noteapp.entities.token;
 
-import razepl.dev.noteapp.entities.user.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -18,6 +17,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import razepl.dev.noteapp.entities.user.User;
 
 @Builder
 @Getter

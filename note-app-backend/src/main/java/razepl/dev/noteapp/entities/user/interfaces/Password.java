@@ -1,8 +1,8 @@
 package razepl.dev.noteapp.entities.user.interfaces;
 
-import razepl.dev.noteapp.entities.user.PasswordValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
+import razepl.dev.noteapp.entities.user.PasswordValidator;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

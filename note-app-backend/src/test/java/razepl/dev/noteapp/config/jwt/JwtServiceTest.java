@@ -1,6 +1,5 @@
 package razepl.dev.noteapp.config.jwt;
 
-import razepl.dev.noteapp.entities.user.User;
 import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,8 +8,10 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UserDetails;
+import razepl.dev.noteapp.entities.user.User;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -44,10 +45,10 @@ class JwtServiceTest {
         String expectedUsername = "john.doe@gmail.com";
 
         // when
-        String username = jwtService.getUsernameFromToken(token);
+        Optional<String> username = jwtService.getUsernameFromToken(token).orElseThrow().describeConstable();
 
         // then
-        assertEquals(expectedUsername, username);
+        assertEquals(expectedUsername, username.get());
     }
 
     @Test
@@ -113,7 +114,7 @@ class JwtServiceTest {
         // when
         when(mockRequest.getHeader("Authorization")).thenReturn(authHeader);
 
-        String refreshToken = jwtService.getJwtRefreshToken(mockRequest);
+        String refreshToken = jwtService.getJwtRefreshToken(mockRequest).orElse("");
 
         // then
         assertEquals("valid-refresh-token", refreshToken);
@@ -126,7 +127,7 @@ class JwtServiceTest {
         // when
         when(mockRequest.getHeader("Authorization")).thenReturn(null);
 
-        String refreshToken = jwtService.getJwtRefreshToken(mockRequest);
+        String refreshToken = jwtService.getJwtRefreshToken(mockRequest).orElse(null);
 
         // then
         assertNull(refreshToken);

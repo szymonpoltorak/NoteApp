@@ -1,7 +1,5 @@
 package razepl.dev.noteapp.config;
 
-import razepl.dev.noteapp.config.interfaces.SecurityConfiguration;
-import razepl.dev.noteapp.config.jwt.interfaces.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,9 +13,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
+import razepl.dev.noteapp.config.interfaces.SecurityConfiguration;
+import razepl.dev.noteapp.config.jwt.interfaces.JwtAuthenticationFilter;
 
+import static razepl.dev.noteapp.config.constants.Matchers.AUTH_MATCHERS;
 import static razepl.dev.noteapp.config.constants.Matchers.LOGOUT_URL;
-import static razepl.dev.noteapp.config.constants.Matchers.WHITE_LIST;
 
 @Configuration
 @EnableWebSecurity
@@ -37,7 +37,9 @@ public class SecurityConfigurationImpl implements SecurityConfiguration {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers(WHITE_LIST)
+                        .requestMatchers(LOGOUT_URL)
+                        .permitAll()
+                        .requestMatchers(AUTH_MATCHERS)
                         .permitAll()
                         .anyRequest()
                         .authenticated()

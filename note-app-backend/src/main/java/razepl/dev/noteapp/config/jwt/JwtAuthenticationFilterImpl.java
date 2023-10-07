@@ -1,8 +1,5 @@
 package razepl.dev.noteapp.config.jwt;
 
-import razepl.dev.noteapp.config.jwt.interfaces.JwtAuthenticationFilter;
-import razepl.dev.noteapp.config.jwt.interfaces.JwtService;
-import razepl.dev.noteapp.entities.token.interfaces.TokenRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,13 +13,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import razepl.dev.noteapp.config.jwt.interfaces.JwtAuthenticationFilter;
+import razepl.dev.noteapp.config.jwt.interfaces.JwtService;
+import razepl.dev.noteapp.entities.token.interfaces.TokenRepository;
 
 import java.io.IOException;
+import java.util.Optional;
 
-/**
- * Class made to add Jwt to security filter chain to let Jwt tokens to authenticate user and his requests.
- * This class extends {@link OncePerRequestFilter}.
- */
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilterImpl extends OncePerRequestFilter implements JwtAuthenticationFilter {
@@ -34,22 +31,30 @@ public class JwtAuthenticationFilterImpl extends OncePerRequestFilter implements
     public final void doFilterInternal(@NonNull HttpServletRequest request,
                                        @NonNull HttpServletResponse response,
                                        @NonNull FilterChain filterChain) throws ServletException, IOException {
-        String token = jwtService.getJwtToken(request);
+        Optional<String> token = jwtService.getJwtToken(request);
 
-        if (token == null) {
+        if (token.isEmpty()) {
             filterChain.doFilter(request, response);
 
             return;
         }
-        String username = jwtService.getUsernameFromToken(token);
+        String authToken = token.get();
+        Optional<String> usernameOptional = jwtService.getUsernameFromToken(authToken);
 
-        setTokenForNotAuthenticatedUser(token, username, request);
+        if (usernameOptional.isEmpty()) {
+            filterChain.doFilter(request, response);
+
+            return;
+        }
+        String username = usernameOptional.get();
+
+        setTokenForNotAuthenticatedUser(authToken, username, request);
 
         filterChain.doFilter(request, response);
     }
 
     private void setTokenForNotAuthenticatedUser(String jwtToken, String username, @NonNull HttpServletRequest request) {
-        if (username == null || SecurityContextHolder.getContext().getAuthentication() != null) {
+        if (SecurityContextHolder.getContext().getAuthentication() != null) {
             return;
         }
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);

@@ -5,12 +5,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 
 public interface JwtService {
-    String getUsernameFromToken(String jwtToken);
+    Optional<String> getUsernameFromToken(String jwtToken);
 
-    <T> T getClaimFromToken(String jwtToken, Function<Claims, T> claimsHandler);
+    <T> Optional<T> getClaimFromToken(String jwtToken, Function<Claims, T> claimsHandler);
 
     String generateToken(UserDetails userDetails);
 
@@ -18,9 +19,9 @@ public interface JwtService {
 
     boolean isTokenValid(String jwtToken, UserDetails userDetails);
 
-    String getJwtToken(HttpServletRequest request);
+    Optional<String> getJwtToken(HttpServletRequest request);
 
     String generateRefreshToken(UserDetails userDetails);
 
-    String getJwtRefreshToken(HttpServletRequest request);
+    Optional<String> getJwtRefreshToken(HttpServletRequest request);
 }
