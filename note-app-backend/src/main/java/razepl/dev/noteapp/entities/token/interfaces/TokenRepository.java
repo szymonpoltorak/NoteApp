@@ -2,6 +2,7 @@ package razepl.dev.noteapp.entities.token.interfaces;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import razepl.dev.noteapp.entities.token.JwtToken;
 
@@ -17,5 +18,5 @@ public interface TokenRepository extends JpaRepository<JwtToken, Long> {
                 inner join User as u on (t.user.userId = u.userId)
                 where u.userId = :id and (t.isExpired = false or t.isRevoked = false)
             """)
-    List<JwtToken> findAllValidTokensByUserId(Long id);
+    List<JwtToken> findAllValidTokensByUserId(@Param("id") Long id);
 }

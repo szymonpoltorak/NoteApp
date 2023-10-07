@@ -24,11 +24,11 @@ import java.util.function.Function;
 
 @Service
 public class JwtServiceImpl implements JwtService {
-    @Value(Properties.EXPIRATION_PROPERTY)
-    private long expirationTime;
-
     @Value(Properties.ENCODING_KEY_PROPERTY)
     private String encodingKey;
+
+    @Value(Properties.EXPIRATION_PROPERTY)
+    private long expirationTime;
 
     @Value(Properties.REFRESH_PROPERTY)
     private long refreshTime;
@@ -103,7 +103,7 @@ public class JwtServiceImpl implements JwtService {
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(time))
                 .setExpiration(new Date(time + expiration))
-                .signWith(buildSignInKey(), SignatureAlgorithm.HS256)
+                .signWith(buildSignInKey(), SignatureAlgorithm.ES256)
                 .compact();
     }
 

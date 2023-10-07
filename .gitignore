@@ -40,3 +40,4 @@ gradlew.bat
 gradle
 out
 generated
+*.pem
