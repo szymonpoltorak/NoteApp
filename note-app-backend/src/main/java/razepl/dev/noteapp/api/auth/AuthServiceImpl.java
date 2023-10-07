@@ -31,6 +31,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
     private static final String USER_NOT_EXIST_MESSAGE = "Such user does not exist!";
+    private static final String BUILDING_TOKEN_RESPONSE_MESSAGE = "Building token response for user : {}";
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
@@ -48,7 +49,7 @@ public class AuthServiceImpl implements AuthService {
 
         createUserWithEncodedPassword(user);
 
-        log.info("Building token response for user : {}", user);
+        log.info(BUILDING_TOKEN_RESPONSE_MESSAGE, user);
 
         return tokenManager.buildTokensIntoResponse(user, false);
     }
@@ -66,7 +67,7 @@ public class AuthServiceImpl implements AuthService {
         User user = userRepository.findByUsername(username).orElseThrow(
                 () -> new UsernameNotFoundException(USER_NOT_EXIST_MESSAGE)
         );
-        log.info("Building token response for user : {}", user);
+        log.info(BUILDING_TOKEN_RESPONSE_MESSAGE, user);
 
         return tokenManager.buildTokensIntoResponse(user, true);
     }
