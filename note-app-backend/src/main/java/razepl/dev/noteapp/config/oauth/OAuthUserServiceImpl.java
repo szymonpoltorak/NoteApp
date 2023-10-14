@@ -69,10 +69,6 @@ public class OAuthUserServiceImpl implements OAuthUserService {
                 .build();
         log.info("User to be saved : {}", user);
 
-        lol(user);
-    }
-
-    private void lol(@Valid User user) {
         userRepository.save(user);
     }
 

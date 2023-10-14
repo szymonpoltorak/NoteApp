@@ -50,9 +50,4 @@ public class AuthControllerImpl implements AuthController {
     public final TokenResponse authenticateUser(@RequestBody TokenRequest request) {
         return authService.validateUsersTokens(request);
     }
-
-    @GetMapping(value = "lol")
-    public String get() {
-        return "Hellow World";
-    }
 }
