@@ -11,7 +11,7 @@ public final class UserValidation {
 
     public static final int EMAIL_MIN_LENGTH = 7;
 
-    public static final int EMAIL_MAX_LENGTH = 20;
+    public static final int EMAIL_MAX_LENGTH = 40;
 
     private UserValidation() {
     }
