@@ -1,10 +1,10 @@
 version: "3.1"
 
 services:
-    postgres:
+    note-postgres:
         env_file:
             - .env
-        container_name: postgres
+        container_name: note-postgres
         image: postgres:alpine
         environment:
             - POSTGRES_USER=${_POSTGRES_USER}
@@ -16,9 +16,12 @@ services:
         container_name: note-app-backend
         image: note-app-backend
         depends_on:
-            - postgres
+            - note-postgres
         environment:
             - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/noteapp
+            - FRONTEND_URL=none
+            - GOOGLE_CLIENT_ID=none
+            - GOOGLE_CLIENT_SECRET=none
         build:
             context: .
             dockerfile: Dockerfile

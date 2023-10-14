@@ -2,6 +2,7 @@ package razepl.dev.noteapp.api.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,5 +49,10 @@ public class AuthControllerImpl implements AuthController {
     @PostMapping(value = AuthMappings.AUTHENTICATE_MAPPING)
     public final TokenResponse authenticateUser(@RequestBody TokenRequest request) {
         return authService.validateUsersTokens(request);
+    }
+
+    @GetMapping(value = "lol")
+    public String get() {
+        return "Hellow World";
     }
 }
