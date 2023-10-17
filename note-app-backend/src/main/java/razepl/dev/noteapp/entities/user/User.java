@@ -63,12 +63,6 @@ import static razepl.dev.noteapp.entities.user.constants.UserValidationMessages.
 public class User implements ServiceUser {
     @Serial
     private static final long serialVersionUID = 884980275324187578L;
-    
-    @NotNull(message = DATE_NULL_MESSAGE)
-    @DateTimeFormat(pattern = DATE_PATTERN)
-    @JsonSerialize(using = LocalDateSerializer.class)
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    private LocalDate dateOfBirth;
 
     @NotNull(message = NAME_NULL_MESSAGE)
     @Size(min = NAME_MIN_LENGTH, max = NAME_MAX_LENGTH, message = NAME_SIZE_MESSAGE)
@@ -93,13 +87,6 @@ public class User implements ServiceUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long userId;
-
-    @Override
-    public final int getAge() {
-        log.info("Getting age of user : {}", userId);
-
-        return Period.between(LocalDate.now(), this.dateOfBirth).getYears();
-    }
 
     @Override
     public final String getFullName() {

@@ -64,7 +64,6 @@ public class OAuthUserServiceImpl implements OAuthUserService {
                 .name(oAuthUser.getName())
                 .surname(oAuthUser.getFamilyName())
                 .username(oAuthUser.getUsername())
-                .dateOfBirth(LocalDate.now())
                 .password(passwordEncoder.encode(oAuthUser.getPassword()))
                 .build();
         log.info("User to be saved : {}", user);

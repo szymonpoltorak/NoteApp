@@ -10,6 +10,8 @@ services:
             - POSTGRES_USER=${_POSTGRES_USER}
             - POSTGRES_PASSWORD=${_POSTGRES_PASSWORD}
             - POSTGRES_DB=${_POSTGRES_DB}
+        ports:
+            - "5100:5432"
     note-app-backend:
         env_file:
             - .env
