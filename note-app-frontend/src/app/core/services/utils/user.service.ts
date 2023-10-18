@@ -6,27 +6,19 @@ import { StorageKeys } from "@enums/auth/StorageKeys";
     providedIn: 'root'
 })
 export class UserService {
-    private isAuthenticated !: boolean;
-    private wasLoggedOut !: boolean;
+    private isAuthenticated: boolean = false;
 
     constructor(private utilService: UtilService) {
     }
 
     get isUserAuthenticated(): boolean {
-        if (!this.isAuthenticated) {
-            this.isAuthenticated = !!this.utilService.getValueFromStorage(StorageKeys.AUTH_TOKEN);
+        const authToken: string = this.utilService.getValueFromStorage(StorageKeys.AUTH_TOKEN);
 
-            return this.isAuthenticated;
-        }
-        return true;
-    }
+        this.isAuthenticated = authToken !== "undefined" && authToken !== "";
 
-    get wasUserLoggedOut(): boolean {
-        return this.wasLoggedOut;
-    }
+        console.log(this.isAuthenticated);
 
-    set setWasUserLoggedOut(wasLoggedOut: boolean) {
-        this.wasLoggedOut = wasLoggedOut;
+        return this.isAuthenticated;
     }
 
     set setUserAuthentication(isAuthenticated: boolean) {

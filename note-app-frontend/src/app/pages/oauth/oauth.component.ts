@@ -4,6 +4,7 @@ import { ActivatedRoute } from "@angular/router";
 import { UtilService } from "@core/services/utils/util.service";
 import { StorageKeys } from "@enums/auth/StorageKeys";
 import { RouterPaths } from "@enums/RouterPaths";
+import { UserService } from "@core/services/utils/user.service";
 
 @Component({
   selector: 'app-oauth',
@@ -14,7 +15,8 @@ export class OAuthComponent implements OnInit, OnDestroy {
     private destroyRoute$: Subject<void> = new Subject<void>();
 
     constructor(private activatedRoute: ActivatedRoute,
-                private utilService: UtilService) {
+                private utilService: UtilService,
+                private userService: UserService) {
     }
 
     ngOnInit(): void {
@@ -27,7 +29,11 @@ export class OAuthComponent implements OnInit, OnDestroy {
                 this.utilService.addValueToStorage(StorageKeys.AUTH_TOKEN, authToken);
                 this.utilService.addValueToStorage(StorageKeys.REFRESH_TOKEN, refreshToken);
 
-                this.utilService.navigate(RouterPaths.HOME_LOGIN_PATH);
+                if (this.userService.isUserAuthenticated) {
+                    this.utilService.navigate(RouterPaths.HOME_LOGIN_PATH);
+                } else {
+                    this.utilService.navigate(RouterPaths.LOGIN_DIRECT);
+                }
             });
     }
 

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { OAuthComponent } from "./oauth.component";
 import { RouterPaths } from "@enums/RouterPaths";
+import { AuthGuard } from "@core/guards/auth.guard";
 
 const routes: Routes = [
     {
@@ -10,7 +11,9 @@ const routes: Routes = [
     },
     {
         path: RouterPaths.HOME_PATH,
-        redirectTo: RouterPaths.HOME_PATH
+        loadChildren: () => import("../home/home.module")
+            .then(module => module.HomeModule),
+        canActivate: [AuthGuard]
     }
 ];
 

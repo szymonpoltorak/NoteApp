@@ -8,4 +8,5 @@ export enum RouterPaths {
     AUTH_PATH = "auth",
     HOME_LOGIN_PATH = "/home",
     OAUTH_PATH = "oauth",
+    LOGIN_DIRECT = "/auth/login",
 }
