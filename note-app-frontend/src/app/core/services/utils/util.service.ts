@@ -8,39 +8,39 @@ import { StorageKeys } from "@enums/auth/StorageKeys";
 import { AuthResponse } from "@core/data/auth-response";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class UtilService {
-  constructor(private router: Router,
-              private localStorageService: LocalStorageService,
-              private http: HttpClient) {
-  }
+    constructor(private router: Router,
+                private localStorageService: LocalStorageService,
+                private http: HttpClient) {
+    }
 
-  navigate(url: string): void {
-    this.router.navigateByUrl(url);
-  }
+    navigate(url: string): void {
+        this.router.navigateByUrl(url);
+    }
 
-  clearStorage(): void {
-    this.localStorageService.clearStorage();
-  }
+    clearStorage(): void {
+        this.localStorageService.clearStorage();
+    }
 
-  addValueToStorage(key: StorageKeys, value: string): void {
-    this.localStorageService.addValueIntoStorage(key, value);
-  }
+    addValueToStorage(key: StorageKeys, value: string): void {
+        this.localStorageService.addValueIntoStorage(key, value);
+    }
 
-  getValueFromStorage(key: StorageKeys): string {
-    return this.localStorageService.getValueFromStorage(key);
-  }
+    getValueFromStorage(key: StorageKeys): string {
+        return this.localStorageService.getValueFromStorage(key);
+    }
 
-  getKeyValuePairFromStorage(key: StorageKeys): string {
-    return this.localStorageService.getKeyValueFromStorage(key);
-  }
+    getKeyValuePairFromStorage(key: StorageKeys): string {
+        return this.localStorageService.getKeyValueFromStorage(key);
+    }
 
-  removeValueFromStorage(key: StorageKeys): void {
-    this.localStorageService.removeValueFromStorage(key);
-  }
+    removeValueFromStorage(key: StorageKeys): void {
+        this.localStorageService.removeValueFromStorage(key);
+    }
 
-  buildTestData(): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${environment.httpBackend}/api/test`, {});
-  }
+    buildTestData(): Observable<AuthResponse> {
+        return this.http.post<AuthResponse>(`${environment.httpBackend}/api/test`, {});
+    }
 }

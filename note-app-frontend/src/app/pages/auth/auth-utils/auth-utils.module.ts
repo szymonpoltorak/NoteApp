@@ -9,23 +9,23 @@ import { NameFieldComponent } from './name-field/name-field.component';
 
 
 @NgModule({
-  declarations: [
-    PasswordFieldComponent,
-    EmailFieldComponent,
-    NameFieldComponent
-  ],
-  exports: [
-    EmailFieldComponent,
-    PasswordFieldComponent,
-    NameFieldComponent
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule
-  ]
+    declarations: [
+        PasswordFieldComponent,
+        EmailFieldComponent,
+        NameFieldComponent
+    ],
+    exports: [
+        EmailFieldComponent,
+        PasswordFieldComponent,
+        NameFieldComponent
+    ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule
+    ]
 })
 export class AuthUtilsModule {
 }

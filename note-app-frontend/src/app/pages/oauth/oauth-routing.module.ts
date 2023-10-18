@@ -1,17 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { OAuthComponent } from "./oauth.component";
 import { RouterPaths } from "@enums/RouterPaths";
-import { RegisterComponent } from "./register.component";
 
 const routes: Routes = [
     {
         path: RouterPaths.CURRENT_PATH,
-        component: RegisterComponent
+        component: OAuthComponent
     },
     {
-        path: RouterPaths.LOGIN_FULL_PATH,
-        loadChildren: () => import("../login/login.module")
-            .then(module => module.LoginModule)
+        path: RouterPaths.HOME_PATH,
+        redirectTo: RouterPaths.HOME_PATH
     }
 ];
 
@@ -19,5 +18,5 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class RegisterRoutingModule {
+export class OAuthRoutingModule {
 }

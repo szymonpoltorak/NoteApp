@@ -1,5 +1,5 @@
 export interface AuthResponse {
-  authToken: string;
+    authToken: string;
 
-  refreshToken: string;
+    refreshToken: string;
 }
