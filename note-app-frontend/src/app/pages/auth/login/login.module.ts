@@ -9,18 +9,18 @@ import { AuthUtilsModule } from "../auth-utils/auth-utils.module";
 
 
 @NgModule({
-  declarations: [
-    LoginComponent
-  ],
-  imports: [
-    CommonModule,
-    LoginRoutingModule,
-    MatInputModule,
-    MatButtonModule,
-    ReactiveFormsModule,
-    AuthUtilsModule,
-  ],
-  providers: []
+    declarations: [
+        LoginComponent
+    ],
+    imports: [
+        CommonModule,
+        LoginRoutingModule,
+        MatInputModule,
+        MatButtonModule,
+        ReactiveFormsModule,
+        AuthUtilsModule,
+    ],
+    providers: []
 })
 export class LoginModule {
 }

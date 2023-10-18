@@ -3,33 +3,25 @@ import { UtilService } from "@core/services/utils/util.service";
 import { StorageKeys } from "@enums/auth/StorageKeys";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class UserService {
-  private isAuthenticated !: boolean;
-  private wasLoggedOut !: boolean;
+    private isAuthenticated: boolean = false;
 
-  constructor(private utilService: UtilService) {
-  }
-
-  get isUserAuthenticated(): boolean {
-    if (!this.isAuthenticated) {
-      this.isAuthenticated = !!this.utilService.getValueFromStorage(StorageKeys.AUTH_TOKEN);
-
-      return this.isAuthenticated;
+    constructor(private utilService: UtilService) {
     }
-    return true;
-  }
 
-  get wasUserLoggedOut(): boolean {
-    return this.wasLoggedOut;
-  }
+    get isUserAuthenticated(): boolean {
+        const authToken: string = this.utilService.getValueFromStorage(StorageKeys.AUTH_TOKEN);
 
-  set setWasUserLoggedOut(wasLoggedOut: boolean) {
-    this.wasLoggedOut = wasLoggedOut;
-  }
+        this.isAuthenticated = authToken !== "undefined" && authToken !== "";
 
-  set setUserAuthentication(isAuthenticated: boolean) {
-    this.isAuthenticated = isAuthenticated;
-  }
+        console.log(this.isAuthenticated);
+
+        return this.isAuthenticated;
+    }
+
+    set setUserAuthentication(isAuthenticated: boolean) {
+        this.isAuthenticated = isAuthenticated;
+    }
 }

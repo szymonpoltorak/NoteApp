@@ -11,52 +11,52 @@ import { LoginRequest } from "@core/data/login-request";
 import { AuthConstants } from "@enums/auth/AuthConstants";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AuthService {
-  constructor(private http: HttpClient,
-              private utilService: UtilService) {
-  }
-
-  logoutUser(): Observable<any> {
-    return this.http.post(`${environment.httpBackend}${AuthApiCalls.LOGOUT_URL}`, {});
-  }
-
-  registerUser(registerRequest: RegisterRequest): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${environment.httpBackend}${AuthApiCalls.REGISTER_URL}`,
-      registerRequest)
-      .pipe(catchError(() => of(JSON.parse(AuthApiCalls.ERROR_FOUND))));
-  }
-
-  loginUser(loginRequest: LoginRequest): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${environment.httpBackend}${AuthApiCalls.LOGIN_URL}`, loginRequest)
-      .pipe(catchError(() => of(JSON.parse(AuthApiCalls.ERROR_FOUND))));
-  }
-
-  refreshUsersToken(refreshToken: string): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${environment.httpBackend}${AuthApiCalls.REFRESH_URL}`,
-      this.buildRefreshToken(refreshToken)).pipe(tap((response: AuthResponse) => {
-      this.saveData(response);
-    }));
-  }
-
-  saveData(data: AuthResponse): void {
-    console.log(data);
-
-    if (data.authToken === AuthConstants.NO_TOKEN || data.refreshToken === AuthConstants.NO_TOKEN) {
-      return;
+    constructor(private http: HttpClient,
+                private utilService: UtilService) {
     }
-    this.utilService.addValueToStorage(StorageKeys.AUTH_TOKEN, data.authToken);
-    this.utilService.addValueToStorage(StorageKeys.REFRESH_TOKEN, data.refreshToken);
-  }
 
-  private buildAuthRequest(authToken: string) {
-    console.log(JSON.parse(`{${authToken}}`));
+    logoutUser(): Observable<any> {
+        return this.http.post(`${environment.httpBackend}${AuthApiCalls.LOGOUT_URL}`, {});
+    }
 
-    return JSON.parse(`{${authToken}}`);
-  }
+    registerUser(registerRequest: RegisterRequest): Observable<AuthResponse> {
+        return this.http.post<AuthResponse>(`${environment.httpBackend}${AuthApiCalls.REGISTER_URL}`,
+            registerRequest)
+            .pipe(catchError(() => of(JSON.parse(AuthApiCalls.ERROR_FOUND))));
+    }
 
-  private buildRefreshToken(refreshToken: string) {
-    return JSON.parse(`{"refreshToken": "${refreshToken}"}`);
-  }
+    loginUser(loginRequest: LoginRequest): Observable<AuthResponse> {
+        return this.http.post<AuthResponse>(`${environment.httpBackend}${AuthApiCalls.LOGIN_URL}`, loginRequest)
+            .pipe(catchError(() => of(JSON.parse(AuthApiCalls.ERROR_FOUND))));
+    }
+
+    refreshUsersToken(refreshToken: string): Observable<AuthResponse> {
+        return this.http.post<AuthResponse>(`${environment.httpBackend}${AuthApiCalls.REFRESH_URL}`,
+            this.buildRefreshToken(refreshToken)).pipe(tap((response: AuthResponse) => {
+            this.saveData(response);
+        }));
+    }
+
+    saveData(data: AuthResponse): void {
+        console.log(data);
+
+        if (data.authToken === AuthConstants.NO_TOKEN || data.refreshToken === AuthConstants.NO_TOKEN) {
+            return;
+        }
+        this.utilService.addValueToStorage(StorageKeys.AUTH_TOKEN, data.authToken);
+        this.utilService.addValueToStorage(StorageKeys.REFRESH_TOKEN, data.refreshToken);
+    }
+
+    private buildAuthRequest(authToken: string) {
+        console.log(JSON.parse(`{${authToken}}`));
+
+        return JSON.parse(`{${authToken}}`);
+    }
+
+    private buildRefreshToken(refreshToken: string) {
+        return JSON.parse(`{"refreshToken": "${refreshToken}"}`);
+    }
 }

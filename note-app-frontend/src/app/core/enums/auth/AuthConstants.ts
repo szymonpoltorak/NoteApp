@@ -1,3 +1,3 @@
 export enum AuthConstants {
-  NO_TOKEN = ""
+    NO_TOKEN = ""
 }

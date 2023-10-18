@@ -1,13 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { OAuthComponent } from "./oauth.component";
 import { RouterPaths } from "@enums/RouterPaths";
-import { HomeComponent } from "./home.component";
 import { AuthGuard } from "@core/guards/auth.guard";
 
 const routes: Routes = [
     {
         path: RouterPaths.CURRENT_PATH,
-        component: HomeComponent,
+        component: OAuthComponent
+    },
+    {
+        path: RouterPaths.HOME_PATH,
+        loadChildren: () => import("../home/home.module")
+            .then(module => module.HomeModule),
         canActivate: [AuthGuard]
     }
 ];
@@ -16,5 +21,5 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class HomeRoutingModule {
+export class OAuthRoutingModule {
 }

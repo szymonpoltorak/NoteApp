@@ -1,9 +1,9 @@
 export class RegisterRequest {
-  name!: string;
+    name!: string;
 
-  surname!: string;
+    surname!: string;
 
-  username!: string;
+    username!: string;
 
-  password!: string;
+    password!: string;
 }

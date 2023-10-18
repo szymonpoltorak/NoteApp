@@ -13,61 +13,61 @@ import { UtilService } from "@core/services/utils/util.service";
 import { RouterPaths } from "@enums/RouterPaths";
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  registerForm !: FormGroup;
-  private destroyRegister$: Subject<void> = new Subject<void>();
+    registerForm !: FormGroup;
+    private destroyRegister$: Subject<void> = new Subject<void>();
 
-  constructor(public formValidatorService: FormValidatorService,
-              private authService: AuthService,
-              private userService: UserService,
-              private utilService: UtilService) {
-  }
-
-  ngOnInit(): void {
-    this.registerForm = this.formValidatorService.buildRegisterFormGroup();
-  }
-
-  submitForm(): void {
-    if (this.registerForm.invalid) {
-      return;
+    constructor(public formValidatorService: FormValidatorService,
+                private authService: AuthService,
+                private userService: UserService,
+                private utilService: UtilService) {
     }
-    const request: RegisterRequest = this.buildRegisterRequest();
 
-    this.authService.registerUser(request)
-      .pipe(takeUntil(this.destroyRegister$))
-      .subscribe((data: AuthResponse): void => {
-        if (data.authToken === AuthConstants.NO_TOKEN) {
-          return;
+    ngOnInit(): void {
+        this.registerForm = this.formValidatorService.buildRegisterFormGroup();
+    }
+
+    submitForm(): void {
+        if (this.registerForm.invalid) {
+            return;
         }
-        this.userService.setUserAuthentication = true;
+        const request: RegisterRequest = this.buildRegisterRequest();
 
-        const username: string = this.registerForm.get(FormFieldNames.EMAIL_FIELD)?.value;
+        this.authService.registerUser(request)
+            .pipe(takeUntil(this.destroyRegister$))
+            .subscribe((data: AuthResponse): void => {
+                if (data.authToken === AuthConstants.NO_TOKEN) {
+                    return;
+                }
+                this.userService.setUserAuthentication = true;
 
-        this.utilService.addValueToStorage(StorageKeys.USERNAME, username);
+                const username: string = this.registerForm.get(FormFieldNames.EMAIL_FIELD)?.value;
 
-        this.authService.saveData(data);
+                this.utilService.addValueToStorage(StorageKeys.USERNAME, username);
 
-        this.utilService.navigate(RouterPaths.HOME_LOGIN_PATH);
-      });
-  }
+                this.authService.saveData(data);
 
-  private buildRegisterRequest(): RegisterRequest {
-    const registerRequest: RegisterRequest = new RegisterRequest();
-    const nameGroup: AbstractControl<any, any> = this.registerForm.get(FormFieldNames.NAME_GROUP)!;
-    const passwordGroup: AbstractControl<any, any> = this.registerForm.get(FormFieldNames.PASSWORD_GROUP)!;
+                this.utilService.navigate(RouterPaths.HOME_LOGIN_PATH);
+            });
+    }
 
-    registerRequest.name = nameGroup.get(FormFieldNames.NAME_FIELD)!.value;
+    private buildRegisterRequest(): RegisterRequest {
+        const registerRequest: RegisterRequest = new RegisterRequest();
+        const nameGroup: AbstractControl<any, any> = this.registerForm.get(FormFieldNames.NAME_GROUP)!;
+        const passwordGroup: AbstractControl<any, any> = this.registerForm.get(FormFieldNames.PASSWORD_GROUP)!;
 
-    registerRequest.surname = nameGroup.get(FormFieldNames.SURNAME_FIELD)!.value;
+        registerRequest.name = nameGroup.get(FormFieldNames.NAME_FIELD)!.value;
 
-    registerRequest.username = this.registerForm.get(FormFieldNames.EMAIL_FIELD)!.value;
+        registerRequest.surname = nameGroup.get(FormFieldNames.SURNAME_FIELD)!.value;
 
-    registerRequest.password = passwordGroup.get(FormFieldNames.PASSWORD_FIELD)!.value;
+        registerRequest.username = this.registerForm.get(FormFieldNames.EMAIL_FIELD)!.value;
 
-    return registerRequest;
-  }
+        registerRequest.password = passwordGroup.get(FormFieldNames.PASSWORD_FIELD)!.value;
+
+        return registerRequest;
+    }
 }
