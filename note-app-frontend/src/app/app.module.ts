@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from "@angular/common/http";
 import { HomeComponent } from './pages/home/home.component';
 import { OAuthComponent } from './pages/oauth/oauth.component';
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import { OAuthComponent } from './pages/oauth/oauth.component';
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        HttpClientModule
+        HttpClientModule,
+        MatProgressSpinnerModule
     ],
     providers: [],
     bootstrap: [AppComponent]
