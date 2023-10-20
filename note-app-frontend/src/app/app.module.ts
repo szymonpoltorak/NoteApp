@@ -9,6 +9,10 @@ import { HomeComponent } from './pages/home/home.component';
 import { OAuthComponent } from './pages/oauth/oauth.component';
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { AuthInterceptor } from "@core/interceptors/auth.interceptor";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatIconModule } from "@angular/material/icon";
+import { MatButtonModule } from "@angular/material/button";
+import { MatGridListModule } from "@angular/material/grid-list";
 
 @NgModule({
     declarations: [
@@ -21,7 +25,11 @@ import { AuthInterceptor } from "@core/interceptors/auth.interceptor";
         AppRoutingModule,
         BrowserAnimationsModule,
         HttpClientModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        MatGridListModule
     ],
     providers: [
         {

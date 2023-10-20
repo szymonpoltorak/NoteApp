@@ -1,1 +1,15 @@
-<p>home works!</p>
+<main class="home-container">
+    <mat-toolbar color="primary">
+        <button mat-icon-button class="menu-icon" aria-label="Menu button">
+            <mat-icon>menu</mat-icon>
+        </button>
+
+        <span>Notes</span>
+    </mat-toolbar>
+
+    <mat-grid-list cols="4" rowHeight="2:1">
+        <mat-grid-tile *ngFor="let gridItem of gridItems">
+            {{ gridItem }}
+        </mat-grid-tile>
+    </mat-grid-list>
+</main>
