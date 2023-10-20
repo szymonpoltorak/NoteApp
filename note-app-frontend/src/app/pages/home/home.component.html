@@ -8,8 +8,8 @@
     </mat-toolbar>
 
     <mat-grid-list cols="4" rowHeight="2:1">
-        <mat-grid-tile *ngFor="let gridItem of gridItems">
-            {{ gridItem }}
+        <mat-grid-tile *ngFor="let note of notes">
+            <app-note [title]="note.title" [description]="note.description"></app-note>
         </mat-grid-tile>
     </mat-grid-list>
 </main>
