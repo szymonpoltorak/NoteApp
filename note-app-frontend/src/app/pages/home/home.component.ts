@@ -9,7 +9,7 @@ export class HomeComponent implements OnInit {
     readonly gridItems: number[] = [];
 
     ngOnInit(): void {
-        for (let i = 0; i < 16; i++) {
+        for (let i = 0; i < 20; i++) {
             this.gridItems[i] = i;
         }
     }

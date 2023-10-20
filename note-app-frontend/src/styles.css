@@ -17,4 +17,17 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+*::-webkit-scrollbar {
+  width: 1em;
+}
+
+*::-webkit-scrollbar-track {
+  background: #424242;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #565756;
+  border-radius: 3em;
+}
+
 /*# sourceMappingURL=styles.css.map */
