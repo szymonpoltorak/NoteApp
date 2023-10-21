@@ -1,3 +1,16 @@
+.note-container {
+  width: 420px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+}
 
+p {
+  text-align: justify;
+}
+
+mat-card-title {
+  margin-bottom: 3px;
+}
 
 /*# sourceMappingURL=note.component.css.map */

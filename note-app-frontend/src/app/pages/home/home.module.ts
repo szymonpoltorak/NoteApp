@@ -9,6 +9,8 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatCardModule } from "@angular/material/card";
+import { MatDividerModule } from "@angular/material/divider";
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { MatPaginatorModule } from "@angular/material/paginator";
         MatToolbarModule,
         MatIconModule,
         MatButtonModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatCardModule,
+        MatDividerModule,
     ]
 })
 export class HomeModule {

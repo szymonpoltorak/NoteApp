@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Note } from "@core/data/Note";
+import { Note } from "@core/data/note";
 
 @Component({
     selector: 'app-home',
@@ -8,24 +8,87 @@ import { Note } from "@core/data/Note";
 })
 export class HomeComponent implements OnInit {
     readonly notes: Note[] = [
-        {title: "Note 1", description: "Description for Note 1"},
-        {title: "Note 2", description: "Description for Note 2"},
-        {title: "Note 3", description: "Description for Note 3"},
-        {title: "Note 4", description: "Description for Note 4"},
-        {title: "Note 5", description: "Description for Note 5"},
-        {title: "Note 6", description: "Description for Note 6"},
-        {title: "Note 7", description: "Description for Note 7"},
-        {title: "Note 8", description: "Description for Note 8"},
-        {title: "Note 9", description: "Description for Note 9"},
-        {title: "Note 10", description: "Description for Note 10"},
-        {title: "Note 11", description: "Description for Note 11"},
-        {title: "Note 12", description: "Description for Note 12"},
-        {title: "Note 13", description: "Description for Note 13"},
-        {title: "Note 14", description: "Description for Note 14"},
-        {title: "Note 15", description: "Description for Note 15"},
-        {title: "Note 16", description: "Description for Note 16"},
+        {
+            title: "Note 1 dsagndhgasjkldhasjkldhasldkjhac",
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed sem nec eros finibus fringilla. Proin sed justo ut elit tincidunt varius. Nullam id urna nec justo vehicula semper. Sed varius risus a purus aliquam, in ultricies odio viverra. Nullam in sapien eu ante viverra vulputate ac eget lectus.",
+            noteId: 0
+        },
+        {
+            title: "Note 2",
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed sem nec eros finibus fringilla. Proin sed justo ut elit tincidunt varius. Nullam id urna nec justo vehicula semper. Sed varius risus a purus aliquam, in ultricies odio viverra. Nullam in sapien eu ante viverra vulputate ac eget lectus.",
+            noteId: 1
+        },
+        {
+            title: "Note 3",
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed sem nec eros finibus fringilla. Proin sed justo ut elit tincidunt varius. Nullam id urna nec justo vehicula semper. Sed varius risus a purus aliquam, in ultricies odio viverra. Nullam in sapien eu ante viverra vulputate ac eget lectus.",
+            noteId: 2,
+        },
+        {
+            title: "Note 4",
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed sem nec eros finibus fringilla. Proin sed justo ut elit tincidunt varius. Nullam id urna nec justo vehicula semper. Sed varius risus a purus aliquam, in ultricies odio viverra. Nullam in sapien eu ante viverra vulputate ac eget lectus.",
+            noteId: 3
+        },
+        {
+            title: "Note 5",
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed sem nec eros finibus fringilla. Proin sed justo ut elit tincidunt varius. Nullam id urna nec justo vehicula semper. Sed varius risus a purus aliquam, in ultricies odio viverra. Nullam in sapien eu ante viverra vulputate ac eget lectus.",
+            noteId: 4
+        },
+        {
+            title: "Note 6",
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed sem nec eros finibus fringilla. Proin sed justo ut elit tincidunt varius. Nullam id urna nec justo vehicula semper. Sed varius risus a purus aliquam, in ultricies odio viverra. Nullam in sapien eu ante viverra vulputate ac eget lectus.",
+            noteId: 5
+        },
+        {
+            title: "Note 7",
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed sem nec eros finibus fringilla. Proin sed justo ut elit tincidunt varius. Nullam id urna nec justo vehicula semper. Sed varius risus a purus aliquam, in ultricies odio viverra. Nullam in sapien eu ante viverra vulputate ac eget lectus.",
+            noteId: 6
+        },
+        {
+            title: "Note 8",
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed sem nec eros finibus fringilla. Proin sed justo ut elit tincidunt varius. Nullam id urna nec justo vehicula semper. Sed varius risus a purus aliquam, in ultricies odio viverra. Nullam in sapien eu ante viverra vulputate ac eget lectus.",
+            noteId: 7
+        },
+        {
+            title: "Note 9",
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed sem nec eros finibus fringilla. Proin sed justo ut elit tincidunt varius. Nullam id urna nec justo vehicula semper. Sed varius risus a purus aliquam, in ultricies odio viverra. Nullam in sapien eu ante viverra vulputate ac eget lectus.",
+            noteId: 8
+        },
+        {
+            title: "Note 10",
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed sem nec eros finibus fringilla. Proin sed justo ut elit tincidunt varius. Nullam id urna nec justo vehicula semper. Sed varius risus a purus aliquam, in ultricies odio viverra. Nullam in sapien eu ante viverra vulputate ac eget lectus.",
+            noteId: 9
+        },
+        {
+            title: "Note 11",
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed sem nec eros finibus fringilla. Proin sed justo ut elit tincidunt varius. Nullam id urna nec justo vehicula semper. Sed varius risus a purus aliquam, in ultricies odio viverra. Nullam in sapien eu ante viverra vulputate ac eget lectus.",
+            noteId: 10
+        },
+        {
+            title: "Note 12",
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed sem nec eros finibus fringilla. Proin sed justo ut elit tincidunt varius. Nullam id urna nec justo vehicula semper. Sed varius risus a purus aliquam, in ultricies odio viverra. Nullam in sapien eu ante viverra vulputate ac eget lectus.",
+            noteId: 11
+        },
+        {
+            title: "Note 13",
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed sem nec eros finibus fringilla. Proin sed justo ut elit tincidunt varius. Nullam id urna nec justo vehicula semper. Sed varius risus a purus aliquam, in ultricies odio viverra. Nullam in sapien eu ante viverra vulputate ac eget lectus.",
+            noteId: 12
+        },
+        {
+            title: "Note 14",
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed sem nec eros finibus fringilla. Proin sed justo ut elit tincidunt varius. Nullam id urna nec justo vehicula semper. Sed varius risus a purus aliquam, in ultricies odio viverra. Nullam in sapien eu ante viverra vulputate ac eget lectus.",
+            noteId: 13
+        },
+        {
+            title: "Note 15",
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed sem nec eros finibus fringilla. Proin sed justo ut elit tincidunt varius. Nullam id urna nec justo vehicula semper. Sed varius risus a purus aliquam, in ultricies odio viverra. Nullam in sapien eu ante viverra vulputate ac eget lectus.",
+            noteId: 14
+        },
+        {
+            title: "Note 16",
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed sem nec eros finibus fringilla. Proin sed justo ut elit tincidunt varius. Nullam id urna nec justo vehicula semper. Sed varius risus a purus aliquam, in ultricies odio viverra. Nullam in sapien eu ante viverra vulputate ac eget lectus.",
+            noteId: 15
+        }
     ];
-
 
     ngOnInit(): void {
     }
