@@ -5,7 +5,12 @@
   justify-content: center;
 }
 
-p {
+.action-bar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.note-description {
   text-align: justify;
 }
 
