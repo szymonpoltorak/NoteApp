@@ -12,7 +12,12 @@
 
             <mat-divider></mat-divider>
 
-            <button class="menu-option" mat-fab extended>
+            <button (click)="changeToHomeView()" class="menu-option home-button" mat-fab extended>
+                <mat-icon>home</mat-icon>
+                Home
+            </button>
+
+            <button (click)="changeToProfileView()" class="menu-option" mat-fab extended>
                 <mat-icon>person</mat-icon>
                 Profile
             </button>
@@ -23,8 +28,6 @@
                 <mat-icon>logout</mat-icon>
                 Logout
             </button>
-
-            <mat-divider></mat-divider>
         </div>
     </mat-drawer>
 
@@ -36,19 +39,25 @@
         <span>Notes</span>
     </mat-toolbar>
 
-    <mat-grid-list cols="4" rowHeight="224px">
-        <mat-grid-tile *ngFor="let note of notes" class="grid-item">
-            <app-note [description]="note.description"
-                      [noteId]="note.noteId"
-                      [title]="note.title">
-            </app-note>
-        </mat-grid-tile>
-    </mat-grid-list>
+    <div *ngIf="currentView === HomeViews.NOTES">
+        <mat-grid-list cols="4" rowHeight="224px">
+            <mat-grid-tile *ngFor="let note of notes" class="grid-item">
+                <app-note [description]="note.description"
+                          [noteId]="note.noteId"
+                          [title]="note.title">
+                </app-note>
+            </mat-grid-tile>
+        </mat-grid-list>
 
-    <mat-divider></mat-divider>
+        <mat-divider></mat-divider>
 
-    <mat-paginator [length]="notes.length"
-                   [pageSize]="16"
-                   aria-label="Select page">
-    </mat-paginator>
+        <mat-paginator [length]="notes.length"
+                       [pageSize]="16"
+                       aria-label="Select page">
+        </mat-paginator>
+    </div>
+
+    <div *ngIf="currentView === HomeViews.PROFILE">
+        <h1>This is Profile View!</h1>
+    </div>
 </mat-drawer-container>
