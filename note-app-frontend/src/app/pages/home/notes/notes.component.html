@@ -1,0 +1,16 @@
+<mat-grid-list cols="4" rowHeight="224px">
+    <mat-grid-tile *ngFor="let note of notes" class="grid-item">
+        <app-note [description]="note.description"
+                  [noteId]="note.noteId"
+                  [title]="note.title">
+        </app-note>
+    </mat-grid-tile>
+</mat-grid-list>
+
+<mat-divider></mat-divider>
+
+<mat-paginator [length]="notes.length"
+               [pageSize]="16"
+               aria-label="Select page">
+</mat-paginator>
+

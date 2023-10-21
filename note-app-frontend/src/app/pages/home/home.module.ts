@@ -14,13 +14,18 @@ import { MatDividerModule } from "@angular/material/divider";
 import { DeleteNoteDialogComponent } from './delete-note-dialog/delete-note-dialog.component';
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatSidenavModule } from "@angular/material/sidenav";
+import { NotesComponent } from './notes/notes.component';
+import { ProfileComponent } from './profile/profile.component';
+import { MatListModule } from "@angular/material/list";
 
 
 @NgModule({
     declarations: [
         NoteComponent,
         HomeComponent,
-        DeleteNoteDialogComponent
+        DeleteNoteDialogComponent,
+        NotesComponent,
+        ProfileComponent
     ],
     exports: [
         NoteComponent
@@ -37,6 +42,7 @@ import { MatSidenavModule } from "@angular/material/sidenav";
         MatDividerModule,
         MatDialogModule,
         MatSidenavModule,
+        MatListModule,
     ]
 })
 export class HomeModule {

@@ -6,9 +6,10 @@
   overflow-x: hidden;
 }
 
-.grid-item {
-  background-color: #424242;
-  color: white;
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .menu-option {
