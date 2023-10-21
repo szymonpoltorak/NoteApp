@@ -13,6 +13,7 @@ import { MatCardModule } from "@angular/material/card";
 import { MatDividerModule } from "@angular/material/divider";
 import { DeleteNoteDialogComponent } from './delete-note-dialog/delete-note-dialog.component';
 import { MatDialogModule } from "@angular/material/dialog";
+import { MatSidenavModule } from "@angular/material/sidenav";
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { MatDialogModule } from "@angular/material/dialog";
         MatCardModule,
         MatDividerModule,
         MatDialogModule,
+        MatSidenavModule,
     ]
 })
 export class HomeModule {

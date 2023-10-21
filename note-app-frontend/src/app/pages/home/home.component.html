@@ -1,14 +1,43 @@
-<main class="home-container">
+<mat-drawer-container class="home-container" autosize>
+    <mat-drawer #drawer class="sidenav" mode="push">
+        <h1>Menu</h1>
+
+        <mat-divider></mat-divider>
+
+        <div class="button-column">
+            <button class="menu-option" mat-fab extended color="primary">
+                <mat-icon>add</mat-icon>
+                New Note
+            </button>
+
+            <mat-divider></mat-divider>
+
+            <button class="menu-option" mat-fab extended>
+                <mat-icon>person</mat-icon>
+                Profile
+            </button>
+
+            <mat-divider></mat-divider>
+
+            <button class="menu-option" mat-fab extended>
+                <mat-icon>logout</mat-icon>
+                Logout
+            </button>
+
+            <mat-divider></mat-divider>
+        </div>
+    </mat-drawer>
+
     <mat-toolbar class="navbar" color="primary">
-        <button aria-label="Menu button" class="menu-icon" mat-icon-button>
+        <button (click)="drawer.toggle()" aria-label="Menu button" class="menu-icon" mat-icon-button>
             <mat-icon>menu</mat-icon>
         </button>
 
         <span>Notes</span>
     </mat-toolbar>
 
-    <mat-grid-list cols="4" rowHeight="2.13:1">
-        <mat-grid-tile *ngFor="let note of notes">
+    <mat-grid-list cols="4" rowHeight="224px">
+        <mat-grid-tile *ngFor="let note of notes" class="grid-item">
             <app-note [description]="note.description"
                       [noteId]="note.noteId"
                       [title]="note.title">
@@ -19,7 +48,7 @@
     <mat-divider></mat-divider>
 
     <mat-paginator [length]="notes.length"
-                   [pageSize]="15"
+                   [pageSize]="16"
                    aria-label="Select page">
     </mat-paginator>
-</main>
+</mat-drawer-container>

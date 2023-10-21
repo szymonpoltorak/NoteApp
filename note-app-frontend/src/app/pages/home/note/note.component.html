@@ -1,15 +1,13 @@
-<mat-card class="note-container">
-    <mat-card-header>
-        <mat-card-title>{{ title }}</mat-card-title>
-    </mat-card-header>
+<div class="note-container">
+    <h1>{{ title }}</h1>
 
-    <mat-card-content>
+    <div>
         <p class="note-description">{{ description }}</p>
 
         <mat-divider></mat-divider>
-    </mat-card-content>
+    </div>
 
-    <mat-card-actions class="action-bar">
+    <div class="action-bar">
         <button color="accent" mat-icon-button>
             <mat-icon>edit</mat-icon>
         </button>
@@ -17,5 +15,5 @@
         <button (click)="openDeleteDialog('200ms', '200ms')" color="warn" mat-icon-button>
             <mat-icon>delete</mat-icon>
         </button>
-    </mat-card-actions>
-</mat-card>
+    </div>
+</div>

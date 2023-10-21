@@ -1,21 +1,18 @@
-.note-container {
-    width: 420px;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-}
-
 .action-bar {
-    display: flex;
-    justify-content: space-between;
+  margin-top: 0.5em;
+  display: flex;
+  justify-content: space-between;
 }
 
 .note-description {
-    text-align: justify;
+  text-align: justify;
 }
 
-mat-card-title {
-    margin-bottom: 3px;
+.note-container {
+  display: flex;
+  margin: 1em;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /*# sourceMappingURL=note.component.css.map */
