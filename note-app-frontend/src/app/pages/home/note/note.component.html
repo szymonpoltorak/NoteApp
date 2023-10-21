@@ -1,0 +1,19 @@
+<div class="note-container">
+    <h1>{{ title }}</h1>
+
+    <div>
+        <p class="note-description">{{ description }}</p>
+
+        <mat-divider></mat-divider>
+    </div>
+
+    <div class="action-bar">
+        <button color="accent" mat-icon-button>
+            <mat-icon>edit</mat-icon>
+        </button>
+
+        <button (click)="openDeleteDialog('200ms', '200ms')" color="warn" mat-icon-button>
+            <mat-icon>delete</mat-icon>
+        </button>
+    </div>
+</div>

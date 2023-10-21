@@ -1,0 +1,35 @@
+.home-container {
+    width: 100%;
+    height: 100%;
+    background-color: #313130;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.grid-item {
+    background-color: #424242;
+    color: white;
+}
+
+.menu-option {
+    display: flex;
+    justify-content: left;
+}
+
+.button-column {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.navbar {
+    top: 0;
+    z-index: 1000;
+    align-self: start;
+    position: sticky;
+}
+
+.sidenav {
+    padding: 20px;
+}

@@ -1,0 +1,16 @@
+.action-bar {
+    margin-top: 0.5em;
+    display: flex;
+    justify-content: space-between;
+}
+
+.note-description {
+    text-align: justify;
+}
+
+.note-container {
+    display: flex;
+    margin: 1em;
+    flex-direction: column;
+    justify-content: center;
+}
