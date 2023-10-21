@@ -1,4 +1,4 @@
-export enum RouterPaths {
+export const enum RouterPaths {
     CURRENT_PATH = "",
     LOGIN_AUTH_PATH = "login",
     REGISTER_AUTH_PATH = "register",
@@ -9,4 +9,5 @@ export enum RouterPaths {
     HOME_LOGIN_PATH = "/home",
     OAUTH_PATH = "oauth",
     LOGIN_DIRECT = "/auth/login",
+    PROFILE_PATH = "profile",
 }

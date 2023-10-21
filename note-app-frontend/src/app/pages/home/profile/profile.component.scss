@@ -1,0 +1,22 @@
+.profile-container {
+    margin-top: 5em;
+    width: 600px;
+    height: 500px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-title {
+    font-size: 30px;
+}
+
+.profile-section-separator {
+    margin-bottom: 20px;
+}
+
+.profile-title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}

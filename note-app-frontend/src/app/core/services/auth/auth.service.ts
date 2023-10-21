@@ -5,9 +5,9 @@ import { environment } from "@environments/environment";
 import { UtilService } from "@core/services/utils/util.service";
 import { StorageKeys } from "@enums/auth/StorageKeys";
 import { AuthApiCalls } from "@enums/auth/AuthApiCalls";
-import { RegisterRequest } from "@core/data/register-request";
-import { AuthResponse } from "@core/data/auth-response";
-import { LoginRequest } from "@core/data/login-request";
+import { RegisterRequest } from "@core/data/auth/register-request";
+import { AuthResponse } from "@core/data/auth/auth-response";
+import { LoginRequest } from "@core/data/auth/login-request";
 import { AuthConstants } from "@enums/auth/AuthConstants";
 
 @Injectable({
