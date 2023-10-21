@@ -11,12 +11,15 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatCardModule } from "@angular/material/card";
 import { MatDividerModule } from "@angular/material/divider";
+import { DeleteNoteDialogComponent } from './delete-note-dialog/delete-note-dialog.component';
+import { MatDialogModule } from "@angular/material/dialog";
 
 
 @NgModule({
     declarations: [
         NoteComponent,
-        HomeComponent
+        HomeComponent,
+        DeleteNoteDialogComponent
     ],
     exports: [
         NoteComponent
@@ -31,6 +34,7 @@ import { MatDividerModule } from "@angular/material/divider";
         MatPaginatorModule,
         MatCardModule,
         MatDividerModule,
+        MatDialogModule,
     ]
 })
 export class HomeModule {

@@ -58,11 +58,11 @@ export class LoginComponent implements OnInit {
     }
 
     redirectToGoogleOauth(): void {
-        window.location.href = `${ environment.httpBackend }/oauth2/authorization/google`;
+        window.location.href = `${environment.httpBackend}/oauth2/authorization/google`;
     }
 
     redirectToGithubOauth(): void {
-        window.location.href = `${ environment.httpBackend }/oauth2/authorization/github`;
+        window.location.href = `${environment.httpBackend}/oauth2/authorization/github`;
     }
 
     private buildLoginRequest(): LoginRequest {

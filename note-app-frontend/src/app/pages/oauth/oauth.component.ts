@@ -7,9 +7,9 @@ import { RouterPaths } from "@enums/RouterPaths";
 import { UserService } from "@core/services/utils/user.service";
 
 @Component({
-  selector: 'app-oauth',
-  templateUrl: './oauth.component.html',
-  styleUrls: ['./oauth.component.scss']
+    selector: 'app-oauth',
+    templateUrl: './oauth.component.html',
+    styleUrls: ['./oauth.component.scss']
 })
 export class OAuthComponent implements OnInit, OnDestroy {
     private destroyRoute$: Subject<void> = new Subject<void>();

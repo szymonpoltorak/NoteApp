@@ -10,11 +10,11 @@
     </mat-card-content>
 
     <mat-card-actions class="action-bar">
-        <button mat-icon-button color="accent">
+        <button color="accent" mat-icon-button>
             <mat-icon>edit</mat-icon>
         </button>
 
-        <button mat-icon-button color="warn">
+        <button (click)="openDeleteDialog('200ms', '200ms')" color="warn" mat-icon-button>
             <mat-icon>delete</mat-icon>
         </button>
     </mat-card-actions>

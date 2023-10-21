@@ -1,6 +1,6 @@
 <main class="home-container">
     <mat-toolbar class="navbar" color="primary">
-        <button mat-icon-button class="menu-icon" aria-label="Menu button">
+        <button aria-label="Menu button" class="menu-icon" mat-icon-button>
             <mat-icon>menu</mat-icon>
         </button>
 
@@ -9,9 +9,9 @@
 
     <mat-grid-list cols="4" rowHeight="2.13:1">
         <mat-grid-tile *ngFor="let note of notes">
-            <app-note [title]="note.title"
+            <app-note [description]="note.description"
                       [noteId]="note.noteId"
-                      [description]="note.description">
+                      [title]="note.title">
             </app-note>
         </mat-grid-tile>
     </mat-grid-list>
