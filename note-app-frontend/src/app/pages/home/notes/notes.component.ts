@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Note } from "@core/data/home/note";
 
 @Component({
-  selector: 'app-notes',
-  templateUrl: './notes.component.html',
-  styleUrls: ['./notes.component.scss']
+    selector: 'app-notes',
+    templateUrl: './notes.component.html',
+    styleUrls: ['./notes.component.scss']
 })
 export class NotesComponent implements OnInit {
     protected readonly notes: Note[] = [];

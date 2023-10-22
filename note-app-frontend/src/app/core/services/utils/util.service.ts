@@ -1,19 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
 import { LocalStorageService } from "./local-storage.service";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { environment } from "@environments/environment";
 import { StorageKeys } from "@enums/auth/StorageKeys";
-import { AuthResponse } from "@core/data/auth/auth-response";
 
 @Injectable({
     providedIn: 'root'
 })
 export class UtilService {
     constructor(private router: Router,
-                private localStorageService: LocalStorageService,
-                private http: HttpClient) {
+                private localStorageService: LocalStorageService) {
     }
 
     navigate(url: string): void {
@@ -38,9 +33,5 @@ export class UtilService {
 
     removeValueFromStorage(key: StorageKeys): void {
         this.localStorageService.removeValueFromStorage(key);
-    }
-
-    buildTestData(): Observable<AuthResponse> {
-        return this.http.post<AuthResponse>(`${environment.httpBackend}/api/test`, {});
     }
 }

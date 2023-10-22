@@ -26,16 +26,13 @@ import static razepl.dev.noteapp.api.notes.constants.Constants.PAGE_SIZE;
 
 @SpringBootTest
 class NoteServiceTest {
+    private final NoteTestData testData = TestDataBuilder.buildNoteTestData();
     @InjectMocks
     private NoteServiceImpl noteService;
-
     @Mock
     private NoteRepository noteRepository;
-
     @Mock
     private NoteMapper noteMapper;
-
-    private final NoteTestData testData = TestDataBuilder.buildNoteTestData();
 
     @Test
     final void test_createNewNote_shouldCreateNote() {

@@ -13,6 +13,7 @@ import razepl.dev.noteapp.entities.user.interfaces.UserRepository;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ProfileServiceImpl implements ProfileService {
     private final UserMapper userMapper;
@@ -20,14 +21,15 @@ public class ProfileServiceImpl implements ProfileService {
     private final TokenRepository tokenRepository;
 
     @Override
-    public final UserResponse getUserData(User user) {
+    public UserResponse getUserData(User user) {
         log.info("Getting data from user : {}", user);
+
+        log.info(String.valueOf(userMapper == null));
 
         return userMapper.toUserResponse(user);
     }
 
     @Override
-    @Transactional
     public UserResponse closeUsersAccount(User user) {
         log.info("Closing account of user : {}", user);
 

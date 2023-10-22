@@ -4,9 +4,9 @@ import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
-  selector: 'app-oauth-buttons',
-  templateUrl: './oauth-buttons.component.html',
-  styleUrls: ['./oauth-buttons.component.scss']
+    selector: 'app-oauth-buttons',
+    templateUrl: './oauth-buttons.component.html',
+    styleUrls: ['./oauth-buttons.component.scss']
 })
 export class OauthButtonsComponent {
     constructor(private iconRegistry: MatIconRegistry,
@@ -20,6 +20,7 @@ export class OauthButtonsComponent {
             this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/icons8-github.svg')
         );
     }
+
     redirectToGoogleOauth(): void {
         window.location.href = `${environment.httpBackend}/oauth2/authorization/google`;
     }

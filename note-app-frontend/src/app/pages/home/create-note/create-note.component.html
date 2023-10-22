@@ -1,4 +1,4 @@
-<form class="create-note-container" (ngSubmit)="addNewNote()" [formGroup]="noteGroup">
+<form (ngSubmit)="addNewNote()" [formGroup]="noteGroup" class="create-note-container">
     <h1 class="create-note-title">Create your Note</h1>
 
     <mat-form-field class="full-width">
@@ -39,5 +39,5 @@
         </mat-error>
     </mat-form-field>
 
-    <button mat-raised-button color="primary" type="submit">Create</button>
+    <button color="primary" mat-raised-button type="submit">Create</button>
 </form>
