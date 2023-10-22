@@ -39,8 +39,4 @@ export class UtilService {
     removeValueFromStorage(key: StorageKeys): void {
         this.localStorageService.removeValueFromStorage(key);
     }
-
-    buildTestData(): Observable<AuthResponse> {
-        return this.http.post<AuthResponse>(`${environment.httpBackend}/api/test`, {});
-    }
 }
