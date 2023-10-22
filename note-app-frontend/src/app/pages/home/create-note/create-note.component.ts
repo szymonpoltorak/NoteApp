@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { NoteRequest } from "@core/data/home/note-request";
 
 @Component({
     selector: 'app-create-note',
@@ -19,7 +20,7 @@ export class CreateNoteComponent implements OnInit {
         ]
     );
 
-    readonly content: FormControl = new FormControl("",
+    readonly contentControl: FormControl = new FormControl("",
         [
             Validators.required,
             Validators.minLength(this.MIN_LENGTH),
@@ -32,13 +33,21 @@ export class CreateNoteComponent implements OnInit {
     }
 
     addNewNote(): void {
-
+        if (this.noteGroup.invalid) {
+            return;
+        }
+        const noteRequest: NoteRequest = {
+            title: this.titleControl.value,
+            content: this.contentControl.value,
+            noteLang: "TEXT"
+        };
+        console.log(noteRequest);
     }
 
     ngOnInit(): void {
         this.noteGroup = this.formBuilder.group({
             title: this.titleControl,
-            content: this.content
+            content: this.contentControl
         });
     }
 }

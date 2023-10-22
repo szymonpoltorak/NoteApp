@@ -21,20 +21,20 @@
     </mat-form-field>
 
     <mat-form-field class="full-width">
-        <mat-label>Leave a comment</mat-label>
+        <mat-label>Your note</mat-label>
 
         <textarea class="note-content" formControlName="content" matInput placeholder="Enter your note here...">
         </textarea>
 
-        <mat-error *ngIf="content.hasError('minLength')">
+        <mat-error *ngIf="contentControl.hasError('minLength')">
             Your note is <strong>too short</strong>!
         </mat-error>
 
-        <mat-error *ngIf="content.hasError('maxLength')">
+        <mat-error *ngIf="contentControl.hasError('maxLength')">
             Your note is <strong>too long</strong>!
         </mat-error>
 
-        <mat-error *ngIf="content.hasError('required')">
+        <mat-error *ngIf="contentControl.hasError('required')">
             Note is <strong>required</strong>
         </mat-error>
     </mat-form-field>
