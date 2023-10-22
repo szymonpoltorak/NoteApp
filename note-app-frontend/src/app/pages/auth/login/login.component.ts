@@ -11,9 +11,6 @@ import { UtilService } from "@core/services/utils/util.service";
 import { UserService } from "@core/services/utils/user.service";
 import { RouterPaths } from "@enums/RouterPaths";
 import { FormFieldNames } from "@enums/auth/FormFieldNames";
-import { environment } from "@environments/environment";
-import { DomSanitizer } from "@angular/platform-browser";
-import { MatIconRegistry } from "@angular/material/icon";
 
 @Component({
     selector: 'app-login',
@@ -27,17 +24,7 @@ export class LoginComponent implements OnInit {
     constructor(public loginValidatorService: FormValidatorService,
                 private authService: AuthService,
                 private utilService: UtilService,
-                private userService: UserService,
-                private iconRegistry: MatIconRegistry,
-                private sanitizer: DomSanitizer) {
-        this.iconRegistry.addSvgIcon(
-            'google',
-            this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/icons8-google-logo.svg')
-        );
-        this.iconRegistry.addSvgIcon(
-            'github',
-            this.sanitizer.bypassSecurityTrustResourceUrl('../../../../assets/icons8-github.svg')
-        );
+                private userService: UserService) {
     }
 
     ngOnInit(): void {
@@ -71,14 +58,6 @@ export class LoginComponent implements OnInit {
                 this.utilService.addValueToStorage(StorageKeys.USERNAME, username);
                 this.utilService.navigate(RouterPaths.HOME_LOGIN_PATH);
             });
-    }
-
-    redirectToGoogleOauth(): void {
-        // window.location.href = `${environment.httpBackend}/oauth2/authorization/google`;
-    }
-
-    redirectToGithubOauth(): void {
-        // window.location.href = `${environment.httpBackend}/oauth2/authorization/github`;
     }
 
     private buildLoginRequest(): LoginRequest {

@@ -14,20 +14,6 @@
         >
         </app-password-field>
 
-        <div class="oauth-buttons">
-            <button class="login-button" (click)="redirectToGoogleOauth()" mat-raised-button type="button">
-                <mat-icon svgIcon="google"></mat-icon>
-
-                <span class="oauth-label">Sign In with Google</span>
-            </button>
-
-            <button class="login-button" (click)="redirectToGithubOauth()" mat-raised-button type="button">
-                <mat-icon svgIcon="github"></mat-icon>
-
-                <span class="oauth-label">Sign In with Github</span>
-            </button>
-        </div>
-
         <div class="button-bar">
             <button class="login-button" color="primary" mat-raised-button routerLink="/auth/register" type="button">
                 Register
@@ -35,5 +21,7 @@
 
             <button class="login-button" color="primary" mat-raised-button type="submit">Login</button>
         </div>
+
+        <app-oauth-buttons></app-oauth-buttons>
     </form>
 </div>
