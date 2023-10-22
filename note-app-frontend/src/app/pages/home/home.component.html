@@ -40,7 +40,7 @@
     </mat-toolbar>
 
     <div *ngIf="currentView === HomeViews.NOTES">
-        <app-notes></app-notes>
+        <app-notes (editEvent)="loadEditNoteView($event)"></app-notes>
     </div>
 
     <div *ngIf="currentView === HomeViews.PROFILE" class="center-container">
@@ -49,5 +49,9 @@
 
     <div *ngIf="currentView === HomeViews.CREATE_NOTE" class="center-container">
         <app-create-note></app-create-note>
+    </div>
+
+    <div *ngIf="currentView === HomeViews.EDIT_NOTE">
+        <app-edit-note [editNote]="editNote"></app-edit-note>
     </div>
 </mat-drawer-container>

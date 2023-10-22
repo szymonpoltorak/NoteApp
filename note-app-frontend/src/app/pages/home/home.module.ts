@@ -20,6 +20,7 @@ import { MatListModule } from "@angular/material/list";
 import { MatInputModule } from "@angular/material/input";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CreateNoteComponent } from './create-note/create-note.component';
+import { EditNoteComponent } from './edit-note/edit-note.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { CreateNoteComponent } from './create-note/create-note.component';
         DeleteNoteDialogComponent,
         NotesComponent,
         ProfileComponent,
-        CreateNoteComponent
+        CreateNoteComponent,
+        EditNoteComponent
     ],
     exports: [
         NoteComponent
