@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeViews } from "@enums/home/HomeViews";
+import { ProfileService } from "@core/services/home/profile.service";
+import { AuthService } from "@core/services/auth/auth.service";
+import { UtilService } from "@core/services/utils/util.service";
+import { RouterPaths } from "@enums/RouterPaths";
 
 @Component({
     selector: 'app-home',
@@ -9,6 +13,10 @@ import { HomeViews } from "@enums/home/HomeViews";
 export class HomeComponent implements OnInit {
     protected readonly HomeViews = HomeViews;
     protected currentView: HomeViews = HomeViews.CREATE_NOTE;
+
+    constructor(private authService: AuthService,
+                private utilService: UtilService) {
+    }
 
     ngOnInit(): void {
     }
@@ -29,5 +37,15 @@ export class HomeComponent implements OnInit {
         if (this.currentView !== HomeViews.CREATE_NOTE) {
             this.currentView = HomeViews.CREATE_NOTE;
         }
+    }
+
+    logoutUser(): void {
+        this.authService.logoutUser().subscribe(data => {
+            console.log(data);
+
+            this.utilService.clearStorage();
+
+            this.utilService.navigate(RouterPaths.LOGIN_DIRECT);
+        })
     }
 }

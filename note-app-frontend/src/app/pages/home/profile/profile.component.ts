@@ -10,7 +10,7 @@ import { RouterPaths } from "@enums/RouterPaths";
     styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-    user !: User;
+    user: User = {name: "", surname: "", username: ""};
 
     constructor(private profileService: ProfileService,
                 private utilService: UtilService) {
@@ -25,8 +25,8 @@ export class ProfileComponent implements OnInit {
     }
 
     closeAccount(): void {
-        this.profileService.closeAccount().subscribe((data: User): void => {
-            console.log(data);
+        this.profileService.closeAccount().subscribe((): void => {
+            this.utilService.clearStorage();
 
             this.utilService.navigate(RouterPaths.LOGIN_DIRECT);
         });
