@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeViews } from "@enums/home/HomeViews";
-import { MatDialog } from "@angular/material/dialog";
 
 @Component({
     selector: 'app-home',
@@ -9,10 +8,7 @@ import { MatDialog } from "@angular/material/dialog";
 })
 export class HomeComponent implements OnInit {
     protected readonly HomeViews = HomeViews;
-    protected currentView: HomeViews = HomeViews.NOTES;
-
-    constructor(public dialog: MatDialog) {
-    }
+    protected currentView: HomeViews = HomeViews.CREATE_NOTE;
 
     ngOnInit(): void {
     }

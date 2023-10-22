@@ -29,10 +29,6 @@ export class LoginComponent implements OnInit {
 
     ngOnInit(): void {
         this.loginForm = this.loginValidatorService.buildFormGroup();
-        this.registerSvgIcon();
-    }
-
-    private registerSvgIcon(): void {
     }
 
     submitForm(): void {

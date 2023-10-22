@@ -18,7 +18,7 @@ import { NotesComponent } from './notes/notes.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MatListModule } from "@angular/material/list";
 import { MatInputModule } from "@angular/material/input";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CreateNoteComponent } from './create-note/create-note.component';
 
 
@@ -49,6 +49,7 @@ import { CreateNoteComponent } from './create-note/create-note.component';
         MatListModule,
         MatInputModule,
         FormsModule,
+        ReactiveFormsModule,
     ]
 })
 export class HomeModule {
