@@ -1,7 +1,7 @@
 .login-form {
   min-width: 150px;
   max-width: 500px;
-  max-height: 350px;
+  max-height: 400px;
   margin-top: 200px;
   padding: 20px;
   background-color: #313130;
@@ -19,7 +19,7 @@
 }
 
 .button-bar {
-  margin: 5px;
+  margin: 5px 5px 1em;
   display: flex;
   justify-content: center;
   align-content: center;
@@ -35,21 +35,9 @@
   background-color: #313130;
 }
 
-.oauth-buttons {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  gap: 100px;
-  margin-bottom: 1em;
-}
-
 .login-button {
   height: 50px;
   width: 12em;
-}
-
-.oauth-label {
-  font-size: 10px;
 }
 
 /*# sourceMappingURL=login.component.css.map */
