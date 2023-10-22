@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeViews } from "@enums/home/HomeViews";
+import { MatDialog } from "@angular/material/dialog";
 
 @Component({
     selector: 'app-home',
@@ -9,6 +10,9 @@ import { HomeViews } from "@enums/home/HomeViews";
 export class HomeComponent implements OnInit {
     protected readonly HomeViews = HomeViews;
     protected currentView: HomeViews = HomeViews.NOTES;
+
+    constructor(public dialog: MatDialog) {
+    }
 
     ngOnInit(): void {
     }
@@ -22,6 +26,12 @@ export class HomeComponent implements OnInit {
     changeToProfileView(): void {
         if (this.currentView !== HomeViews.PROFILE) {
             this.currentView = HomeViews.PROFILE;
+        }
+    }
+
+    changeToCreateNoteView(): void {
+        if (this.currentView !== HomeViews.CREATE_NOTE) {
+            this.currentView = HomeViews.CREATE_NOTE;
         }
     }
 }

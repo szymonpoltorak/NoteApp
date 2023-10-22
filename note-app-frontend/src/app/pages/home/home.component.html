@@ -5,7 +5,7 @@
         <mat-divider></mat-divider>
 
         <div class="button-column">
-            <button class="menu-option" mat-fab extended color="primary">
+            <button (click)="changeToCreateNoteView()" class="menu-option" mat-fab extended color="primary">
                 <mat-icon>add</mat-icon>
                 New Note
             </button>
@@ -45,5 +45,9 @@
 
     <div class="center-container" *ngIf="currentView === HomeViews.PROFILE">
         <app-profile></app-profile>
+    </div>
+
+    <div class="center-container" *ngIf="currentView === HomeViews.CREATE_NOTE">
+        <app-create-note></app-create-note>
     </div>
 </mat-drawer-container>
