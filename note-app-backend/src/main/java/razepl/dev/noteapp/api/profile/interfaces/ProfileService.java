@@ -5,4 +5,6 @@ import razepl.dev.noteapp.entities.user.User;
 
 public interface ProfileService {
     UserResponse getUserData(User user);
+
+    UserResponse closeUsersAccount(User user);
 }
