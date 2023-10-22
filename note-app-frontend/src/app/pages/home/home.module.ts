@@ -17,6 +17,9 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { NotesComponent } from './notes/notes.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MatListModule } from "@angular/material/list";
+import { MatInputModule } from "@angular/material/input";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { CreateNoteComponent } from './create-note/create-note.component';
 
 
 @NgModule({
@@ -25,7 +28,8 @@ import { MatListModule } from "@angular/material/list";
         HomeComponent,
         DeleteNoteDialogComponent,
         NotesComponent,
-        ProfileComponent
+        ProfileComponent,
+        CreateNoteComponent
     ],
     exports: [
         NoteComponent
@@ -43,6 +47,9 @@ import { MatListModule } from "@angular/material/list";
         MatDialogModule,
         MatSidenavModule,
         MatListModule,
+        MatInputModule,
+        FormsModule,
+        ReactiveFormsModule,
     ]
 })
 export class HomeModule {

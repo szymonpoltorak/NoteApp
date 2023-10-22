@@ -4,4 +4,8 @@ export interface Note {
     description: string;
 
     noteId: number;
+
+    dateOfCreation: Date;
+
+    noteLang: string;
 }

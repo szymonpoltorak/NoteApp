@@ -7,7 +7,7 @@ public final class NoteSizeBonds {
 
     public static final int NOTE_TITLE_MIN_SIZE = 2;
 
-    public static final int NOTE_TITLE_MAX_SIZE = 20;
+    public static final int NOTE_TITLE_MAX_SIZE = 30;
 
     private NoteSizeBonds() {
     }

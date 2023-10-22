@@ -1,4 +1,5 @@
 export enum HomeViews {
     NOTES,
-    PROFILE
+    PROFILE,
+    CREATE_NOTE,
 }

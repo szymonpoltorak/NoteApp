@@ -1,0 +1,43 @@
+<form class="create-note-container" (ngSubmit)="addNewNote()" [formGroup]="noteGroup">
+    <h1 class="create-note-title">Create your Note</h1>
+
+    <mat-form-field class="full-width">
+        <mat-label>Title</mat-label>
+
+        <input [formControl]="titleControl" matInput placeholder="Your title"
+               type="text">
+
+        <mat-error *ngIf="titleControl.hasError('minLength')">
+            Your title is <strong>too short</strong>!
+        </mat-error>
+
+        <mat-error *ngIf="titleControl.hasError('maxLength')">
+            Your title is <strong>too long</strong>!
+        </mat-error>
+
+        <mat-error *ngIf="titleControl.hasError('required')">
+            Title is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+        <mat-label>Your note</mat-label>
+
+        <textarea class="note-content" formControlName="content" matInput placeholder="Enter your note here...">
+        </textarea>
+
+        <mat-error *ngIf="contentControl.hasError('minLength')">
+            Your note is <strong>too short</strong>!
+        </mat-error>
+
+        <mat-error *ngIf="contentControl.hasError('maxLength')">
+            Your note is <strong>too long</strong>!
+        </mat-error>
+
+        <mat-error *ngIf="contentControl.hasError('required')">
+            Note is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Create</button>
+</form>

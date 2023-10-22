@@ -63,7 +63,7 @@ class NoteServiceTest {
         Pageable pageable = PageRequest.of(pageNumber, PAGE_SIZE);
         List<NoteResponse> expected = List.of(testData.noteResponse());
 
-        when(noteRepository.findNotesByNoteAuthor(testData.noteAuthor(), pageable))
+        when(noteRepository.findByNoteAuthorOrderByDateOfCreation(testData.noteAuthor(), pageable))
                 .thenReturn(new PageImpl<>(List.of(testData.newNote())));
         when(noteMapper.toNoteResponse(testData.newNote()))
                 .thenReturn(testData.noteResponse());

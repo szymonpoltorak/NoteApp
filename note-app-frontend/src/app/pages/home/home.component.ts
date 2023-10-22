@@ -8,7 +8,7 @@ import { HomeViews } from "@enums/home/HomeViews";
 })
 export class HomeComponent implements OnInit {
     protected readonly HomeViews = HomeViews;
-    protected currentView: HomeViews = HomeViews.PROFILE;
+    protected currentView: HomeViews = HomeViews.CREATE_NOTE;
 
     ngOnInit(): void {
     }
@@ -22,6 +22,12 @@ export class HomeComponent implements OnInit {
     changeToProfileView(): void {
         if (this.currentView !== HomeViews.PROFILE) {
             this.currentView = HomeViews.PROFILE;
+        }
+    }
+
+    changeToCreateNoteView(): void {
+        if (this.currentView !== HomeViews.CREATE_NOTE) {
+            this.currentView = HomeViews.CREATE_NOTE;
         }
     }
 }

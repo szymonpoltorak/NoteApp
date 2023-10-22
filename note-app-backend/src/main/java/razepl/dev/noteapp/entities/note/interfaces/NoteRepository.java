@@ -9,5 +9,5 @@ import razepl.dev.noteapp.entities.user.User;
 
 @Repository
 public interface NoteRepository extends JpaRepository<Note, Long> {
-    Page<Note> findNotesByNoteAuthor(User noteAuthor, Pageable pageable);
+    Page<Note> findByNoteAuthorOrderByDateOfCreation(User noteAuthor, Pageable pageable);
 }
