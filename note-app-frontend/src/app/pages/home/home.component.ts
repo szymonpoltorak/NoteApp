@@ -8,7 +8,7 @@ import { HomeViews } from "@enums/home/HomeViews";
 })
 export class HomeComponent implements OnInit {
     protected readonly HomeViews = HomeViews;
-    protected currentView: HomeViews = HomeViews.PROFILE;
+    protected currentView: HomeViews = HomeViews.NOTES;
 
     ngOnInit(): void {
     }

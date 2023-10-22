@@ -43,7 +43,7 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public final List<NoteResponse> getNotesFromPage(int pageNumber, User notesAuthor) {
         Pageable pageable = PageRequest.of(pageNumber, PAGE_SIZE);
-        Page<Note> notes = noteRepository.findNotesByNoteAuthor(notesAuthor, pageable);
+        Page<Note> notes = noteRepository.findByNoteAuthorOrderByDateOfCreation(notesAuthor, pageable);
 
         log.info("Found '{}' notes for user '{}' on page '{}'", notes.getSize(), notesAuthor.getUsername(), pageNumber);
 
