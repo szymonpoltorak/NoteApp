@@ -12,10 +12,10 @@ export class ProfileService {
     }
 
     getUserData(): Observable<User> {
-        return this.httpClient.get<User>(`${ environment.httpBackend }/api/home/profile/userData`, {});
+        return this.httpClient.get<User>(`${environment.httpBackend}/api/home/profile/userData`, {});
     }
 
     closeAccount(): Observable<User> {
-        return this.httpClient.delete<User>(`${ environment.httpBackend }/api/home/profile/closeAccount`);
+        return this.httpClient.delete<User>(`${environment.httpBackend}/api/home/profile/closeAccount`);
     }
 }

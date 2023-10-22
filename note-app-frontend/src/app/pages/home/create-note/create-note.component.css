@@ -1,26 +1,26 @@
 .create-note-container {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  margin-top: 5em;
-  border: 1px #424242 solid;
-  border-radius: 0.5em;
-  padding: 2em;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 5em;
+    border: 1px #424242 solid;
+    border-radius: 0.5em;
+    padding: 2em;
 }
 
 .full-width {
-  width: 50em;
-  margin-bottom: 1em;
+    width: 50em;
+    margin-bottom: 1em;
 }
 
 .note-content {
-  min-height: 400px;
+    min-height: 400px;
 }
 
 .create-note-title {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /*# sourceMappingURL=create-note.component.css.map */

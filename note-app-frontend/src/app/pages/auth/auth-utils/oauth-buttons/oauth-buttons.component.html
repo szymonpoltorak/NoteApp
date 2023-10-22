@@ -7,13 +7,13 @@
 </div>
 
 <div class="oauth-buttons">
-    <button color="accent" class="login-button" (click)="redirectToGoogleOauth()" mat-raised-button type="button">
+    <button (click)="redirectToGoogleOauth()" class="login-button" color="accent" mat-raised-button type="button">
         <mat-icon svgIcon="google"></mat-icon>
 
         <span class="oauth-label">Sign In with Google</span>
     </button>
 
-    <button class="login-button" (click)="redirectToGithubOauth()" mat-raised-button type="button">
+    <button (click)="redirectToGithubOauth()" class="login-button" mat-raised-button type="button">
         <mat-icon svgIcon="github"></mat-icon>
 
         <span class="oauth-label">Sign In with Github</span>

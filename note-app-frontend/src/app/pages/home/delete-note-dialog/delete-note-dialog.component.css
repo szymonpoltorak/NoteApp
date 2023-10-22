@@ -1,6 +1,6 @@
 .delete-dialog-buttons {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 /*# sourceMappingURL=delete-note-dialog.component.css.map */

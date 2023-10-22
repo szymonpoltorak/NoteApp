@@ -1,30 +1,30 @@
-<mat-drawer-container class="home-container" autosize>
+<mat-drawer-container autosize class="home-container">
     <mat-drawer #drawer class="sidenav" mode="push">
         <h1>Menu</h1>
 
         <mat-divider></mat-divider>
 
         <div class="button-column">
-            <button (click)="changeToCreateNoteView()" class="menu-option" mat-fab extended color="primary">
+            <button (click)="changeToCreateNoteView()" class="menu-option" color="primary" extended mat-fab>
                 <mat-icon>add</mat-icon>
                 New Note
             </button>
 
             <mat-divider></mat-divider>
 
-            <button (click)="changeToHomeView()" class="menu-option home-button" mat-fab extended>
+            <button (click)="changeToHomeView()" class="menu-option home-button" extended mat-fab>
                 <mat-icon>home</mat-icon>
                 Home
             </button>
 
-            <button (click)="changeToProfileView()" class="menu-option" mat-fab extended>
+            <button (click)="changeToProfileView()" class="menu-option" extended mat-fab>
                 <mat-icon>person</mat-icon>
                 Profile
             </button>
 
             <mat-divider></mat-divider>
 
-            <button class="menu-option" mat-fab extended>
+            <button class="menu-option" extended mat-fab>
                 <mat-icon>logout</mat-icon>
                 Logout
             </button>
@@ -43,11 +43,11 @@
         <app-notes></app-notes>
     </div>
 
-    <div class="center-container" *ngIf="currentView === HomeViews.PROFILE">
+    <div *ngIf="currentView === HomeViews.PROFILE" class="center-container">
         <app-profile></app-profile>
     </div>
 
-    <div class="center-container" *ngIf="currentView === HomeViews.CREATE_NOTE">
+    <div *ngIf="currentView === HomeViews.CREATE_NOTE" class="center-container">
         <app-create-note></app-create-note>
     </div>
 </mat-drawer-container>

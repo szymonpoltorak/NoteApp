@@ -1,18 +1,18 @@
 .action-bar {
-  margin-top: 0.5em;
-  display: flex;
-  justify-content: space-between;
+    margin-top: 0.5em;
+    display: flex;
+    justify-content: space-between;
 }
 
 .note-description {
-  text-align: justify;
+    text-align: justify;
 }
 
 .note-container {
-  display: flex;
-  margin: 1em;
-  flex-direction: column;
-  justify-content: center;
+    display: flex;
+    margin: 1em;
+    flex-direction: column;
+    justify-content: center;
 }
 
 /*# sourceMappingURL=note.component.css.map */

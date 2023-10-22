@@ -5,9 +5,9 @@ import { UtilService } from "@core/services/utils/util.service";
 import { RouterPaths } from "@enums/RouterPaths";
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+    selector: 'app-profile',
+    templateUrl: './profile.component.html',
+    styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
     user !: User;
@@ -17,18 +17,18 @@ export class ProfileComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.profileService.getUserData().subscribe((data: User) => {
+        this.profileService.getUserData().subscribe((data: User): void => {
             console.log(data);
 
             this.user = data;
         });
     }
 
-    closeAccount() {
+    closeAccount(): void {
         this.profileService.closeAccount().subscribe((data: User): void => {
-           console.log(data);
+            console.log(data);
 
-           this.utilService.navigate(RouterPaths.LOGIN_DIRECT);
+            this.utilService.navigate(RouterPaths.LOGIN_DIRECT);
         });
     }
 }
