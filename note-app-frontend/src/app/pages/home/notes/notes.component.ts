@@ -1,6 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Note } from "@core/data/home/note";
 import { SideMenuActions } from "@core/interfaces/home/SideMenuActions";
+import { SideMenuService } from "@core/services/home/side-menu.service";
+import { EditNoteService } from "@core/services/home/edit-note.service";
 
 @Component({
     selector: 'app-notes',
@@ -8,8 +10,11 @@ import { SideMenuActions } from "@core/interfaces/home/SideMenuActions";
     styleUrls: ['./notes.component.scss']
 })
 export class NotesComponent implements OnInit, SideMenuActions {
-    @Output() readonly editEvent: EventEmitter<Note> = new EventEmitter<Note>();
     protected readonly notes: Note[] = [];
+
+    constructor(private sideMenuService: SideMenuService,
+                private editNoteService: EditNoteService) {
+    }
 
     ngOnInit(): void {
         for (let i: number = 0; i < 16; i++) {
@@ -23,22 +28,25 @@ export class NotesComponent implements OnInit, SideMenuActions {
         }
     }
 
-    propagateEditEvent(event: Note): void {
-        this.editEvent.emit(event);
-    }
-
     changeToCreateNoteView(): void {
+        this.sideMenuService.changeToCreateNoteView();
     }
 
-    changeToHomeView(): void {
+    changeToNotesView(): void {
+        this.sideMenuService.changeToNotesView();
     }
 
     changeToProfileView(): void {
+        this.sideMenuService.changeToProfileView();
     }
 
-    loadEditNoteView(event: Note): void {
+    changeToEditNote(event: Note): void {
+        this.editNoteService.setNoteToEdit(event);
+
+        this.sideMenuService.changeToEditNote(event);
     }
 
     logoutUser(): void {
+        this.sideMenuService.logoutUser();
     }
 }

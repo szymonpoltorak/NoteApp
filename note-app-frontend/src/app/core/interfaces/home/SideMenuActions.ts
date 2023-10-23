@@ -1,7 +1,7 @@
 import { Note } from "@core/data/home/note";
 
 export interface SideMenuActions {
-    changeToHomeView(): void;
+    changeToNotesView(): void;
 
     changeToProfileView(): void;
 
@@ -9,5 +9,5 @@ export interface SideMenuActions {
 
     logoutUser(): void;
 
-    loadEditNoteView(event: Note): void;
+    changeToEditNote(event: Note): void;
 }

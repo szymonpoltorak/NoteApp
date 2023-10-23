@@ -5,6 +5,7 @@ import { UtilService } from "@core/services/utils/util.service";
 import { RouterPaths } from "@enums/RouterPaths";
 import { SideMenuActions } from "@core/interfaces/home/SideMenuActions";
 import { Note } from "@core/data/home/note";
+import { SideMenuService } from "@core/services/home/side-menu.service";
 
 @Component({
     selector: 'app-profile',
@@ -15,7 +16,8 @@ export class ProfileComponent implements OnInit, SideMenuActions {
     user: User = {name: "", surname: "", username: ""};
 
     constructor(private profileService: ProfileService,
-                private utilService: UtilService) {
+                private utilService: UtilService,
+                private sideMenuService: SideMenuService) {
     }
 
     ngOnInit(): void {
@@ -33,17 +35,22 @@ export class ProfileComponent implements OnInit, SideMenuActions {
     }
 
     changeToCreateNoteView(): void {
+        this.sideMenuService.changeToCreateNoteView();
     }
 
-    changeToHomeView(): void {
+    changeToNotesView(): void {
+        this.sideMenuService.changeToNotesView();
     }
 
     changeToProfileView(): void {
+        this.sideMenuService.changeToProfileView();
     }
 
-    loadEditNoteView(event: Note): void {
+    changeToEditNote(event: Note): void {
+        this.sideMenuService.changeToEditNote(event);
     }
 
     logoutUser(): void {
+        this.sideMenuService.logoutUser();
     }
 }

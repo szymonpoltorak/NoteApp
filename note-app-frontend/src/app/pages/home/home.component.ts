@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    changeToHomeView(): void {
+    changeToNotesView(): void {
         if (this.currentView !== HomeViews.NOTES) {
             this.currentView = HomeViews.NOTES;
         }

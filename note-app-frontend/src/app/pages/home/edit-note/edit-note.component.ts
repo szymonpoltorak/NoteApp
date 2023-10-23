@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Note } from "@core/data/home/note";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { SideMenuActions } from "@core/interfaces/home/SideMenuActions";
+import { SideMenuService } from "@core/services/home/side-menu.service";
+import { EditNoteService } from "@core/services/home/edit-note.service";
 
 @Component({
     selector: 'app-edit-note',
@@ -9,7 +11,7 @@ import { SideMenuActions } from "@core/interfaces/home/SideMenuActions";
     styleUrls: ['./edit-note.component.scss']
 })
 export class EditNoteComponent implements OnInit, SideMenuActions {
-    @Input() editNote: Note = {title: "", description: "", noteId: -1, dateOfCreation: new Date(), noteLang: "TEXT"};
+    editNote: Note = {title: "", description: "", noteId: -1, dateOfCreation: new Date(), noteLang: "TEXT"};
     protected noteGroup !: FormGroup;
     private readonly MIN_LENGTH: number = 2;
     private readonly TITLE_MAX_LENGTH: number = 30;
@@ -29,7 +31,9 @@ export class EditNoteComponent implements OnInit, SideMenuActions {
         ]
     );
 
-    constructor(private formBuilder: FormBuilder) {
+    constructor(private formBuilder: FormBuilder,
+                private sideMenuService: SideMenuService,
+                private editNoteService: EditNoteService) {
     }
 
     submitEditedNote(): void {
@@ -51,20 +55,28 @@ export class EditNoteComponent implements OnInit, SideMenuActions {
             title: this.titleControl,
             content: this.contentControl
         });
+        this.editNote = this.editNoteService.getNoteToEdit();
+
+        console.log(this.editNote);
     }
 
     changeToCreateNoteView(): void {
+        this.sideMenuService.changeToCreateNoteView();
     }
 
-    changeToHomeView(): void {
+    changeToNotesView(): void {
+        this.sideMenuService.changeToNotesView();
     }
 
     changeToProfileView(): void {
+        this.sideMenuService.changeToProfileView();
     }
 
-    loadEditNoteView(event: Note): void {
+    changeToEditNote(event: Note): void {
+        this.sideMenuService.changeToEditNote(event);
     }
 
     logoutUser(): void {
+        this.sideMenuService.logoutUser();
     }
 }

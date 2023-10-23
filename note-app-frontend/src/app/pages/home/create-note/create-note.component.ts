@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
 import { NoteRequest } from "@core/data/home/note-request";
 import { SideMenuActions } from "@core/interfaces/home/SideMenuActions";
 import { Note } from "@core/data/home/note";
+import { SideMenuService } from "@core/services/home/side-menu.service";
 
 @Component({
     selector: 'app-create-note',
@@ -29,7 +30,8 @@ export class CreateNoteComponent implements OnInit, SideMenuActions {
         ]
     );
 
-    constructor(private formBuilder: FormBuilder) {
+    constructor(private formBuilder: FormBuilder,
+                private sideMenuService: SideMenuService) {
     }
 
     addNewNote(): void {
@@ -52,17 +54,22 @@ export class CreateNoteComponent implements OnInit, SideMenuActions {
     }
 
     changeToCreateNoteView(): void {
+        this.sideMenuService.changeToCreateNoteView();
     }
 
-    changeToHomeView(): void {
+    changeToNotesView(): void {
+        this.sideMenuService.changeToNotesView();
     }
 
     changeToProfileView(): void {
+        this.sideMenuService.changeToProfileView();
     }
 
-    loadEditNoteView(event: Note): void {
+    changeToEditNote(event: Note): void {
+        this.sideMenuService.changeToEditNote(event);
     }
 
     logoutUser(): void {
+        this.sideMenuService.logoutUser();
     }
 }

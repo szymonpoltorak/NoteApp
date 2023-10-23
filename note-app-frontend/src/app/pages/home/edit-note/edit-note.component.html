@@ -12,7 +12,7 @@
 
             <mat-divider></mat-divider>
 
-            <button (click)="changeToHomeView()" class="menu-option home-button" extended mat-fab>
+            <button (click)="changeToNotesView()" class="menu-option home-button" extended mat-fab>
                 <mat-icon>home</mat-icon>
                 Home
             </button>
@@ -69,8 +69,7 @@
                           formControlName="content"
                           matInput
                           placeholder="Enter your note here..."
-                          value="{{ editNote.description }}">
-            </textarea>
+                          value="{{ editNote.description }}"></textarea>
 
                 <mat-error *ngIf="contentControl.hasError('minLength')">
                     Your note is <strong>too short</strong>!
@@ -86,6 +85,7 @@
             </mat-form-field>
 
             <button color="primary" mat-raised-button type="submit">Create</button>
+
             <button color="primary" mat-raised-button type="submit">Return</button>
         </form>
     </div>
