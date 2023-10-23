@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { NoteRequest } from "@core/data/home/note-request";
+import { SideMenuActions } from "@core/interfaces/home/SideMenuActions";
+import { Note } from "@core/data/home/note";
 
 @Component({
     selector: 'app-create-note',
     templateUrl: './create-note.component.html',
     styleUrls: ['./create-note.component.scss']
 })
-export class CreateNoteComponent implements OnInit {
+export class CreateNoteComponent implements OnInit, SideMenuActions {
     protected noteGroup !: FormGroup;
     private readonly MIN_LENGTH: number = 2;
     private readonly TITLE_MAX_LENGTH: number = 30;
@@ -36,7 +38,7 @@ export class CreateNoteComponent implements OnInit {
         }
         const noteRequest: NoteRequest = {
             title: this.titleControl.value,
-            content: this.contentControl.value,
+            description: this.contentControl.value,
             noteLang: "TEXT"
         };
         console.log(noteRequest);
@@ -47,5 +49,20 @@ export class CreateNoteComponent implements OnInit {
             title: this.titleControl,
             content: this.contentControl
         });
+    }
+
+    changeToCreateNoteView(): void {
+    }
+
+    changeToHomeView(): void {
+    }
+
+    changeToProfileView(): void {
+    }
+
+    loadEditNoteView(event: Note): void {
+    }
+
+    logoutUser(): void {
     }
 }

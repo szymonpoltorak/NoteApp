@@ -10,6 +10,9 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     declarations: [
         OAuthComponent
     ],
+    exports: [
+        OAuthComponent
+    ],
     imports: [
         CommonModule,
         OAuthRoutingModule,

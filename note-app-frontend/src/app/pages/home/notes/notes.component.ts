@@ -1,14 +1,15 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Note } from "@core/data/home/note";
+import { SideMenuActions } from "@core/interfaces/home/SideMenuActions";
 
 @Component({
     selector: 'app-notes',
     templateUrl: './notes.component.html',
     styleUrls: ['./notes.component.scss']
 })
-export class NotesComponent implements OnInit {
-    protected readonly notes: Note[] = [];
+export class NotesComponent implements OnInit, SideMenuActions {
     @Output() readonly editEvent: EventEmitter<Note> = new EventEmitter<Note>();
+    protected readonly notes: Note[] = [];
 
     ngOnInit(): void {
         for (let i: number = 0; i < 16; i++) {
@@ -24,5 +25,20 @@ export class NotesComponent implements OnInit {
 
     propagateEditEvent(event: Note): void {
         this.editEvent.emit(event);
+    }
+
+    changeToCreateNoteView(): void {
+    }
+
+    changeToHomeView(): void {
+    }
+
+    changeToProfileView(): void {
+    }
+
+    loadEditNoteView(event: Note): void {
+    }
+
+    logoutUser(): void {
     }
 }

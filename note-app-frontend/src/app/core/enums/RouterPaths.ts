@@ -10,4 +10,7 @@ export const enum RouterPaths {
     OAUTH_PATH = "oauth",
     LOGIN_DIRECT = "/auth/login",
     PROFILE_PATH = "profile",
+    NOTES_PATH = "notes",
+    CREATE_NOTE = "createNote",
+    EDIT_NOTE = "editNote",
 }

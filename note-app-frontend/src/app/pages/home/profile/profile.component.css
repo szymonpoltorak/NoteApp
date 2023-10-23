@@ -1,24 +1,66 @@
+.home-container {
+  width: 100%;
+  height: 100%;
+  background-color: #313130;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-option {
+  display: flex;
+  justify-content: left;
+}
+
+.button-column {
+  margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.home-button {
+  margin-bottom: 1.5em;
+}
+
+.navbar {
+  top: 0;
+  z-index: 1000;
+  align-self: start;
+  position: sticky;
+}
+
+.sidenav {
+  padding: 20px;
+}
+
 .profile-container {
-    margin-top: 5em;
-    width: 600px;
-    height: 500px;
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 5em;
+  width: 600px;
+  height: 500px;
 }
 
 .profile-title {
-    font-size: 30px;
+  font-size: 30px;
 }
 
 .profile-section-separator {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .profile-title-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 /*# sourceMappingURL=profile.component.css.map */

@@ -1,1 +1,92 @@
-<p>edit-note works!</p>
+<mat-drawer-container autosize class="home-container">
+    <mat-drawer #drawer class="sidenav" mode="push">
+        <h1>Menu</h1>
+
+        <mat-divider></mat-divider>
+
+        <div class="button-column">
+            <button (click)="changeToCreateNoteView()" class="menu-option" color="primary" extended mat-fab>
+                <mat-icon>add</mat-icon>
+                New Note
+            </button>
+
+            <mat-divider></mat-divider>
+
+            <button (click)="changeToHomeView()" class="menu-option home-button" extended mat-fab>
+                <mat-icon>home</mat-icon>
+                Home
+            </button>
+
+            <button (click)="changeToProfileView()" class="menu-option" extended mat-fab>
+                <mat-icon>person</mat-icon>
+                Profile
+            </button>
+
+            <mat-divider></mat-divider>
+
+            <button (click)="logoutUser()" class="menu-option" extended mat-fab>
+                <mat-icon>logout</mat-icon>
+                Logout
+            </button>
+        </div>
+    </mat-drawer>
+
+    <mat-toolbar class="navbar" color="primary">
+        <button (click)="drawer.toggle()" aria-label="Menu button" class="menu-icon" mat-icon-button>
+            <mat-icon>menu</mat-icon>
+        </button>
+
+        <span>Notes</span>
+    </mat-toolbar>
+
+    <div class="center-container">
+        <form (ngSubmit)="submitEditedNote()" [formGroup]="noteGroup" class="create-note-container">
+            <h1 class="create-note-title">Create your Note</h1>
+
+            <mat-form-field class="full-width">
+                <mat-label>Title</mat-label>
+
+                <input [formControl]="titleControl" matInput placeholder="Your title"
+                       type="text" value="{{ editNote.title }}">
+
+                <mat-error *ngIf="titleControl.hasError('minLength')">
+                    Your title is <strong>too short</strong>!
+                </mat-error>
+
+                <mat-error *ngIf="titleControl.hasError('maxLength')">
+                    Your title is <strong>too long</strong>!
+                </mat-error>
+
+                <mat-error *ngIf="titleControl.hasError('required')">
+                    Title is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+                <mat-label>Your note</mat-label>
+
+                <textarea class="note-content"
+                          formControlName="content"
+                          matInput
+                          placeholder="Enter your note here..."
+                          value="{{ editNote.description }}">
+            </textarea>
+
+                <mat-error *ngIf="contentControl.hasError('minLength')">
+                    Your note is <strong>too short</strong>!
+                </mat-error>
+
+                <mat-error *ngIf="contentControl.hasError('maxLength')">
+                    Your note is <strong>too long</strong>!
+                </mat-error>
+
+                <mat-error *ngIf="contentControl.hasError('required')">
+                    Note is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <button color="primary" mat-raised-button type="submit">Create</button>
+            <button color="primary" mat-raised-button type="submit">Return</button>
+        </form>
+    </div>
+</mat-drawer-container>

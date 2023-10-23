@@ -11,9 +11,9 @@ import { Note } from "@core/data/home/note";
     styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+    editNote: Note = {title: "", description: "", noteId: -1, dateOfCreation: new Date(), noteLang: "TEXT"};
     protected readonly HomeViews = HomeViews;
     protected currentView: HomeViews = HomeViews.NOTES;
-    editNote: Note = {title: "", description: "", noteId: -1, dateOfCreation: new Date(), noteLang: "TEXT"};
 
     constructor(private authService: AuthService,
                 private utilService: UtilService) {
