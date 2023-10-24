@@ -50,14 +50,9 @@ export class EditNoteComponent implements OnInit, SideMenuActions {
             noteId: this.editNote.noteId,
             dateOfCreation: this.editNote.dateOfCreation
         };
-        console.log(note);
 
         this.editNoteService.updateNote(note)
-            .subscribe((data) => {
-                console.log(data);
-
-                this.utilService.navigate(RouterPaths.NOTES_DIRECT_PATH);
-            });
+            .subscribe((data) => this.utilService.navigate(RouterPaths.NOTES_DIRECT_PATH));
     }
 
     ngOnInit(): void {
