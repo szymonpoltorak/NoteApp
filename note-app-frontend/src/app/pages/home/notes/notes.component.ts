@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Note } from "@core/data/home/note";
 import { SideMenuActions } from "@core/interfaces/home/SideMenuActions";
 import { SideMenuService } from "@core/services/home/side-menu.service";
@@ -41,7 +41,7 @@ export class NotesComponent implements OnInit, SideMenuActions {
     }
 
     changeToEditNote(event: Note): void {
-        this.editNoteService.setNoteToEdit(event);
+        this.editNoteService.noteToEdit = event;
 
         this.sideMenuService.changeToEditNote(event);
     }

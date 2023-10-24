@@ -13,7 +13,7 @@ import { SideMenuService } from "@core/services/home/side-menu.service";
     styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit, SideMenuActions {
-    user: User = {name: "", surname: "", username: ""};
+    protected user: User = {name: "", surname: "", username: ""};
 
     constructor(private profileService: ProfileService,
                 private utilService: UtilService,

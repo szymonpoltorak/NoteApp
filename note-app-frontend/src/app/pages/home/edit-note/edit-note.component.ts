@@ -1,9 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Note } from "@core/data/home/note";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { SideMenuActions } from "@core/interfaces/home/SideMenuActions";
 import { SideMenuService } from "@core/services/home/side-menu.service";
 import { EditNoteService } from "@core/services/home/edit-note.service";
+import { UtilService } from "@core/services/utils/util.service";
+import { RouterPaths } from "@enums/RouterPaths";
 
 @Component({
     selector: 'app-edit-note',
@@ -11,19 +13,19 @@ import { EditNoteService } from "@core/services/home/edit-note.service";
     styleUrls: ['./edit-note.component.scss']
 })
 export class EditNoteComponent implements OnInit, SideMenuActions {
-    editNote: Note = {title: "", description: "", noteId: -1, dateOfCreation: new Date(), noteLang: "TEXT"};
+    protected readonly editNote: Note = this.editNoteService.noteToEdit;
     protected noteGroup !: FormGroup;
     private readonly MIN_LENGTH: number = 2;
     private readonly TITLE_MAX_LENGTH: number = 30;
-    readonly titleControl: FormControl = new FormControl("",
+    readonly titleControl: FormControl = new FormControl(this.editNote.title,
         [
             Validators.required,
             Validators.minLength(this.MIN_LENGTH),
             Validators.maxLength(this.TITLE_MAX_LENGTH)
         ]
     );
-    private readonly CONTENT_MAX_LENGTH: number = 30;
-    readonly contentControl: FormControl = new FormControl("",
+    private readonly CONTENT_MAX_LENGTH: number = 500;
+    readonly contentControl: FormControl = new FormControl(this.editNote.description,
         [
             Validators.required,
             Validators.minLength(this.MIN_LENGTH),
@@ -33,7 +35,8 @@ export class EditNoteComponent implements OnInit, SideMenuActions {
 
     constructor(private formBuilder: FormBuilder,
                 private sideMenuService: SideMenuService,
-                private editNoteService: EditNoteService) {
+                private editNoteService: EditNoteService,
+                private utilService: UtilService) {
     }
 
     submitEditedNote(): void {
@@ -55,9 +58,10 @@ export class EditNoteComponent implements OnInit, SideMenuActions {
             title: this.titleControl,
             content: this.contentControl
         });
-        this.editNote = this.editNoteService.getNoteToEdit();
 
-        console.log(this.editNote);
+        if (this.editNote.title === "") {
+            this.utilService.navigate(RouterPaths.NOTES_DIRECT_PATH);
+        }
     }
 
     changeToCreateNoteView(): void {
@@ -78,5 +82,9 @@ export class EditNoteComponent implements OnInit, SideMenuActions {
 
     logoutUser(): void {
         this.sideMenuService.logoutUser();
+    }
+
+    updateNote(): void {
+
     }
 }

@@ -4,7 +4,7 @@
 
         <mat-divider></mat-divider>
 
-        <div class="button-column">
+        <section class="button-column">
             <button (click)="changeToCreateNoteView()" class="menu-option" color="primary" extended mat-fab>
                 <mat-icon>add</mat-icon>
                 New Note
@@ -28,7 +28,7 @@
                 <mat-icon>logout</mat-icon>
                 Logout
             </button>
-        </div>
+        </section>
     </mat-drawer>
 
     <mat-toolbar class="navbar" color="primary">
@@ -39,15 +39,14 @@
         <span>Notes</span>
     </mat-toolbar>
 
-    <div class="center-container">
+    <main class="center-container">
         <form (ngSubmit)="submitEditedNote()" [formGroup]="noteGroup" class="create-note-container">
-            <h1 class="create-note-title">Create your Note</h1>
+            <h1 class="create-note-title">Edit your Note</h1>
 
             <mat-form-field class="full-width">
                 <mat-label>Title</mat-label>
 
-                <input [formControl]="titleControl" matInput placeholder="Your title"
-                       type="text" value="{{ editNote.title }}">
+                <input [formControl]="titleControl" matInput placeholder="Your title">
 
                 <mat-error *ngIf="titleControl.hasError('minLength')">
                     Your title is <strong>too short</strong>!
@@ -68,8 +67,8 @@
                 <textarea class="note-content"
                           formControlName="content"
                           matInput
-                          placeholder="Enter your note here..."
-                          value="{{ editNote.description }}"></textarea>
+                          placeholder="Enter your note here...">
+                </textarea>
 
                 <mat-error *ngIf="contentControl.hasError('minLength')">
                     Your note is <strong>too short</strong>!
@@ -84,9 +83,23 @@
                 </mat-error>
             </mat-form-field>
 
-            <button color="primary" mat-raised-button type="submit">Create</button>
+            <div class="button-bar-container">
+                <button class="edit-note-button"
+                        (click)="changeToNotesView()"
+                        color="primary"
+                        mat-raised-button
+                        type="button">
+                    Return
+                </button>
 
-            <button color="primary" mat-raised-button type="submit">Return</button>
+                <button class="edit-note-button"
+                        (click)="updateNote()"
+                        color="primary"
+                        mat-raised-button
+                        type="submit">
+                    Update
+                </button>
+            </div>
         </form>
-    </div>
+    </main>
 </mat-drawer-container>

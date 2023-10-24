@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Note } from "@core/data/home/note";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
     providedIn: 'root'
 })
 export class EditNoteService {
-    private noteToEdit : Note = {title: "", description: "", noteId: -1, dateOfCreation: new Date(), noteLang: "TEXT"};
+    private _noteToEdit: Note = {title: "", description: "", noteId: -1, dateOfCreation: new Date(), noteLang: "TEXT"};
 
-    getNoteToEdit(): Note {
-        return this.noteToEdit;
+    get noteToEdit() {
+        return this._noteToEdit;
     }
 
-    setNoteToEdit(note: Note): void {
-        this.noteToEdit = note;
+    set noteToEdit(note: Note) {
+        this._noteToEdit = note;
     }
 }
