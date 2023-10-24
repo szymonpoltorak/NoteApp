@@ -1,0 +1,12 @@
+@import "../sidebar";
+@import "../create-note/create-note.component";
+
+.button-bar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit-note-button {
+    width: 10em;
+}

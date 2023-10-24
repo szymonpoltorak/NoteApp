@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeViews } from "@enums/home/HomeViews";
-import { ProfileService } from "@core/services/home/profile.service";
 import { AuthService } from "@core/services/auth/auth.service";
 import { UtilService } from "@core/services/utils/util.service";
 import { RouterPaths } from "@enums/RouterPaths";
+import { Note } from "@core/data/home/note";
 
 @Component({
     selector: 'app-home',
@@ -11,8 +11,9 @@ import { RouterPaths } from "@enums/RouterPaths";
     styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+    editNote: Note = {title: "", description: "", noteId: -1, dateOfCreation: new Date(), noteLang: "TEXT"};
     protected readonly HomeViews = HomeViews;
-    protected currentView: HomeViews = HomeViews.CREATE_NOTE;
+    protected currentView: HomeViews = HomeViews.NOTES;
 
     constructor(private authService: AuthService,
                 private utilService: UtilService) {
@@ -21,7 +22,7 @@ export class HomeComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    changeToHomeView(): void {
+    changeToNotesView(): void {
         if (this.currentView !== HomeViews.NOTES) {
             this.currentView = HomeViews.NOTES;
         }
@@ -47,5 +48,10 @@ export class HomeComponent implements OnInit {
 
             this.utilService.navigate(RouterPaths.LOGIN_DIRECT);
         })
+    }
+
+    loadEditNoteView(event: Note): void {
+        this.currentView = HomeViews.EDIT_NOTE;
+        this.editNote = event;
     }
 }

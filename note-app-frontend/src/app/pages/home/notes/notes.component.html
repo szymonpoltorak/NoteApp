@@ -1,16 +1,54 @@
-<mat-grid-list cols="4" rowHeight="224px">
-    <mat-grid-tile *ngFor="let note of notes" class="grid-item">
-        <app-note [description]="note.description"
-                  [noteId]="note.noteId"
-                  [title]="note.title">
-        </app-note>
-    </mat-grid-tile>
-</mat-grid-list>
+<mat-drawer-container autosize class="home-container">
+    <mat-drawer #drawer class="sidenav" mode="push">
+        <h1>Menu</h1>
 
-<mat-divider></mat-divider>
+        <mat-divider></mat-divider>
 
-<mat-paginator [length]="notes.length"
-               [pageSize]="16"
-               aria-label="Select page">
-</mat-paginator>
+        <section class="button-column">
+            <button (click)="changeToCreateNoteView()" class="menu-option" color="primary" extended mat-fab>
+                <mat-icon>add</mat-icon>
+                New Note
+            </button>
 
+            <mat-divider></mat-divider>
+
+            <button (click)="changeToNotesView()" class="menu-option home-button" extended mat-fab>
+                <mat-icon>home</mat-icon>
+                Home
+            </button>
+
+            <button (click)="changeToProfileView()" class="menu-option" extended mat-fab>
+                <mat-icon>person</mat-icon>
+                Profile
+            </button>
+
+            <mat-divider></mat-divider>
+
+            <button (click)="logoutUser()" class="menu-option" extended mat-fab>
+                <mat-icon>logout</mat-icon>
+                Logout
+            </button>
+        </section>
+    </mat-drawer>
+
+    <mat-toolbar class="navbar" color="primary">
+        <button (click)="drawer.toggle()" aria-label="Menu button" class="menu-icon" mat-icon-button>
+            <mat-icon>menu</mat-icon>
+        </button>
+
+        <span>Notes</span>
+    </mat-toolbar>
+
+    <mat-grid-list cols="4" rowHeight="224px">
+        <mat-grid-tile *ngFor="let note of notes" class="grid-item">
+            <app-note (editEvent)="changeToEditNote($event)" [note]="note"></app-note>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-divider></mat-divider>
+
+    <mat-paginator [length]="notes.length"
+                   [pageSize]="16"
+                   aria-label="Select page">
+    </mat-paginator>
+</mat-drawer-container>

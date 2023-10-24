@@ -24,8 +24,6 @@ public class ProfileServiceImpl implements ProfileService {
     public UserResponse getUserData(User user) {
         log.info("Getting data from user : {}", user);
 
-        log.info(String.valueOf(userMapper == null));
-
         return userMapper.toUserResponse(user);
     }
 

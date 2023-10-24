@@ -40,14 +40,13 @@
     </mat-toolbar>
 
     <main class="center-container">
-        <form (ngSubmit)="addNewNote()" [formGroup]="noteGroup" class="create-note-container">
-            <h1 class="create-note-title">Create your Note</h1>
+        <form (ngSubmit)="submitEditedNote()" [formGroup]="noteGroup" class="create-note-container">
+            <h1 class="create-note-title">Edit your Note</h1>
 
             <mat-form-field class="full-width">
                 <mat-label>Title</mat-label>
 
-                <input [formControl]="titleControl" matInput placeholder="Your title"
-                       type="text">
+                <input [formControl]="titleControl" matInput placeholder="Your title">
 
                 <mat-error *ngIf="titleControl.hasError('minLength')">
                     Your title is <strong>too short</strong>!
@@ -65,7 +64,10 @@
             <mat-form-field class="full-width">
                 <mat-label>Your note</mat-label>
 
-                <textarea class="note-content" formControlName="content" matInput placeholder="Enter your note here...">
+                <textarea class="note-content"
+                          formControlName="content"
+                          matInput
+                          placeholder="Enter your note here...">
                 </textarea>
 
                 <mat-error *ngIf="contentControl.hasError('minLength')">
@@ -81,7 +83,22 @@
                 </mat-error>
             </mat-form-field>
 
-            <button color="primary" mat-raised-button type="submit">Create</button>
+            <div class="button-bar-container">
+                <button class="edit-note-button"
+                        (click)="changeToNotesView()"
+                        color="primary"
+                        mat-raised-button
+                        type="button">
+                    Return
+                </button>
+
+                <button class="edit-note-button"
+                        color="primary"
+                        mat-raised-button
+                        type="submit">
+                    Update
+                </button>
+            </div>
         </form>
     </main>
 </mat-drawer-container>

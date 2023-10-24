@@ -1,28 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { NoteRequest } from "@core/data/home/note-request";
-import { SideMenuActions } from "@core/interfaces/home/SideMenuActions";
 import { Note } from "@core/data/home/note";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { SideMenuActions } from "@core/interfaces/home/SideMenuActions";
 import { SideMenuService } from "@core/services/home/side-menu.service";
+import { EditNoteService } from "@core/services/home/edit-note.service";
+import { UtilService } from "@core/services/utils/util.service";
+import { RouterPaths } from "@enums/RouterPaths";
 
 @Component({
-    selector: 'app-create-note',
-    templateUrl: './create-note.component.html',
-    styleUrls: ['./create-note.component.scss']
+    selector: 'app-edit-note',
+    templateUrl: './edit-note.component.html',
+    styleUrls: ['./edit-note.component.scss']
 })
-export class CreateNoteComponent implements OnInit, SideMenuActions {
-    protected noteGroup !: FormGroup;
+export class EditNoteComponent implements OnInit, SideMenuActions {
     private readonly MIN_LENGTH: number = 2;
     private readonly TITLE_MAX_LENGTH: number = 30;
-    readonly titleControl: FormControl = new FormControl("",
+    private readonly CONTENT_MAX_LENGTH: number = 500;
+    protected readonly editNote: Note = this.editNoteService.noteToEdit;
+    protected noteGroup !: FormGroup;
+    protected readonly titleControl: FormControl = new FormControl(this.editNote.title,
         [
             Validators.required,
             Validators.minLength(this.MIN_LENGTH),
             Validators.maxLength(this.TITLE_MAX_LENGTH)
         ]
     );
-    private readonly CONTENT_MAX_LENGTH: number = 30;
-    readonly contentControl: FormControl = new FormControl("",
+    protected readonly contentControl: FormControl = new FormControl(this.editNote.description,
         [
             Validators.required,
             Validators.minLength(this.MIN_LENGTH),
@@ -31,19 +34,25 @@ export class CreateNoteComponent implements OnInit, SideMenuActions {
     );
 
     constructor(private formBuilder: FormBuilder,
-                private sideMenuService: SideMenuService) {
+                private sideMenuService: SideMenuService,
+                private editNoteService: EditNoteService,
+                private utilService: UtilService) {
     }
 
-    addNewNote(): void {
+    submitEditedNote(): void {
         if (this.noteGroup.invalid) {
             return;
         }
-        const noteRequest: NoteRequest = {
+        const note: Note = {
             title: this.titleControl.value,
             description: this.contentControl.value,
-            noteLang: "TEXT"
+            noteLang: this.editNote.noteLang,
+            noteId: this.editNote.noteId,
+            dateOfCreation: this.editNote.dateOfCreation
         };
-        console.log(noteRequest);
+
+        this.editNoteService.updateNote(note)
+            .subscribe((data) => this.utilService.navigate(RouterPaths.NOTES_DIRECT_PATH));
     }
 
     ngOnInit(): void {

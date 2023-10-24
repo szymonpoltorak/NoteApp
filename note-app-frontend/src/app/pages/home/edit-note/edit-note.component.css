@@ -39,6 +39,47 @@
   padding: 20px;
 }
 
+.home-container {
+  width: 100%;
+  height: 100%;
+  background-color: #313130;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-option {
+  display: flex;
+  justify-content: left;
+}
+
+.button-column {
+  margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.home-button {
+  margin-bottom: 1.5em;
+}
+
+.navbar {
+  top: 0;
+  z-index: 1000;
+  align-self: start;
+  position: sticky;
+}
+
+.sidenav {
+  padding: 20px;
+}
+
 .create-note-container {
   display: flex;
   justify-content: center;
@@ -64,4 +105,14 @@
   align-items: center;
 }
 
-/*# sourceMappingURL=create-note.component.css.map */
+.button-bar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.edit-note-button {
+  width: 10em;
+}
+
+/*# sourceMappingURL=edit-note.component.css.map */

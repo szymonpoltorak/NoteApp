@@ -1,7 +1,7 @@
 export interface NoteRequest {
     title: string;
 
-    content: string;
+    description: string;
 
     noteLang: string;
 }

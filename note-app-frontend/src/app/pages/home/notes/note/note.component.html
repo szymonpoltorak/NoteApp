@@ -1,14 +1,14 @@
-<div class="note-container">
-    <h1>{{ title }}</h1>
+<article class="note-container">
+    <h1>{{ visibleTitle }}</h1>
 
     <div>
-        <p class="note-description">{{ description }}</p>
+        <p class="note-description">{{ visibleDescription }}</p>
 
         <mat-divider></mat-divider>
     </div>
 
     <div class="action-bar">
-        <button color="accent" mat-icon-button>
+        <button (click)="emitEditEvent()" color="accent" mat-icon-button>
             <mat-icon>edit</mat-icon>
         </button>
 
@@ -16,4 +16,4 @@
             <mat-icon>delete</mat-icon>
         </button>
     </div>
-</div>
+</article>
