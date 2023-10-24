@@ -13,16 +13,24 @@ export class NoteComponent implements OnInit {
     @Output() readonly editEvent: EventEmitter<Note> = new EventEmitter<Note>();
     private readonly MAX_DESCRIPTION_LENGTH: number = 230;
     private readonly MAX_TITLE_LENGTH: number = 35;
+    protected visibleTitle: string = "";
+    protected visibleDescription: string = "";
 
     constructor(public dialog: MatDialog) {
     }
 
     ngOnInit(): void {
         if (this.note.description.length > this.MAX_DESCRIPTION_LENGTH) {
-            this.note.description = `${this.note.description.substring(0, this.MAX_DESCRIPTION_LENGTH)}...`
+            this.visibleDescription = `${this.note.description.substring(0, this.MAX_DESCRIPTION_LENGTH)}...`
         }
+        else {
+            this.visibleDescription = this.note.description;
+        }
+
         if (this.note.title.length > this.MAX_TITLE_LENGTH) {
-            this.note.title = `${this.note.title.substring(0, this.MAX_TITLE_LENGTH)}...`;
+            this.visibleTitle = `${this.note.title.substring(0, this.MAX_TITLE_LENGTH)}...`;
+        } else {
+            this.visibleTitle = this.note.title;
         }
     }
 

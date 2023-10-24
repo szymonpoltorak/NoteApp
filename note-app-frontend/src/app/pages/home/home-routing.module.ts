@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RouterPaths } from "@enums/RouterPaths";
 import { AuthGuard } from "@core/guards/auth.guard";
+import { EditNoteGuard } from "@core/guards/edit-note.guard";
 
 const routes: Routes = [
     {
@@ -31,7 +32,7 @@ const routes: Routes = [
         path: RouterPaths.EDIT_NOTE,
         loadChildren: () => import("./edit-note/edit-note.module")
             .then(module => module.EditNoteModule),
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard, EditNoteGuard]
     }
 ];
 

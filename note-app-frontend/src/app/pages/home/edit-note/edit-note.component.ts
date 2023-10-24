@@ -13,19 +13,19 @@ import { RouterPaths } from "@enums/RouterPaths";
     styleUrls: ['./edit-note.component.scss']
 })
 export class EditNoteComponent implements OnInit, SideMenuActions {
-    protected readonly editNote: Note = this.editNoteService.noteToEdit;
-    protected noteGroup !: FormGroup;
     private readonly MIN_LENGTH: number = 2;
     private readonly TITLE_MAX_LENGTH: number = 30;
-    readonly titleControl: FormControl = new FormControl(this.editNote.title,
+    private readonly CONTENT_MAX_LENGTH: number = 500;
+    protected readonly editNote: Note = this.editNoteService.noteToEdit;
+    protected noteGroup !: FormGroup;
+    protected readonly titleControl: FormControl = new FormControl(this.editNote.title,
         [
             Validators.required,
             Validators.minLength(this.MIN_LENGTH),
             Validators.maxLength(this.TITLE_MAX_LENGTH)
         ]
     );
-    private readonly CONTENT_MAX_LENGTH: number = 500;
-    readonly contentControl: FormControl = new FormControl(this.editNote.description,
+    protected readonly contentControl: FormControl = new FormControl(this.editNote.description,
         [
             Validators.required,
             Validators.minLength(this.MIN_LENGTH),
@@ -51,6 +51,13 @@ export class EditNoteComponent implements OnInit, SideMenuActions {
             dateOfCreation: this.editNote.dateOfCreation
         };
         console.log(note);
+
+        this.editNoteService.updateNote(note)
+            .subscribe((data) => {
+                console.log(data);
+
+                this.utilService.navigate(RouterPaths.NOTES_DIRECT_PATH);
+            });
     }
 
     ngOnInit(): void {
@@ -58,10 +65,6 @@ export class EditNoteComponent implements OnInit, SideMenuActions {
             title: this.titleControl,
             content: this.contentControl
         });
-
-        if (this.editNote.title === "") {
-            this.utilService.navigate(RouterPaths.NOTES_DIRECT_PATH);
-        }
     }
 
     changeToCreateNoteView(): void {
@@ -82,9 +85,5 @@ export class EditNoteComponent implements OnInit, SideMenuActions {
 
     logoutUser(): void {
         this.sideMenuService.logoutUser();
-    }
-
-    updateNote(): void {
-
     }
 }
