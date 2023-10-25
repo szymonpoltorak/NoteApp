@@ -45,10 +45,14 @@
         </mat-grid-tile>
     </mat-grid-list>
 
-    <mat-divider></mat-divider>
+    <div class="separator"></div>
 
-    <mat-paginator [length]="notes.length"
-                   [pageSize]="16"
-                   aria-label="Select page">
-    </mat-paginator>
+    <div class="paginator">
+        <mat-divider></mat-divider>
+
+        <mat-paginator [length]="notes.length"
+                       [pageSize]="16"
+                       aria-label="Select page">
+        </mat-paginator>
+    </div>
 </mat-drawer-container>

@@ -4,5 +4,5 @@ import lombok.Builder;
 import razepl.dev.noteapp.entities.note.NoteLang;
 
 @Builder
-public record NoteRequest(String content, String title, NoteLang noteLang) {
+public record NoteRequest(String description, String title, NoteLang noteLang) {
 }

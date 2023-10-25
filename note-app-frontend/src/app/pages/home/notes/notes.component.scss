@@ -4,3 +4,20 @@
     background-color: #424242;
     color: white;
 }
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.separator {
+    height: 4em;
+}
+
+.paginator {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    height: 4em;
+}

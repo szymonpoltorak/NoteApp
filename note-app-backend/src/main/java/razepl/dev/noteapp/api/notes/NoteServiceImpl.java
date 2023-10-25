@@ -33,8 +33,14 @@ public class NoteServiceImpl implements NoteService {
         log.info("Received request with data : {}", noteRequest);
         log.info("Request is from user : {}", noteAuthor.getUsername());
 
-        Note newNote = noteMapper.toNote(noteRequest, LocalDate.now(), noteAuthor);
-
+        Note newNote = Note
+                .builder()
+                .noteLang(noteRequest.noteLang())
+                .dateOfCreation(LocalDate.now())
+                .description(noteRequest.description())
+                .noteAuthor(noteAuthor)
+                .title(noteRequest.title())
+                .build();
         Note repoNote = noteRepository.save(newNote);
 
         return noteMapper.toNoteResponse(repoNote);
@@ -45,7 +51,7 @@ public class NoteServiceImpl implements NoteService {
         Pageable pageable = PageRequest.of(pageNumber, PAGE_SIZE);
         Page<Note> notes = noteRepository.findByNoteAuthorOrderByDateOfCreation(notesAuthor, pageable);
 
-        log.info("Found '{}' notes for user '{}' on page '{}'", notes.getSize(), notesAuthor.getUsername(), pageNumber);
+        log.info("Found '{}' notes for user '{}' on page '{}'", notes.getTotalElements(), notesAuthor.getUsername(), pageNumber);
 
         return notes
                 .stream()

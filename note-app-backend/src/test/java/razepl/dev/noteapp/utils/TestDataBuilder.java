@@ -11,7 +11,7 @@ public class TestDataBuilder {
     }
 
     public static NoteTestData buildNoteTestData() {
-        String content = "content";
+        String content = "description";
         String title = "title";
         long noteId = 1L;
 
