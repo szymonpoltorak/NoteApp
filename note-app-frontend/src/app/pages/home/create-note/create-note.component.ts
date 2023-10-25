@@ -1,17 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { NoteRequest } from "@core/data/home/note-request";
 import { SideMenuActions } from "@core/interfaces/home/SideMenuActions";
 import { Note } from "@core/data/home/note";
 import { SideMenuService } from "@core/services/home/side-menu.service";
+import { NotesService } from "@core/services/home/notes.service";
+import { UtilService } from "@core/services/utils/util.service";
+import { RouterPaths } from "@enums/RouterPaths";
+import { Subject, takeUntil } from "rxjs";
 
 @Component({
     selector: 'app-create-note',
     templateUrl: './create-note.component.html',
     styleUrls: ['./create-note.component.scss']
 })
-export class CreateNoteComponent implements OnInit, SideMenuActions {
+export class CreateNoteComponent implements OnInit, SideMenuActions, OnDestroy {
     protected noteGroup !: FormGroup;
+    private destroyCreatNote$: Subject<void> = new Subject<void>();
     private readonly MIN_LENGTH: number = 2;
     private readonly TITLE_MAX_LENGTH: number = 30;
     readonly titleControl: FormControl = new FormControl("",
@@ -31,7 +36,9 @@ export class CreateNoteComponent implements OnInit, SideMenuActions {
     );
 
     constructor(private formBuilder: FormBuilder,
-                private sideMenuService: SideMenuService) {
+                private sideMenuService: SideMenuService,
+                private notesService: NotesService,
+                private utilService: UtilService) {
     }
 
     addNewNote(): void {
@@ -44,6 +51,14 @@ export class CreateNoteComponent implements OnInit, SideMenuActions {
             noteLang: "TEXT"
         };
         console.log(noteRequest);
+
+        this.notesService.createNote(noteRequest)
+            .pipe(takeUntil(this.destroyCreatNote$))
+            .subscribe((note) => {
+                console.log(note);
+
+                this.utilService.navigate(RouterPaths.NOTES_DIRECT_PATH);
+            });
     }
 
     ngOnInit(): void {
@@ -71,5 +86,9 @@ export class CreateNoteComponent implements OnInit, SideMenuActions {
 
     logoutUser(): void {
         this.sideMenuService.logoutUser();
+    }
+
+    ngOnDestroy(): void {
+        this.destroyCreatNote$.complete();
     }
 }

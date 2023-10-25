@@ -8,10 +8,10 @@ import { environment } from "@environments/environment";
     providedIn: 'root'
 })
 export class EditNoteService {
-    private _noteToEdit: Note = {title: "", description: "", noteId: -1, dateOfCreation: new Date(), noteLang: "TEXT"};
-
     constructor(private httpClient: HttpClient) {
     }
+
+    private _noteToEdit: Note = {title: "", description: "", noteId: -1, dateOfCreation: new Date(), noteLang: "TEXT"};
 
     get noteToEdit() {
         return this._noteToEdit;

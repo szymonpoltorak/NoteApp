@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { User } from "@core/data/home/user";
 import { ProfileService } from "@core/services/home/profile.service";
 import { UtilService } from "@core/services/utils/util.service";
@@ -6,15 +6,16 @@ import { RouterPaths } from "@enums/RouterPaths";
 import { SideMenuActions } from "@core/interfaces/home/SideMenuActions";
 import { Note } from "@core/data/home/note";
 import { SideMenuService } from "@core/services/home/side-menu.service";
-import { Observable } from "rxjs";
+import { Observable, Subject, takeUntil } from "rxjs";
 
 @Component({
     selector: 'app-profile',
     templateUrl: './profile.component.html',
     styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit, SideMenuActions {
+export class ProfileComponent implements OnInit, SideMenuActions, OnDestroy {
     user$ !: Observable<User>;
+    private destroyClosingAccount$: Subject<void> = new Subject<void>();
 
     constructor(private profileService: ProfileService,
                 private utilService: UtilService,
@@ -26,11 +27,13 @@ export class ProfileComponent implements OnInit, SideMenuActions {
     }
 
     closeAccount(): void {
-        this.profileService.closeAccount().subscribe((): void => {
-            this.utilService.clearStorage();
+        this.profileService.closeAccount()
+            .pipe(takeUntil(this.destroyClosingAccount$))
+            .subscribe((): void => {
+                this.utilService.clearStorage();
 
-            this.utilService.navigate(RouterPaths.LOGIN_DIRECT);
-        });
+                this.utilService.navigate(RouterPaths.LOGIN_DIRECT);
+            });
     }
 
     changeToCreateNoteView(): void {
@@ -51,5 +54,9 @@ export class ProfileComponent implements OnInit, SideMenuActions {
 
     logoutUser(): void {
         this.sideMenuService.logoutUser();
+    }
+
+    ngOnDestroy(): void {
+        this.destroyClosingAccount$.complete();
     }
 }

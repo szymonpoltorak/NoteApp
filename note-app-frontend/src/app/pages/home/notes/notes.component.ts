@@ -13,8 +13,8 @@ import { Observable } from "rxjs";
     styleUrls: ['./notes.component.scss']
 })
 export class NotesComponent implements OnInit, SideMenuActions {
-    protected notes: Note[] = [];
     notes$ !: Observable<Note[]>;
+    protected notes: Note[] = [];
 
     constructor(private sideMenuService: SideMenuService,
                 private editNoteService: EditNoteService,

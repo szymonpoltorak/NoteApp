@@ -1,6 +1,10 @@
 @import "../sidebar";
 
 .grid-item {
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+    padding: 0;
     background-color: #424242;
     color: white;
 }
@@ -20,4 +24,10 @@
     position: fixed;
     bottom: 0;
     height: 4em;
+}
+
+app-note {
+    width: 100%;
+    height: 100%;
+    margin: 1em;
 }

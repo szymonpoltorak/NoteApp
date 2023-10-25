@@ -50,8 +50,8 @@
     <div class="paginator">
         <mat-divider></mat-divider>
 
-        <mat-paginator [length]="notes.length"
-                       (page)="changePage($event)"
+        <mat-paginator (page)="changePage($event)"
+                       [length]="notes.length"
                        [pageSize]="16"
                        aria-label="Select page">
         </mat-paginator>
