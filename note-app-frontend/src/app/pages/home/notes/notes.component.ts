@@ -4,6 +4,7 @@ import { SideMenuActions } from "@core/interfaces/home/SideMenuActions";
 import { SideMenuService } from "@core/services/home/side-menu.service";
 import { EditNoteService } from "@core/services/home/edit-note.service";
 import { NotesService } from "@core/services/home/notes.service";
+import { PageEvent } from "@angular/material/paginator";
 
 @Component({
     selector: 'app-notes',
@@ -19,23 +20,12 @@ export class NotesComponent implements OnInit, SideMenuActions {
     }
 
     ngOnInit(): void {
-        for (let i: number = 0; i < 20; i++) {
-            this.notes.push({
-                title: `Notes ${i + 1}`,
-                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed sem nec eros finibus fringilla. Proin sed justo ut elit tincidunt varius. Nullam id urna nec justo vehicula semper. Sed varius risus a purus aliquam, in ultricies odio viverra. Nullam in sapien eu ante viverra vulputate ac eget lectus.",
-                noteId: i + 1,
-                dateOfCreation: new Date(),
-                noteLang: "TEXT"
+        this.notesService.getNotesList(0)
+            .subscribe((notes: Note[]): void => {
+               this.notes = notes;
+
+               console.log(this.notes);
             });
-        }
-        // this.notesService.getNotesList(0)
-        //     .subscribe((notes: Note[]): void => {
-        //        console.log(notes);
-        //
-        //        this.notes = notes;
-        //
-        //        console.log(this.notes);
-        //     });
     }
 
     changeToCreateNoteView(): void {
@@ -58,5 +48,14 @@ export class NotesComponent implements OnInit, SideMenuActions {
 
     logoutUser(): void {
         this.sideMenuService.logoutUser();
+    }
+
+    changePage(event: PageEvent): void {
+        this.notesService.getNotesList(event.pageIndex)
+            .subscribe((notes: Note[]): void => {
+               this.notes = notes;
+
+               console.log(this.notes);
+            });
     }
 }
