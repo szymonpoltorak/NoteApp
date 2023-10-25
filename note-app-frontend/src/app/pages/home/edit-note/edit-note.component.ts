@@ -13,11 +13,10 @@ import { RouterPaths } from "@enums/RouterPaths";
     styleUrls: ['./edit-note.component.scss']
 })
 export class EditNoteComponent implements OnInit, SideMenuActions {
-    private readonly MIN_LENGTH: number = 2;
-    private readonly TITLE_MAX_LENGTH: number = 30;
-    private readonly CONTENT_MAX_LENGTH: number = 500;
     protected readonly editNote: Note = this.editNoteService.noteToEdit;
     protected noteGroup !: FormGroup;
+    private readonly MIN_LENGTH: number = 2;
+    private readonly TITLE_MAX_LENGTH: number = 30;
     protected readonly titleControl: FormControl = new FormControl(this.editNote.title,
         [
             Validators.required,
@@ -25,6 +24,7 @@ export class EditNoteComponent implements OnInit, SideMenuActions {
             Validators.maxLength(this.TITLE_MAX_LENGTH)
         ]
     );
+    private readonly CONTENT_MAX_LENGTH: number = 500;
     protected readonly contentControl: FormControl = new FormControl(this.editNote.description,
         [
             Validators.required,

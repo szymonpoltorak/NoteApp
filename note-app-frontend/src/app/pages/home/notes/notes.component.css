@@ -1,47 +1,74 @@
 .home-container {
-    width: 100%;
-    height: 100%;
-    background-color: #313130;
-    overflow-y: scroll;
-    overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+  background-color: #313130;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .center-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .menu-option {
-    display: flex;
-    justify-content: left;
+  display: flex;
+  justify-content: left;
 }
 
 .button-column {
-    margin-top: 1em;
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
+  margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }
 
 .home-button {
-    margin-bottom: 1.5em;
+  margin-bottom: 1.5em;
 }
 
 .navbar {
-    top: 0;
-    z-index: 1000;
-    align-self: start;
-    position: sticky;
+  top: 0;
+  z-index: 1000;
+  align-self: start;
+  position: sticky;
 }
 
 .sidenav {
-    padding: 20px;
+  padding: 20px;
 }
 
 .grid-item {
-    background-color: #424242;
-    color: white;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  padding: 0;
+  background-color: #424242;
+  color: white;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.separator {
+  height: 4em;
+}
+
+.paginator {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  height: 4em;
+}
+
+app-note {
+  width: 100%;
+  height: 100%;
+  margin: 1em;
 }
 
 /*# sourceMappingURL=notes.component.css.map */

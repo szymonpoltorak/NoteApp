@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,8 +28,8 @@ import java.time.LocalDate;
 
 import static razepl.dev.noteapp.entities.note.constants.NoteNames.NOTE_ID_COLUMN;
 import static razepl.dev.noteapp.entities.note.constants.NoteNames.NOTE_TABLE_NAME;
-import static razepl.dev.noteapp.entities.note.constants.NoteSizeBonds.NOTE_MAX_CONTENT_SIZE;
-import static razepl.dev.noteapp.entities.note.constants.NoteSizeBonds.NOTE_MIN_CONTENT_SIZE;
+import static razepl.dev.noteapp.entities.note.constants.NoteSizeBonds.NOTE_MAX_DESCRIPTION_SIZE;
+import static razepl.dev.noteapp.entities.note.constants.NoteSizeBonds.NOTE_MIN_DESCRIPTION_SIZE;
 import static razepl.dev.noteapp.entities.note.constants.NoteSizeBonds.NOTE_TITLE_MAX_SIZE;
 import static razepl.dev.noteapp.entities.note.constants.NoteSizeBonds.NOTE_TITLE_MIN_SIZE;
 import static razepl.dev.noteapp.entities.user.constants.UserValidation.DATE_PATTERN;
@@ -48,9 +49,11 @@ public class Note implements Updatable<NoteResponse> {
     @JoinColumn(name = NOTE_ID_COLUMN)
     private User noteAuthor;
 
-    @Size(min = NOTE_MIN_CONTENT_SIZE, max = NOTE_MAX_CONTENT_SIZE)
-    private String content;
+    @NotNull
+    @Size(min = NOTE_MIN_DESCRIPTION_SIZE, max = NOTE_MAX_DESCRIPTION_SIZE)
+    private String description;
 
+    @NotNull
     @Size(min = NOTE_TITLE_MIN_SIZE, max = NOTE_TITLE_MAX_SIZE)
     private String title;
 
@@ -59,12 +62,13 @@ public class Note implements Updatable<NoteResponse> {
     @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate dateOfCreation;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     private NoteLang noteLang;
 
     @Override
     public final void update(NoteResponse updateData) {
-        this.content = updateData.content();
+        this.description = updateData.description();
         this.title = updateData.title();
         this.noteLang = updateData.noteLang();
     }

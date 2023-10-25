@@ -3,6 +3,9 @@ import { Note } from "@core/data/home/note";
 import { SideMenuActions } from "@core/interfaces/home/SideMenuActions";
 import { SideMenuService } from "@core/services/home/side-menu.service";
 import { EditNoteService } from "@core/services/home/edit-note.service";
+import { NotesService } from "@core/services/home/notes.service";
+import { PageEvent } from "@angular/material/paginator";
+import { Observable } from "rxjs";
 
 @Component({
     selector: 'app-notes',
@@ -10,22 +13,16 @@ import { EditNoteService } from "@core/services/home/edit-note.service";
     styleUrls: ['./notes.component.scss']
 })
 export class NotesComponent implements OnInit, SideMenuActions {
-    protected readonly notes: Note[] = [];
+    notes$ !: Observable<Note[]>;
+    protected notes: Note[] = [];
 
     constructor(private sideMenuService: SideMenuService,
-                private editNoteService: EditNoteService) {
+                private editNoteService: EditNoteService,
+                private notesService: NotesService) {
     }
 
     ngOnInit(): void {
-        for (let i: number = 0; i < 16; i++) {
-            this.notes.push({
-                title: `Notes ${i + 1}`,
-                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed sem nec eros finibus fringilla. Proin sed justo ut elit tincidunt varius. Nullam id urna nec justo vehicula semper. Sed varius risus a purus aliquam, in ultricies odio viverra. Nullam in sapien eu ante viverra vulputate ac eget lectus.",
-                noteId: i + 1,
-                dateOfCreation: new Date(),
-                noteLang: "TEXT"
-            });
-        }
+        this.notes$ = this.notesService.getNotesList(0);
     }
 
     changeToCreateNoteView(): void {
@@ -48,5 +45,9 @@ export class NotesComponent implements OnInit, SideMenuActions {
 
     logoutUser(): void {
         this.sideMenuService.logoutUser();
+    }
+
+    changePage(event: PageEvent): void {
+        this.notes$ = this.notesService.getNotesList(event.pageIndex);
     }
 }

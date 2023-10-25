@@ -1,19 +1,21 @@
 <article class="note-container">
-    <h1>{{ visibleTitle }}</h1>
+    <h1 class="note-header">{{ visibleTitle }}</h1>
 
     <div>
         <p class="note-description">{{ visibleDescription }}</p>
-
-        <mat-divider></mat-divider>
     </div>
 
-    <div class="action-bar">
-        <button (click)="emitEditEvent()" color="accent" mat-icon-button>
-            <mat-icon>edit</mat-icon>
-        </button>
+    <div>
+        <mat-divider></mat-divider>
 
-        <button (click)="openDeleteDialog('200ms', '200ms')" color="warn" mat-icon-button>
-            <mat-icon>delete</mat-icon>
-        </button>
+        <div class="action-bar">
+            <button (click)="emitEditEvent()" color="accent" mat-icon-button>
+                <mat-icon>edit</mat-icon>
+            </button>
+
+            <button (click)="openDeleteDialog('200ms', '200ms')" color="warn" mat-icon-button>
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
     </div>
 </article>
