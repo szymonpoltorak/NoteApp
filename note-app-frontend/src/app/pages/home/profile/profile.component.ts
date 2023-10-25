@@ -6,6 +6,7 @@ import { RouterPaths } from "@enums/RouterPaths";
 import { SideMenuActions } from "@core/interfaces/home/SideMenuActions";
 import { Note } from "@core/data/home/note";
 import { SideMenuService } from "@core/services/home/side-menu.service";
+import { Observable } from "rxjs";
 
 @Component({
     selector: 'app-profile',
@@ -13,7 +14,7 @@ import { SideMenuService } from "@core/services/home/side-menu.service";
     styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit, SideMenuActions {
-    protected user: User = {name: "", surname: "", username: ""};
+    user$ !: Observable<User>;
 
     constructor(private profileService: ProfileService,
                 private utilService: UtilService,
@@ -21,9 +22,7 @@ export class ProfileComponent implements OnInit, SideMenuActions {
     }
 
     ngOnInit(): void {
-        this.profileService.getUserData().subscribe((data: User): void => {
-            this.user = data;
-        });
+        this.user$ = this.profileService.getUserData();
     }
 
     closeAccount(): void {

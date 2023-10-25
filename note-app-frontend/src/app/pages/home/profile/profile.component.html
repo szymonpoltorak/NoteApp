@@ -51,7 +51,7 @@
                 <mat-card-content class="profile-section-separator">
                     <mat-card-title>User Info</mat-card-title>
 
-                    <mat-list>
+                    <mat-list *ngIf="user$ | async as user">
                         <mat-list-item>
                             <span matListItemTitle>Name</span>
 
