@@ -11,6 +11,7 @@ import { Note } from "@core/data/home/note";
 export class NoteComponent implements OnInit {
     @Input() note !: Note;
     @Output() readonly editEvent: EventEmitter<Note> = new EventEmitter<Note>();
+    @Output() readonly deleteEvent: EventEmitter<Note> = new EventEmitter<Note>();
     protected visibleTitle: string = "";
     protected visibleDescription: string = "";
     private readonly MAX_DESCRIPTION_LENGTH: number = 230;
@@ -34,10 +35,18 @@ export class NoteComponent implements OnInit {
     }
 
     openDeleteDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-        this.dialog.open(DeleteNoteDialogComponent, {
+        const dialogRef = this.dialog.open(DeleteNoteDialogComponent, {
             width: '400px',
             enterAnimationDuration,
             exitAnimationDuration,
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result === true) {
+                console.log("Deleting note!");
+
+                this.deleteEvent.emit(this.note);
+            }
         });
     }
 

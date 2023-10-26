@@ -23,4 +23,12 @@ export class NotesService {
     createNote(noteRequest: NoteRequest): Observable<Note> {
         return this.httpClient.post<Note>(`${environment.httpBackend}/api/home/notes/createNote`, noteRequest);
     }
+
+    deleteNote(noteId: number): Observable<Note> {
+        return this.httpClient.delete<Note>(`${environment.httpBackend}/api/home/notes/deleteNote`, {
+            params: {
+                noteId: noteId
+            }
+        });
+    }
 }

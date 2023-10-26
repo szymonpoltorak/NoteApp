@@ -22,6 +22,11 @@ const routes: Routes = [
         path: RouterPaths.CURRENT_PATH,
         redirectTo: "auth/login",
         pathMatch: 'full'
+    },
+    {
+        path: RouterPaths.ERROR_PATH,
+        redirectTo: "auth/login",
+        pathMatch: 'full'
     }
 ];
 
