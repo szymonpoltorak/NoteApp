@@ -5,7 +5,7 @@ import { SideMenuService } from "@core/services/home/side-menu.service";
 import { EditNoteService } from "@core/services/home/edit-note.service";
 import { NotesService } from "@core/services/home/notes.service";
 import { PageEvent } from "@angular/material/paginator";
-import { Observable } from "rxjs";
+import { map, Observable } from "rxjs";
 
 @Component({
     selector: 'app-notes',
@@ -13,8 +13,7 @@ import { Observable } from "rxjs";
     styleUrls: ['./notes.component.scss']
 })
 export class NotesComponent implements OnInit, SideMenuActions {
-    notes$ !: Observable<Note[]>;
-    protected notes: Note[] = [];
+    protected notes$ !: Observable<Note[]>;
 
     constructor(private sideMenuService: SideMenuService,
                 private editNoteService: EditNoteService,
@@ -49,5 +48,12 @@ export class NotesComponent implements OnInit, SideMenuActions {
 
     changePage(event: PageEvent): void {
         this.notes$ = this.notesService.getNotesList(event.pageIndex);
+    }
+
+    removeNote(event: Note): void {
+        this.notesService.deleteNote(event.noteId)
+            .subscribe(() => this.notes$ = this.notes$.pipe(
+                map((notes: Note[]) => notes.filter((note: Note) => note !== event)))
+            );
     }
 }

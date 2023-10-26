@@ -41,7 +41,7 @@
 
     <mat-grid-list cols="4" rowHeight="224px">
         <mat-grid-tile *ngFor="let note of notes$ | async" class="grid-item">
-            <app-note (editEvent)="changeToEditNote($event)" [note]="note"></app-note>
+            <app-note (deleteEvent)="removeNote($event)" (editEvent)="changeToEditNote($event)" [note]="note"></app-note>
         </mat-grid-tile>
     </mat-grid-list>
 
@@ -51,7 +51,7 @@
         <mat-divider></mat-divider>
 
         <mat-paginator (page)="changePage($event)"
-                       [length]="notes.length"
+                       [length]="(notes$ | async)?.length"
                        [pageSize]="16"
                        aria-label="Select page">
         </mat-paginator>

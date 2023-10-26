@@ -1,4 +1,5 @@
 export const enum RouterPaths {
+    ERROR_PATH = "**",
     CURRENT_PATH = "",
     LOGIN_AUTH_PATH = "login",
     REGISTER_AUTH_PATH = "register",
