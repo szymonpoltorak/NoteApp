@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    httpBackend: "http://backend:8080"
+    httpBackend: "http://note-backend:8080"
 };
