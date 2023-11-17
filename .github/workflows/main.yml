@@ -35,7 +35,7 @@ jobs:
             -   name: Setup Gradle
                 uses: gradle/gradle-build-action@v2
                 env:
-                    SPRING_DATASOURCE_URL: jdbc:postgresql://note-postgres:5432/noteapp
+                    SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5100/noteapp
                     POSTGRES_USER: postgres
                     POSTGRES_PASSWORD: none
                     POSTGRES_DB: noteapp
