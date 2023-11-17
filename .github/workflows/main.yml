@@ -37,6 +37,6 @@ jobs:
                     gradle-version: '8.2'
 
             -   name: Test App With Gradle
-                run: "mv gradlew note-app-backend; cd note-app-backend; ./gradlew build"
+                run: "mv ./gradlew ./note-app-backend; cd note-app-backend; ./gradlew build"
 
         
