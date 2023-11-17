@@ -31,18 +31,9 @@ jobs:
                     java-version: '17'
                     distribution: 'temurin'
 
-            -   name: Ls my directory
-                run: ls -la
-
             -   name: Setup Gradle
                 uses: gradle/gradle-build-action@v2
                 with:
                     gradle-version: '8.2'
-
-            -   name: Ls my directory after gradle
-                run: ls -la
-
-            -   name: Test App With Gradle
-                run: "mv ./gradlew ./note-app-backend; cd note-app-backend; ./gradlew build"
-
-        
+                    arguments: build
+                    build-root-directory: note-app-backend
