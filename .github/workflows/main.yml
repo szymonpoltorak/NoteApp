@@ -12,9 +12,10 @@ permissions:
 jobs:
     test-app-with-gradle:
         runs-on: ubuntu-latest
+
         services:
             note-postgres:
-                image: postgres:13.3
+                image: postgres:alpine
                 env:
                     POSTGRES_USER: postgres
                     POSTGRES_PASSWORD: none
