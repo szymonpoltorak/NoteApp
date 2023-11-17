@@ -98,7 +98,7 @@ class NoteServiceTest {
                 .builder()
                 .noteId(note.getNoteId())
                 .noteLang(note.getNoteLang())
-                .content("New note description")
+                .description("New note description")
                 .title("New note title")
                 .build();
 
