@@ -46,3 +46,4 @@ jobs:
                     gradle-version: '8.2'
                     arguments: build
                     build-root-directory: note-app-backend
+
