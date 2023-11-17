@@ -20,9 +20,11 @@ services:
             - POSTGRES_PASSWORD=none
             - POSTGRES_DB=noteapp
             - SPRING_DATASOURCE_URL=jdbc:postgresql://note-postgres:5432/noteapp
-            - FRONTEND_URL=note-frontend
+            - FRONTEND_URL=http://localhost:4200
             - GOOGLE_CLIENT_ID=none
             - GOOGLE_CLIENT_SECRET=none
+            - GITHUB_CLIENT_ID=Iv1.none
+            - GITHUB_CLIENT_SECRET=none
         build:
             context: note-app-backend
             dockerfile: Dockerfile
