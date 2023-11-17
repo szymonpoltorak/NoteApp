@@ -32,8 +32,8 @@ jobs:
                     distribution: 'temurin'
 
             -   name: Build with Gradle
-                run: cd note-app-backend
                 uses: gradle/gradle-build-action@v2.8.0
                 with:
                     gradle-version: '8.2'
                     arguments: build
+                working-directory: ./note-app-backend
