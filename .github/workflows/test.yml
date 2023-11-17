@@ -31,6 +31,9 @@ jobs:
                     java-version: '17'
                     distribution: 'temurin'
 
+            -   name: Change directory to note-app-backend
+                run: cd note-app-backend
+
             -   name: Build with Gradle
                 uses: gradle/gradle-build-action@v2.8.0
                 with:
