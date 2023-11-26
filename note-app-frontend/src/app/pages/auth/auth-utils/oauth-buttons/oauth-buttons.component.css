@@ -1,37 +1,50 @@
 .oauth-label {
-    font-size: 10px;
+  font-size: 10px;
 }
 
 .or-label {
-    color: white;
-    margin-left: 7px;
-    margin-right: 7px;
+  color: white;
+  margin-left: 7px;
+  margin-right: 7px;
 }
 
 .or-divider {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1em;
 }
 
 .divider {
-    background-color: #414140;
-    height: 2px;
-    width: 45%;
+  background-color: #414140;
+  height: 2px;
+  width: 45%;
 }
 
 .oauth-buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 100px;
-    margin-bottom: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  margin-bottom: 1em;
 }
 
 .login-button {
-    height: 50px;
-    width: 12em;
+  height: 50px;
+  width: 12em;
+}
+
+@media screen and (max-width: 375px) {
+  .oauth-label {
+    display: none;
+  }
+  .login-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 3px;
+    margin: 0;
+  }
 }
 
 /*# sourceMappingURL=oauth-buttons.component.css.map */
