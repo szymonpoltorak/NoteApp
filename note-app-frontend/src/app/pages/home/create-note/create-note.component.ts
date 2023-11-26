@@ -26,7 +26,7 @@ export class CreateNoteComponent implements OnInit, SideMenuActions, OnDestroy {
             Validators.maxLength(this.TITLE_MAX_LENGTH)
         ]
     );
-    private readonly CONTENT_MAX_LENGTH: number = 30;
+    private readonly CONTENT_MAX_LENGTH: number = 3000;
     readonly contentControl: FormControl = new FormControl("",
         [
             Validators.required,
@@ -43,6 +43,7 @@ export class CreateNoteComponent implements OnInit, SideMenuActions, OnDestroy {
 
     addNewNote(): void {
         if (this.noteGroup.invalid) {
+            console.log(this.noteGroup.errors);
             return;
         }
         const noteRequest: NoteRequest = {

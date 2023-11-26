@@ -39,7 +39,7 @@
         <span>Notes</span>
     </mat-toolbar>
 
-    <mat-grid-list cols="4" rowHeight="224px">
+    <mat-grid-list cols="{{ numOfColumns }}" rowHeight="224px">
         <mat-grid-tile *ngFor="let note of notes$ | async" class="grid-item">
             <app-note (deleteEvent)="removeNote($event)" (editEvent)="changeToEditNote($event)" [note]="note"></app-note>
         </mat-grid-tile>

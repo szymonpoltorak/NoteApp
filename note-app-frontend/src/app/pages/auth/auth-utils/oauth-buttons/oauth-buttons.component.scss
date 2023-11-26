@@ -34,3 +34,16 @@
     width: 12em;
 }
 
+@media screen and (max-width: 375px) {
+    .oauth-label {
+        display: none;
+    }
+
+    .login-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-right: 3px;
+        margin: 0;
+    }
+}

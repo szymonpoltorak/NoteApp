@@ -65,7 +65,10 @@
             <mat-form-field class="full-width">
                 <mat-label>Your note</mat-label>
 
-                <textarea class="note-content" formControlName="content" matInput placeholder="Enter your note here...">
+                <textarea class="note-content"
+                          formControlName="content"
+                          matInput
+                          placeholder="Enter your note here...">
                 </textarea>
 
                 <mat-error *ngIf="contentControl.hasError('minLength')">
