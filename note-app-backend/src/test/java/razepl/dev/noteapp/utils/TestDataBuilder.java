@@ -17,7 +17,7 @@ public class TestDataBuilder {
 
         Note newNote = Note
                 .builder()
-                .content(content)
+                .description(content)
                 .title(title)
                 .noteId(noteId)
                 .noteLang(NoteLang.TEXT)
@@ -29,12 +29,12 @@ public class TestDataBuilder {
         NoteRequest noteRequest = NoteRequest
                 .builder()
                 .noteLang(NoteLang.TEXT)
-                .content(content)
+                .description(content)
                 .title(title)
                 .build();
         NoteResponse noteResponse = NoteResponse
                 .builder()
-                .content(content)
+                .description(content)
                 .title(title)
                 .noteLang(NoteLang.TEXT)
                 .noteId(noteId)

@@ -28,13 +28,13 @@ services:
             dockerfile: Dockerfile
         ports:
             - "8080:8080"
-    note-frontend:
-        container_name: note-frontend
-        image: note-frontend
-        depends_on:
-            - note-backend
-        build:
-            context: note-app-frontend
-            dockerfile: Dockerfile
-        ports:
-            - "4200:80"
+#    note-frontend:
+#        container_name: note-frontend
+#        image: note-frontend
+#        depends_on:
+#            - note-backend
+#        build:
+#            context: note-app-frontend
+#            dockerfile: Dockerfile
+#        ports:
+#            - "4200:80"
