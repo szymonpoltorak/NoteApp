@@ -30,9 +30,15 @@
     "dataGroups": [
         {
             "name": "ApiCaching",
-            "urls": [],
+            "urls": [
+                "https://backend:8080/api/**",
+                "https://localhost:8080/api/**"
+            ],
             "cacheConfig": {
-                "strategy": "none"
+                "maxSize": 100,
+                "maxAge": "3d",
+                "timeout": "10s",
+                "strategy": "freshness"
             }
         }
     ]
