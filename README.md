@@ -1,6 +1,6 @@
 # NoteApp
 
-Simple application for writing and managing notes.
+Simple application for writing and managing notes. Application is full responsive and made pwa.
 
 ## Technology stack
 
@@ -22,7 +22,8 @@ Simple application for writing and managing notes.
 * Typescript 5,
 * Scss,
 * Html 5,
-* Angular Material
+* Angular Material,
+* Angular Pwa
 
 ## Frontend screenshots
 
