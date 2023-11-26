@@ -14,6 +14,7 @@ import { map, Observable } from "rxjs";
 })
 export class NotesComponent implements OnInit, SideMenuActions {
     protected notes$ !: Observable<Note[]>;
+    protected numOfColumns: number = 4;
 
     constructor(private sideMenuService: SideMenuService,
                 private editNoteService: EditNoteService,
@@ -22,6 +23,19 @@ export class NotesComponent implements OnInit, SideMenuActions {
 
     ngOnInit(): void {
         this.notes$ = this.notesService.getNotesList(0);
+
+        window.onresize = () => {
+            if (window.innerWidth < 602) {
+                this.numOfColumns = 1;
+            }
+            else if (window.innerWidth < 886) {
+                this.numOfColumns = 2;
+            } else if (window.innerWidth < 1180) {
+                this.numOfColumns = 3;
+            } else {
+                this.numOfColumns = 4;
+            }
+        };
     }
 
     changeToCreateNoteView(): void {
