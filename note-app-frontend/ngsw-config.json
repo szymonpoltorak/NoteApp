@@ -31,8 +31,7 @@
         {
             "name": "ApiCaching",
             "urls": [
-                "https://backend:8080/api/**",
-                "https://localhost:8080/api/**"
+                "/api/**"
             ],
             "cacheConfig": {
                 "maxSize": 100,
