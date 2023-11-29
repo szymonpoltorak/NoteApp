@@ -58,8 +58,8 @@ jobs:
             -   name: Upload artifact for deployment job
                 uses: actions/upload-artifact@v3
                 with:
-                    name: note-app-backend
-                    path: '${{ github.workspace }}/NoteApp/note-app-backend/build/libs/*.jar'
+                    name: NoteApp
+                    path: '${{ github.workspace }}/note-app-backend/build/libs/*.jar'
 
     deploy-dev:
         runs-on: ubuntu-latest
@@ -72,7 +72,7 @@ jobs:
             -   name: Download artifact from build job
                 uses: actions/download-artifact@v3
                 with:
-                    name: note-app-backend
+                    name: NoteApp
 
             -   name: Deploy to Azure Web App
                 id: deploy-to-webapp
