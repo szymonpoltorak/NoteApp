@@ -2,7 +2,7 @@ import re
 
 
 def main() -> None:
-    regex: str = r"version = '(\d+).(\d+).(\d+)\S+'"
+    regex: str = r"version = '(\d+).(\d+).(\d+)'"
     path: str = "note-app-backend/build.gradle"
 
     with open(path, "r") as build:
