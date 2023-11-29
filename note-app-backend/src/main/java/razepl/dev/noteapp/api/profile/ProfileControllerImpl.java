@@ -19,7 +19,7 @@ import static razepl.dev.noteapp.api.profile.constants.ProfileMappings.PROFILE_M
 @RequestMapping(value = PROFILE_MAPPING)
 @RequiredArgsConstructor
 public class ProfileControllerImpl implements ProfileController {
-    private final ProfileService profileService;
+    private final ProfileService profileService
 
     @Override
     @GetMapping(value = GET_USER_DATA_MAPPING)
