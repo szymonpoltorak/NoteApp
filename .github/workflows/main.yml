@@ -33,9 +33,10 @@ jobs:
                     distribution: 'temurin'
 
             -   name: Update Project Version using Python Script
-                uses: actions/python-actions@v2
+                uses: actions/setup-python@v4
                 with:
-                    entrypoint: note-app-backend/src/main/resources/update_version.py
+                    python-version: '3.10'
+                run: python note-app-backend/src/main/resources/update_version.py
 
             -   name: Setup Gradle
                 uses: gradle/gradle-build-action@v2
