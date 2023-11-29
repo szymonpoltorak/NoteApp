@@ -52,8 +52,11 @@ jobs:
                     GOOGLE_CLIENT_SECRET: none
                 with:
                     gradle-version: '8.2'
-                    arguments: build -x jar
+                    arguments: build
                     build-root-directory: note-app-backend
+
+            -   name: Clean not worthy jar
+                run: rm -rf note-app-backend/build/libs/*-plain.jar
 
             -   name: Upload artifact for deployment job
                 uses: actions/upload-artifact@v3
