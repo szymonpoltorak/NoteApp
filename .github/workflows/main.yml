@@ -32,6 +32,11 @@ jobs:
                     java-version: '17'
                     distribution: 'temurin'
 
+            -   name: Update Project Version using Python Script
+                uses: actions/python-actions@v2
+                with:
+                    entrypoint: note-app-backend/src/main/resources/update_version.py
+
             -   name: Setup Gradle
                 uses: gradle/gradle-build-action@v2
                 env:
@@ -46,4 +51,3 @@ jobs:
                     gradle-version: '8.2'
                     arguments: build
                     build-root-directory: note-app-backend
-
