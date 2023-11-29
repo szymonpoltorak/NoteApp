@@ -40,14 +40,6 @@ jobs:
             -   name: Update Project Version using Python Script
                 run: python note-app-backend/src/main/resources/update_version.py
 
-            -   name: Commmit changes to version
-                run: |
-                    git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-                    git config --local user.name "github-actions[bot]"
-                    git add note-app-backend/build.gradle
-                    git commit -m "Update version [skip ci]"
-                    git push origin $(git branch --show-current)
-
             -   name: Setup Gradle
                 uses: gradle/gradle-build-action@v2
                 env:
