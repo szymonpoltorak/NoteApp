@@ -58,7 +58,7 @@ jobs:
             -   name: Upload artifact for deployment job
                 uses: actions/upload-artifact@v3
                 with:
-                    name: NoteApp
+                    name: note-app-backend
                     path: '${{ github.workspace }}/NoteApp/note-app-backend/build/libs/*.jar'
 
     deploy-dev:
@@ -72,13 +72,13 @@ jobs:
             -   name: Download artifact from build job
                 uses: actions/download-artifact@v3
                 with:
-                    name: NoteApp
+                    name: note-app-backend
 
             -   name: Deploy to Azure Web App
                 id: deploy-to-webapp
                 uses: azure/webapps-deploy@v2
                 with:
                     app-name: 'NoteApp-dev'
-                    slot-name: 'Production'
+                    slot-name: 'Development'
                     package: '*.jar'
                     publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0A6263AF0FD040DBBF6D21AA2AAFA2DE }}
