@@ -52,7 +52,7 @@ jobs:
                     GOOGLE_CLIENT_SECRET: none
                 with:
                     gradle-version: '8.2'
-                    arguments: build
+                    arguments: build -x jarPlain
                     build-root-directory: note-app-backend
 
             -   name: Upload artifact for deployment job
