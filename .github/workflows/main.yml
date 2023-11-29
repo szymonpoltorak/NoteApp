@@ -44,7 +44,7 @@ jobs:
                 run: |
                     git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
                     git config --local user.name "github-actions[bot]"
-                    git add note-app-backend/src/main/resources/application.properties
+                    git add note-app-backend/build.gradle
                     git commit -m "Update version [skip ci]"
 
             -   name: Setup Gradle
