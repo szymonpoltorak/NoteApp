@@ -79,6 +79,6 @@ jobs:
                 uses: azure/webapps-deploy@v2
                 with:
                     app-name: 'NoteApp-dev'
-                    slot-name: 'Development'
+                    slot-name: 'Production'
                     package: '*.jar'
                     publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0A6263AF0FD040DBBF6D21AA2AAFA2DE }}
