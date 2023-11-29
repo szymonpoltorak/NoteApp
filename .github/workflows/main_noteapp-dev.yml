@@ -59,7 +59,7 @@ jobs:
                 uses: actions/upload-artifact@v3
                 with:
                     name: NoteApp
-                    path: '${{ github.workspace }}/NoteApp/build/libs/*.jar'
+                    path: '${{ github.workspace }}/NoteApp/note-app-backend/build/libs/*.jar'
 
     deploy-dev:
         runs-on: ubuntu-latest
